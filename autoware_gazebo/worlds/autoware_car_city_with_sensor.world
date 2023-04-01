@@ -4947,10 +4947,10 @@
             <laser_retro>100.0</laser_retro>
           </collision> -->
         <sensor name="front_laser_sensor" type="ray">
-          <always_on>true</always_on>
+          <always_on>false</always_on>
           <!-- <visualize>true</visualize> -->
           <visualize>false</visualize>
-          <update_rate>15</update_rate>
+          <update_rate>30</update_rate>
           <ray>
             <scan>
               <horizontal>
@@ -5009,6 +5009,7 @@
           <laser_retro>100.0</laser_retro>
         </collision> -->
         <sensor name="depth_camera_sensor" type="depth">
+          <always_on>false</always_on>
           <update_rate>20</update_rate>
           <!-- <always_on>true</always_on> -->
           <visualize>true</visualize>
@@ -5126,14 +5127,14 @@
         </collision>
         <sensor name="velodyne_V16" type="ray">
           <visualize>false</visualize>
-          <update_rate>10</update_rate>
+          <update_rate>50</update_rate>
           <ray>
             <scan>
               <horizontal>
                 <samples>440</samples>
                 <resolution>1</resolution>
                 <min_angle>2.1</min_angle>
-                <max_angle>130</max_angle>
+                <max_angle>50</max_angle>
               </horizontal>
               <vertical>
                 <samples>16</samples>
@@ -5144,7 +5145,7 @@
             </scan>
             <range>
               <min>2.1</min>
-              <max>131</max>
+              <max>50</max>
               <resolution>0.001</resolution>
             </range>
             <noise>
@@ -5162,7 +5163,7 @@
             <frame_name>velodyne_link</frame_name>
             <organize_cloud>false</organize_cloud>
             <min_range>2.5</min_range>
-            <max_range>130</max_range>
+            <max_range>50</max_range>
             <gaussian_noise>0.008</gaussian_noise>
           </plugin>
         </sensor>
@@ -5206,9 +5207,9 @@
         <linear_velocity_i_range>0 0</linear_velocity_i_range>
 
         <!-- output -->
-        <publish_odom>true</publish_odom>
-        <publish_odom_tf>true</publish_odom_tf>
-        <publish_wheel_tf>true</publish_wheel_tf>
+        <publish_odom>false</publish_odom>
+        <publish_odom_tf>false</publish_odom_tf>
+        <publish_wheel_tf>false</publish_wheel_tf>
         <publish_distance>true</publish_distance>
 
         <odometry_frame>odom</odometry_frame>

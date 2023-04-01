@@ -75,5 +75,5 @@ def generate_launch_description():
                             description='Open RViz.'),
         gazebo,
         robot_state_publisher,
-        rviz
+        # rviz
     ])
