@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<robot name="Tesla Webots">
+    <webots>
+        <plugin type="autoware_webots.tesla_driver.TeslaDriver" />
+        
+        <device reference="Velodyne VLP-16" type="Lidar">
+            <ros>
+                <enabled>true</enabled>
+                <updateRate>15</updateRate>
+                <alwaysOn>true</alwaysOn>
+                <frameName>velodyne_link</frameName>
+            </ros>
+        </device>
+
+        <device reference="gps" type="GPS">
+            <ros>
+                <topicName>/GPS</topicName>
+                <updateRate>30</updateRate>
+                <alwaysOn>true</alwaysOn>
+                <frameName>gps_link</frameName>
+            </ros>
+        </device>
+        
+        <plugin type="webots_ros2_driver::Ros2IMU">
+            <enabled>true</enabled>
+            <updateRate>20</updateRate>
+            <topicName>/imu</topicName>
+            <alwaysOn>false</alwaysOn>
+            <frameName>imu_link</frameName>
+            <inertialUnitName>inertial unit</inertialUnitName>
+            <gyroName>gyro</gyroName>
+            <accelerometerName>accelerometer</accelerometerName>
+        </plugin>
+        
+    </webots>
+</robot>

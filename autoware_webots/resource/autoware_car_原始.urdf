@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<robot name="cartographer_backpack_3d" xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="base_link">
+    <visual>
+      <origin xyz="1.37 0 0.21" rpy="1.570796 0 0"/>
+      <geometry>
+        <box size="4.5 0.7 1.8"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.37 0 0.21" rpy="1.570796 0 0"/>
+      <geometry>
+        <box size="4.5 0.7 1.8"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.68 0 0.76" rpy="1.570796 0 0"/>
+      <geometry>
+        <box size="2.9 0.7 1.5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.68 0 0.76" rpy="1.570796 0 0"/>
+      <geometry>
+        <box size="2.9 0.7 1.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="camera">
+  </link>
+  <joint name="base_link_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera"/>
+    <origin xyz="1.67 0 1.072" rpy="-1.570796 0 -1.570796"/>
+  </joint>
+  <link name="backwards_lights">
+  </link>
+  <joint name="base_link_backwards_lights_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="backwards_lights"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="rear_lights">
+  </link>
+  <joint name="base_link_rear_lights_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_lights"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="brake_lights">
+  </link>
+  <joint name="base_link_brake_lights_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="brake_lights"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="antifog_lights">
+  </link>
+  <joint name="base_link_antifog_lights_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="antifog_lights"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="left_indicators">
+  </link>
+  <joint name="base_link_left_indicators_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_indicators"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="right_indicators">
+  </link>
+  <joint name="base_link_right_indicators_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_indicators"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="front_lights">
+  </link>
+  <joint name="base_link_front_lights_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_lights"/>
+    <origin xyz="1.39 0 -0.36" rpy="1.570796 0.000003 3.141589"/>
+  </joint>
+  <link name="engine_speaker">
+  </link>
+  <joint name="base_link_engine_speaker_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="engine_speaker"/>
+    <origin xyz="2.94 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="right_rear_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear right wheel"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="1e+08" velocity="138.889"/>
+    <origin xyz="0 -0.86 0" rpy="-1.570797 0.668175 -3.141589"/>
+  </joint>
+  <link name="rear right wheel">
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.36" length="0.23"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.36" length="0.23"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="slot_rear right wheel_joint" type="fixed">
+    <parent link="slot"/>
+    <child link="rear right wheel"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="left_rear_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear left wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1e+08" velocity="138.889"/>
+    <origin xyz="0 0.86 0" rpy="1.570796 -0.881205 3.141589"/>
+  </joint>
+  <link name="rear left wheel">
+    <visual>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.36" length="0.23"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.36" length="0.23"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="slot_0_rear left wheel_joint" type="fixed">
+    <parent link="slot_0"/>
+    <child link="rear left wheel"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="gps">
+  </link>
+  <joint name="base_link_gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="accelerometer">
+  </link>
+  <joint name="base_link_accelerometer_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="accelerometer"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="inertial unit">
+  </link>
+  <joint name="base_link_inertial unit_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="inertial unit"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="gyro">
+  </link>
+  <joint name="base_link_gyro_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gyro"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="Velodyne VLP-16">
+    <visual>
+      <origin xyz="0 -0.00165 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.052" length="0.0727"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.00165 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.052" length="0.0727"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_Velodyne VLP-16_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="Velodyne VLP-16"/>
+    <origin xyz="1.24 0 1.27" rpy="0 0 0"/>
+  </joint>
+  <link name="Astra">
+    <visual>
+      <origin xyz="0.006 0 0.034" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.165 0.029"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.006 0 0.034" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.165 0.029"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.009 0 0.007" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.061 0.06 0.014"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.009 0 0.007" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.061 0.06 0.014"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_Astra_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="Astra"/>
+    <origin xyz="1.56 0 1.04" rpy="0 0 0"/>
+  </joint>
+  <link name="Astra depth">
+  </link>
+  <joint name="Astra_Astra depth_joint" type="fixed">
+    <parent link="Astra"/>
+    <child link="Astra depth"/>
+    <origin xyz="0.027 0.037 0.034" rpy="0 0 0"/>
+  </joint>
+  <link name="Astra rgb">
+  </link>
+  <joint name="Astra_Astra rgb_joint" type="fixed">
+    <parent link="Astra"/>
+    <child link="Astra rgb"/>
+    <origin xyz="0.027 0.011 0.034" rpy="-1.570796 0 -1.570796"/>
+  </joint>
+</robot>
