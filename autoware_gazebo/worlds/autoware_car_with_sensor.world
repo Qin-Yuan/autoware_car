@@ -719,13 +719,13 @@
       <joint name="velodyne_joint" type="fixed">
         <parent>chassis</parent>
         <child>velodyne_link</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 0 0 1.58</pose>
         <axis>
           <xyz>0 0 1</xyz>
         </axis>
       </joint>
       <link name="velodyne_link">
-        <pose relative_to='chassis'>0 0.47 1.55 0 0 0</pose>
+        <pose relative_to='chassis'>0 0.47 1.55 0 0 -1.58</pose>
         <visual name="visual_box">
           <geometry>
             <mesh>

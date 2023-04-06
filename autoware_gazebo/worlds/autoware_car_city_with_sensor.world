@@ -5124,7 +5124,7 @@
         </axis>
       </joint>
       <link name="velodyne_link">
-        <pose relative_to='chassis'>0 0.47 1.55 0 0 0</pose>
+        <pose relative_to='chassis'>0 0.47 1.55 0 0 -1.58</pose>
         <visual name="visual_box">
           <geometry>
             <mesh>
@@ -5222,7 +5222,7 @@
         <linear_velocity_i_range>0 0</linear_velocity_i_range>
 
         <!-- output -->
-        <publish_odom>false</publish_odom>
+        <publish_odom>true</publish_odom>
         <publish_odom_tf>false</publish_odom_tf>
         <publish_wheel_tf>false</publish_wheel_tf>
         <publish_distance>true</publish_distance>

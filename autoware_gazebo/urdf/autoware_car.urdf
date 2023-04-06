@@ -83,7 +83,7 @@
   <joint name="velodyne_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="velodyne_link" />
-    <origin xyz="-0.47 0 1.55" rpy="0 0 1.58"/>
+    <origin xyz="-0.47 0 1.55" rpy="0 0 0"/>
   </joint>
 
   <joint name="laser_link_joint" type="fixed">

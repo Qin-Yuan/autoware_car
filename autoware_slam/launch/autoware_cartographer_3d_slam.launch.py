@@ -61,7 +61,7 @@ def generate_launch_description():
             '-configuration_directory', lua_dir,
             '-configuration_basename', 'autoware_car_3d.lua'],
         remappings = [
-            ('points2', '/vehicle/Velodyne_VLP_16/point_cloud'),
+            ('points2', '/velodyne_V16/pointcloud2'),
             ('imu', '/imu')],
         output = 'screen'
         )
@@ -85,7 +85,7 @@ def generate_launch_description():
     return LaunchDescription([
         use_sim_time_arg,
         # Nodes
-        robot_state_publisher_node,
+        # robot_state_publisher_node,
         cartographer_node,
         cartographer_occupancy_grid_node,
         # rviz_node,
