@@ -61,12 +61,7 @@
       <width>7.4</width>
       <point>-45 -48.7 0.01</point>
       <point>-45 49.2 0.01</point>
-      <material>
-        <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Residential</name>
-        </script>
-      </material>
+
 
 
     </road>
@@ -127,12 +122,7 @@
       <width>7.4</width>
       <point>120 -48.7 0.01</point>
       <point>120 49.2 0.01</point>
-      <material>
-        <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Residential</name>
-        </script>
-      </material>
+
 
 
     </road>
@@ -144,12 +134,6 @@
       <point>-41.3 -45 0.015</point>
       <point>116.3 -45 0.015</point>
 
-      <material>
-        <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Residential</name>
-        </script>
-      </material>
 
 
     </road>
@@ -178,12 +162,9 @@
       <width>8.4</width>
       <point>-41.3 45 0.015</point>
       <point>116.3 45 0.015</point>
-      <material>
-        <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Residential</name>
-        </script>
-      </material>
+
+
+
     </road>
 
 

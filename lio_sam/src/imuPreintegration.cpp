@@ -143,7 +143,7 @@ public:
         geometry_msgs::msg::TransformStamped ts;
         tf2::convert(tCur, ts);
         ts.child_frame_id = baselinkFrame;
-        tfBroadcaster->sendTransform(ts);
+        // tfBroadcaster->sendTransform(ts);
 
         // publish IMU path
         static nav_msgs::msg::Path imuPath;

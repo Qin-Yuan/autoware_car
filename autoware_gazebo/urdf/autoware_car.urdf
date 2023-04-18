@@ -53,6 +53,7 @@
       <geometry>
         <box size="4.5 0.7 1.8"/>
       </geometry>
+      <material name="orange" />
     </visual>
     <collision>
       <origin xyz="1.37 0 0.21" rpy="1.570796 0 0"/>
