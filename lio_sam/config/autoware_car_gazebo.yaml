@@ -42,13 +42,15 @@
     imuRPYWeight: 0.01
 
     # extrinsicTrans:  [ 0.0,  0.0,  0.0 ]
+    # extrinsicTrans:  [ 0.0,  0.0,  0.0 ]
     # extrinsicRot:    [-1.0,  0.0,  0.0,
-    #                    0.0,  1.0,  0.0,
-    #                    0.0,  0.0, -1.0 ]
+    #                   0.0,  1.0,  0.0,
+    #                   0.0,  0.0, -1.0 ]
     # extrinsicRPY: [ 0.0,  1.0,  0.0,
-    #                -1.0,  0.0,  0.0,
+    #                 -1.0,  0.0,  0.0,
     #                 0.0,  0.0,  1.0 ]
-    extrinsicTrans:  [ 0.0,  0.0,  -0.0103 ]
+
+    extrinsicTrans:  [ 0.0,  0.0,  0.0 ]
     extrinsicRot: [1.0, 0.0, 0.0,
                   0.0, 1.0, 0.0,
                   0.0, 0.0, 1.0]
@@ -63,12 +65,12 @@
     surfFeatureMinValidNum: 100
 
     # voxel filter paprams
-    odometrySurfLeafSize: 0.4                     # default: 0.4 - outdoor, 0.2 - indoor
-    mappingCornerLeafSize: 0.2                    # default: 0.2 - outdoor, 0.1 - indoor
-    mappingSurfLeafSize: 0.4                      # default: 0.4 - outdoor, 0.2 - indoor
+    odometrySurfLeafSize: 0.2                     # default: 0.4 - outdoor, 0.2 - indoor
+    mappingCornerLeafSize: 0.1                    # default: 0.2 - outdoor, 0.1 - indoor
+    mappingSurfLeafSize: 0.2                      # default: 0.4 - outdoor, 0.2 - indoor
 
     # robot motion constraint (in case you are using a 2D robot)
-    z_tollerance: 1000.0                          # meters
+    z_tollerance: 0.0                          # meters
     rotation_tollerance: 1000.0                   # radians
 
     # CPU Params

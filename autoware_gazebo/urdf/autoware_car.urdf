@@ -78,7 +78,7 @@
   <joint name="imu_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu_link" />
-    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    <origin xyz="-0.47 0 1.55" rpy="0 0 0"/>
   </joint>
 
   <joint name="velodyne_link_joint" type="fixed">
