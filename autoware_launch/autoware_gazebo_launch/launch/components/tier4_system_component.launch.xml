@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find-pkg-share tier4_system_launch)/launch/system.launch.xml">
+    <arg name="run_mode" value="$(var system_run_mode)"/>
+    <arg name="launch_system_monitor" value="$(var launch_system_monitor)"/>
+    <arg name="launch_dummy_diag_publisher" value="$(var launch_dummy_diag_publisher)"/>
+    <arg name="sensor_model" value="$(var sensor_model)"/>
+
+    <arg name="component_state_monitor_topic_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/component_state_monitor/topics.yaml"/>
+    <arg name="emergency_handler_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/emergency_handler/emergency_handler.param.yaml"/>
+    <arg name="mrm_comfortable_stop_operator_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/mrm_comfortable_stop_operator/mrm_comfortable_stop_operator.param.yaml"/>
+    <arg name="mrm_emergency_stop_operator_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/mrm_emergency_stop_operator/mrm_emergency_stop_operator.param.yaml"/>
+    <arg name="system_error_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_error_monitor/system_error_monitor.param.yaml"/>
+    <arg name="system_error_monitor_planning_simulator_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_error_monitor/system_error_monitor.planning_simulation.param.yaml"/>
+    <arg name="diagnostic_aggregator_vehicle_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_error_monitor/diagnostic_aggregator/vehicle.param.yaml"/>
+    <arg name="diagnostic_aggregator_system_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_error_monitor/diagnostic_aggregator/system.param.yaml"/>
+    <arg name="dummy_diag_publisher_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/dummy_diag_publisher/dummy_diag_publisher.param.yaml"/>
+    <arg name="system_monitor_cpu_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/cpu_monitor.param.yaml"/>
+    <arg name="system_monitor_gpu_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/gpu_monitor.param.yaml"/>
+    <arg name="system_monitor_hdd_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/hdd_monitor.param.yaml"/>
+    <arg name="system_monitor_mem_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/mem_monitor.param.yaml"/>
+    <arg name="system_monitor_net_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/net_monitor.param.yaml"/>
+    <arg name="system_monitor_ntp_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/ntp_monitor.param.yaml"/>
+    <arg name="system_monitor_process_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/process_monitor.param.yaml"/>
+    <arg name="system_monitor_voltage_monitor_param_path" value="$(find-pkg-share autoware_gazebo_launch)/config/system/system_monitor/voltage_monitor.param.yaml"/>
+  </include>
+</launch>
