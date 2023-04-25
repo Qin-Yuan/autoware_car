@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <!-- Essential parameters -->
-  <arg name="map_path" default=""/>
-  <arg name="vehicle_model" default="" description="vehicle model name"/>
-  <arg name="sensor_model" default="" description="sensor model name"/>
+  <arg name="map_path" default="/home/robot/autoware_universe/autoware_map/gazebo_map" description="point cloud and lanelet2 map directory path"/>
+  <arg name="vehicle_model" default="sample_vehicle" description="vehicle model name"/>
+  <arg name="sensor_model" default="awsim_sensor_kit" description="sensor model name"/>
 
   <!-- Optional parameters -->
   <!-- Map -->

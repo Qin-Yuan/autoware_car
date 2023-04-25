@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Launch Gazebo with a world that has Dolly, as well as the follow node."""
 
 import os
 import subprocess
@@ -72,7 +71,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'world',
-            default_value=[os.path.join(pkg_autoware_gazebo, 'worlds', 'autoware_car_city_with_sensor.world'), ''],
+            default_value=[os.path.join(pkg_autoware_gazebo, 'worlds', 'autoware_car_city_with_sensor_universe.world'), ''],
             description='SDF world file'),
         DeclareLaunchArgument('rviz', default_value='true',
                             description='Open RViz.'),

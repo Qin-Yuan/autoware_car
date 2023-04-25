@@ -28332,8 +28332,11 @@
           <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
             <ros>
               <namespace>camera</namespace>
+              <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
+              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping>
             </ros>
             <camera_name>depth_camera</camera_name>
+            <frame_name>traffic_light_left_camera/camera_optical_link</frame_name>
             <min_depth>0.1</min_depth>
             <max_depth>500</max_depth>
           </plugin>
@@ -28404,9 +28407,10 @@
           <plugin name='imu' filename='libgazebo_ros_imu_sensor.so'>
             <ros>
               <namespace>autoware</namespace>
-              <remapping>/autoware/imu/out:=/imu</remapping>
+              <remapping>/autoware/imu/out:=/sensing/imu/tamagawa/imu_raw</remapping>
             </ros>
             <update_rate>0</update_rate>
+            <frame_name>tamagawa/imu_link</frame_name>
             <updateRateHZ>200.0</updateRateHZ>
             <gaussianNoise>0.00</gaussianNoise>
             <xyzOffset>0 0 0</xyzOffset>
@@ -28505,11 +28509,11 @@
           <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
             <ros>
               <namespace>/velodyne_V16</namespace>
-              <remapping>~/out:=/velodyne_V16/pointcloud2</remapping>
+              <remapping>~/out:=/sensing/lidar/top/pointcloud_raw_ex</remapping>
               <!-- <remapping>~/out:=/points_raw</remapping> -->
             </ros>
             <!-- <frame_name>velodyne</frame_name> -->
-            <frame_name>velodyne_link</frame_name>
+            <frame_name>sensor_kit_base_link</frame_name>
             <min_range>2.5</min_range>
             <max_range>130</max_range>
             <gaussian_noise>0.008</gaussian_noise>
@@ -28554,9 +28558,9 @@
         <right_steering_i_range>0 0</right_steering_i_range>
         <linear_velocity_pid_gain>1000 0 1</linear_velocity_pid_gain>
         <linear_velocity_i_range>0 0</linear_velocity_i_range>
-        <publish_odom>0</publish_odom>
-        <publish_odom_tf>0</publish_odom_tf>
-        <publish_wheel_tf>0</publish_wheel_tf>
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>false</publish_odom_tf>
+        <publish_wheel_tf>false</publish_wheel_tf>
         <publish_distance>1</publish_distance>
         <odometry_frame>odom</odometry_frame>
         <robot_base_frame>base_link</robot_base_frame>
