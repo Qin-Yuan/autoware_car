@@ -32,7 +32,7 @@ def generate_launch_description():
         name='lidar_tf',
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['-0.47','0','1.55','0','0','0','1','odom','sensor_kit_base_link']
+        arguments=['-0.47','0','1.55','0','0','0','1','odom','velodyne_link']
         )
     
     imu_tf = launch_ros.actions.Node(
@@ -54,7 +54,8 @@ def generate_launch_description():
         namespace='',
         package='pcl_localization_ros2',
         executable='pcl_localization_node',
-        remappings=[('/cloud','/sensing/lidar/top/pointcloud_raw_ex')],
+        remappings=[('/cloud','/velodyne_V16/pointcloud2'),
+                    ('/imu','/imu')],
         parameters=[localization_param_dir],
         output='screen')
 
@@ -99,6 +100,7 @@ def generate_launch_description():
     
     ld.add_action(pcl_localization)
     ld.add_action(lidar_tf)
+    ld.add_action(imu_tf)
     ld.add_action(to_inactive)
     ld.add_action(rviz)
     

@@ -1,0 +1,11 @@
+<launch>
+  <arg name="pointcloud_map_path" default="/home/robot/autoware_universe/autoware_map/gazebo_map"/>
+  <arg name="pointcloud_map_loader_param_path" default="$(find-pkg-share pcl_localization_ros2)/param/pointcloud_map_loader.param.yaml"/>
+
+  <node pkg="map_loader" exec="pointcloud_map_loader" name="pointcloud_map_loader" output="screen">
+    <remap from="output/pointcloud_map" to="/map"/>
+    <remap from="service/get_partial_pcd_map" to="/map/get_partial_pointcloud_map"/>
+    <param name="pcd_paths_or_directory" value="[$(var pointcloud_map_path)]"/>
+    <param from="$(var pointcloud_map_loader_param_path)"/>
+  </node>
+</launch>
