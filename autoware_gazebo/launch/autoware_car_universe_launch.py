@@ -33,7 +33,7 @@ def generate_launch_description():
     
     pkg_autoware_gazebo_utils_dir = os.path.join(get_package_share_directory('autoware_gazebo_utils'), 'launch')
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='True')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     urdf = os.path.join(pkg_autoware_gazebo,'urdf', 'autoware_car.urdf')
 
     subprocess.run(['killall', 'gzserver'])
@@ -66,7 +66,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='true',
             description='Use simulation (Gazebo) clock if true'
         ),
         DeclareLaunchArgument(

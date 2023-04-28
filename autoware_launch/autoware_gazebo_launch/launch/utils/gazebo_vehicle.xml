@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- Essential parameters -->
+  <arg name="map_path" default="/home/robot/autoware_universe/autoware_map/gazebo_map" description="point cloud and lanelet2 map directory path"/>
+  <arg name="vehicle_model" default="sample_vehicle" description="vehicle model name"/>
+  <!-- sample_sensor_kit awsim_sensor_kit  -->
+  <arg name="sensor_model" default="awsim_sensor_kit" description="sensor model name"/>
+  <arg name="use_pointcloud_container" default="false" description="launch pointcloud container"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+
+  <!-- Optional parameters -->
+  <!-- Modules to be launched -->
+  <arg name="launch_vehicle" default="true" description="launch vehicle"/>
+  <arg name="launch_map" default="true" description="launch map"/>
+
+  <!-- Global parameters -->
+  <arg name="use_sim_time" default="true" description="use_sim_time"/>
+  <!-- Vehicle -->
+  <arg name="vehicle_id" default="$(env VEHICLE_ID default)" description="vehicle specific ID"/>
+  <arg name="launch_vehicle_interface" default="true" description="launch vehicle interface"/>
+  <!-- Map -->
+  <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
+  <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
+
+  <!-- Vehicle -->
+  <group if="$(var launch_vehicle)">
+    <include file="$(find-pkg-share tier4_vehicle_launch)/launch/vehicle.launch.xml">
+      <arg name="vehicle_model" value="$(var vehicle_model)"/>
+      <arg name="sensor_model" value="$(var sensor_model)"/>
+      <arg name="vehicle_id" value="$(var vehicle_id)"/>
+      <arg name="launch_vehicle_interface" value="$(var launch_vehicle_interface)"/>
+      <arg name="config_dir" value="$(find-pkg-share autoware_gazebo_individual_params)/config/$(var vehicle_id)/$(var sensor_model)"/>
+    </include>
+  </group>
+
+  <!-- Map -->
+  <group if="$(var launch_map)">
+    <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_map_component.launch.xml"/>
+  </group>
+
+  <!-- <group>
+    <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(var rviz_config) -s $(find-pkg-share autoware_launch)/rviz/image/autoware.png" if="$(var rviz)"/>
+  </group> -->
+
+</launch>

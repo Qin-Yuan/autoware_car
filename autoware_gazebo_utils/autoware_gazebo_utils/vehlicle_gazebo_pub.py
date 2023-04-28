@@ -39,7 +39,7 @@ class vehlicle_gazebo_pub(Node):
                 # print(self.odom_msg.twist.twist.linear.x , self.odom_msg.twist.twist.angular.z)
                 self.gear_status_init_flag = True
                 self.gear_status_msgs.report = 2
-                self.get_logger().warn("vel : %f %f"%(abs(self.odom_msg.twist.twist.linear.x),abs(self.odom_msg.twist.twist.angular.z)))
+                # self.get_logger().warn("vel : %f %f"%(abs(self.odom_msg.twist.twist.linear.x),abs(self.odom_msg.twist.twist.angular.z)))
         
         if abs(self.odom_msg.twist.twist.linear.x) < 0.01 :
             self.odom_msg.twist.twist.linear.x = 0.0
@@ -48,7 +48,8 @@ class vehlicle_gazebo_pub(Node):
             self.odom_msg.twist.twist.angular.z = 0.0
             
         self.velocity_status_msgs.longitudinal_velocity = self.odom_msg.twist.twist.linear.x
-        self.velocity_status_msgs.lateral_velocity = self.odom_msg.twist.twist.angular.z
+        self.velocity_status_msgs.lateral_velocity = self.odom_msg.twist.twist.linear.y
+        self.velocity_status_msgs.heading_rate = self.odom_msg.twist.twist.angular.z
 
         self.control_mode_msgs.stamp = self.get_clock().now().to_msg()
         self.gear_status_msgs.stamp = self.get_clock().now().to_msg()

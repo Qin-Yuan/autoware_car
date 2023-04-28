@@ -1,0 +1,5 @@
+<launch>
+
+  <test test-name="autoware_ekf_localizer-test" pkg="autoware_ekf_localizer" type="autoware_ekf_localizer-test" name="test"/>
+
+</launch>

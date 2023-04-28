@@ -16,7 +16,7 @@
   <exec_depend>rviz2</exec_depend>
   <exec_depend>tier4_autoware_api_launch</exec_depend>
   <exec_depend>tier4_control_launch</exec_depend>
-  <exec_depend>tier4_localization_launch</exec_depend>
+  <exec_depend>autoware_localization_launch</exec_depend>
   <exec_depend>tier4_map_launch</exec_depend>
   <exec_depend>tier4_perception_launch</exec_depend>
   <exec_depend>tier4_planning_launch</exec_depend>
