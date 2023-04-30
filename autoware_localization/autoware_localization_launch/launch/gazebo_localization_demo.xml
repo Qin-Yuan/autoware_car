@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Parameter files -->
+  <arg name="ndt_scan_matcher_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/ndt_scan_matcher.param.yaml"/>
+  <arg name="localization_error_monitor_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/autoware_localization_error_monitor.param.yaml"/>
+  <!-- Global parameters -->
+  <arg name="use_sim_time" default="true" description="use_sim_time"/>
+  <!-- Global parameters -->
+  <group scoped="false">
+    <include file="$(find-pkg-share global_parameter_loader)/launch/global_params.launch.py">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="vehicle_model" value="sample_vehicle"/>
+    </include>
+  </group>
+  <!-- localization module -->
+  <group>
+    <push-ros-namespace namespace="localization"/>
+    <!-- util module -->
+    <group>
+      <push-ros-namespace namespace="util"/>
+      <!-- 点云降采样 -->
+      <include file="$(find-pkg-share autoware_ndt_scan_matcher)/launch/random_downsample_filter.launch.xml">
+        <arg name="input_topic_name" value="/sensing/lidar/top/pointcloud_raw"/>
+        <arg name="output_topic_name" value="/localization/util/downsample/pointcloud"/>
+        <arg name="sample_num" value="1500"/>
+        <arg name="input_frame" value="sensor_kit_base_link"/>
+        <arg name="output_frame" value="sensor_kit_base_link"/>
+      </include>
+      <!-- pose_initializer 定位初始化 -->
+      <include file="$(find-pkg-share autoware_pose_initializer)/launch/pose_initializer.launch.xml">
+        <arg name="gnss_enabled" value="true"/>
+        <arg name="ndt_enabled" value="true"/>
+        <arg name="ekf_enabled" value="true"/>
+        <arg name="stop_check_enabled" value="true"/>
+      </include>
+      <!-- autoware_pose_initializer (Automatic call from AD API) -->
+      <include file="$(find-pkg-share autoware_automatic_pose_initializer)/launch/automatic_pose_initializer.launch.xml"/>
+      <!-- autoware_vehicle_velocity_converter -->
+      <include file="$(find-pkg-share autoware_vehicle_velocity_converter)/launch/autoware_vehicle_velocity_converter.launch.xml"/>
+    </group>
+
+    <!-- pose_estimator module 位置初预测，NDT点云匹配 -->
+    <group>
+      <push-ros-namespace namespace="pose_estimator"/>
+      <include file="$(find-pkg-share autoware_localization_launch)/launch/pose_estimator/pose_estimator.launch.xml">
+        <arg name="ndt_scan_matcher_param_path" value="$(var ndt_scan_matcher_param_path)"/>
+      </include>
+    </group>
+    <!-- twist_estimator module 速度预测，根据陀螺仪和速度控制指令进行预测 -->
+    <group>
+      <push-ros-namespace namespace="twist_estimator"/>
+      <include file="$(find-pkg-share autoware_localization_launch)/launch/twist_estimator/twist_estimator.launch.xml"/>
+    </group>
+    <!-- pose_twist_fusion_filter module 最终的位置预测 -->
+    <group>
+      <push-ros-namespace namespace="pose_twist_fusion_filter"/>
+      <include file="$(find-pkg-share autoware_localization_launch)/launch/pose_twist_fusion_filter/pose_twist_fusion_filter.launch.xml"/>
+    </group>
+    <!-- localization_error_monitor_module 定位异常检测模块 -->
+    <group>
+      <include file="$(find-pkg-share autoware_localization_launch)/launch/localization_error_monitor/localization_error_monitor.launch.xml">
+        <arg name="localization_error_monitor_param_path" value="$(var localization_error_monitor_param_path)"/>
+      </include>
+    </group>
+    
+    <!-- API -->
+    <group>
+      <include file="$(find-pkg-share autoware_gazebo_launch)/launch/components/tier4_autoware_api_component.launch.xml"/>
+    </group>
+  </group>
+</launch>

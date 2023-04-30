@@ -4,7 +4,7 @@
   <arg name="map_path" default="/home/robot/autoware_universe/autoware_map/gazebo_map" description="point cloud and lanelet2 map directory path"/>
   <arg name="vehicle_model" default="sample_vehicle" description="vehicle model name"/>
   <!-- sample_sensor_kit awsim_sensor_kit  -->
-  <arg name="sensor_model" default="awsim_sensor_kit" description="sensor model name"/>
+  <arg name="sensor_model" default="sample_sensor_kit" description="sensor model name"/>
   <arg name="use_pointcloud_container" default="false" description="launch pointcloud container"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
 
@@ -21,6 +21,14 @@
   <!-- Map -->
   <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
   <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
+
+  <!-- Global parameters -->
+  <group scoped="false">
+    <include file="$(find-pkg-share global_parameter_loader)/launch/global_params.launch.py">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="vehicle_model" value="$(var vehicle_model)"/>
+    </include>
+  </group>
 
   <!-- Vehicle -->
   <group if="$(var launch_vehicle)">

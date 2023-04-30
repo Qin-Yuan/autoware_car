@@ -290,7 +290,7 @@ void NDTScanMatcher::callback_initial_pose(
   const geometry_msgs::msg::PoseWithCovarianceStamped::ConstSharedPtr initial_pose_msg_ptr)
 {
   if (!is_activated_) return;
-  RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), *this->get_clock(), 1, "Received initial_pose_msg_ptr_array_ ... ");
+  // RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), *this->get_clock(), 1, "Received initial_pose_msg_ptr_array_ ... ");
   // lock mutex for initial pose
   std::lock_guard<std::mutex> initial_pose_array_lock(initial_pose_array_mtx_);
   // if rosbag restart, clear buffer
