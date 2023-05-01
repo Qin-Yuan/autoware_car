@@ -28331,12 +28331,12 @@
           </camera>
           <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
             <ros>
-              <namespace>camera</namespace>
-              <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
-              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping>
+              <namespace>sensing/camera</namespace>
+              <!-- <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
+              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping> -->
             </ros>
-            <camera_name>depth_camera</camera_name>
-            <frame_name>traffic_light_left_camera/camera_optical_link</frame_name>
+            <camera_name>traffic_light</camera_name>
+            <frame_name>traffic_light_left_camera/camera_link</frame_name>
             <min_depth>0.1</min_depth>
             <max_depth>500</max_depth>
           </plugin>
@@ -28514,7 +28514,7 @@
               <!-- <remapping>~/out:=/points_raw</remapping> -->
             </ros>
             <!-- <frame_name>velodyne</frame_name> -->
-            <frame_name>sensor_kit_base_link</frame_name>
+            <frame_name>velodyne_top_base_link</frame_name>
             <min_range>2.5</min_range>
             <max_range>130</max_range>
             <gaussian_noise>0.008</gaussian_noise>

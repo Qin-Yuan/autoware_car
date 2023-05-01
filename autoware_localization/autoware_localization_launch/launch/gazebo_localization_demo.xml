@@ -23,8 +23,8 @@
         <arg name="input_topic_name" value="/sensing/lidar/top/pointcloud_raw"/>
         <arg name="output_topic_name" value="/localization/util/downsample/pointcloud"/>
         <arg name="sample_num" value="1500"/>
-        <arg name="input_frame" value="sensor_kit_base_link"/>
-        <arg name="output_frame" value="sensor_kit_base_link"/>
+        <arg name="input_frame" value="velodyne_top_base_link"/>
+        <arg name="output_frame" value="velodyne_top_base_link"/>
       </include>
       <!-- pose_initializer 定位初始化 -->
       <include file="$(find-pkg-share autoware_pose_initializer)/launch/pose_initializer.launch.xml">
