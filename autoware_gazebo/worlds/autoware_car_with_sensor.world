@@ -9,166 +9,267 @@
       <uri>model://ground_plane</uri>
     </include>
 
-    <model name="prius_hybrid">
-      <static>false</static>
-      <pose>
-        -11.1
-        -0.1
-        0.2
-        0
-        0
-        0
-      </pose>
-      <link name="chassis">
-        <pose>0 0 0 0 0 1.57</pose>
+    <model name='prius_hybrid'>
+      <static>0</static>
+      <pose>-11.1 -0.1 0.2 0 -0 0</pose>
+      <link name='chassis'>
+        <pose>0 0 0 0 -0 1.57</pose>
         <inertial>
-          <mass>1326.0</mass>
-          <pose>0 -0.266 0.48 0 0 0</pose>
+          <mass>1326</mass>
+          <pose>0 -0.266 0.48 0 -0 0</pose>
           <inertia>
-            <ixx>2581.13354740</ixx>
-            <ixy>0.0</ixy>
-            <iyy>591.30846112</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
-            <izz>2681.95008628</izz>
+            <ixx>2581.13</ixx>
+            <ixy>0</ixy>
+            <iyy>591.308</iyy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+            <izz>2681.95</izz>
           </inertia>
         </inertial>
-
-        <visual name="chassis_visual">
+        <visual name='chassis_visual'>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Hybrid</name>
-                <center>false</center>
+                <center>0</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <visual name="interior_visual">
+        <visual name='interior_visual'>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Hybrid_Interior</name>
-                <center>false</center>
+                <center>0</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <visual name="windows_visual">
+        <visual name='windows_visual'>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Hybrid_Windows</name>
-                <center>false</center>
+                <center>0</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="chassis">
-          <pose>0.0 0.05 0.625 0 0 0</pose>
+        <collision name='chassis'>
+          <pose>0 0.05 0.625 0 -0 0</pose>
           <geometry>
             <box>
               <size>1.7526 2.1 0.95</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="front_bumper">
-          <pose>0.0 -2.0 0.458488 0.0 0 0</pose>
+        <collision name='front_bumper'>
+          <pose>0 -2 0.458488 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.337282 0.48 0.566691</size>
+              <size>1.33728 0.48 0.566691</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="hood">
-          <pose>0.0 -1.900842 0.676305 0.341247 0 0</pose>
+        <collision name='hood'>
+          <pose>0 -1.90084 0.676305 0.341247 -0 0</pose>
           <geometry>
             <box>
-              <size>1.597968 0.493107 0.265468</size>
+              <size>1.59797 0.493107 0.265468</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="windshield">
-          <pose>0.0 -0.875105 1.032268 0.335476 0 0</pose>
+        <collision name='windshield'>
+          <pose>0 -0.875105 1.03227 0.335476 -0 0</pose>
           <geometry>
             <box>
-              <size>1.168381 1.654253 0.272347</size>
+              <size>1.16838 1.65425 0.272347</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="top_front">
-          <pose>0.0 0.161236 1.386042 0.135030 0 0</pose>
+        <collision name='top_front'>
+          <pose>0 0.161236 1.38604 0.13503 -0 0</pose>
           <geometry>
             <box>
-              <size>1.279154 0.625988 0.171868</size>
+              <size>1.27915 0.625988 0.171868</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="top_rear">
-          <pose>0.0 0.817696 1.360069 -0.068997 0 0</pose>
+        <collision name='top_rear'>
+          <pose>0 0.817696 1.36007 -0.068997 0 0</pose>
           <geometry>
             <box>
-              <size>1.285130 0.771189 0.226557</size>
+              <size>1.28513 0.771189 0.226557</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="rear_window">
-          <pose>0.0 1.640531 1.175126 -0.262017 0 0</pose>
+        <collision name='rear_window'>
+          <pose>0 1.64053 1.17513 -0.262017 0 0</pose>
           <geometry>
             <box>
-              <size>1.267845 1.116344 0.244286</size>
+              <size>1.26785 1.11634 0.244286</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="trunk">
-          <pose>0.0 1.637059 0.888180 0.0 0 0</pose>
+        <collision name='trunk'>
+          <pose>0 1.63706 0.88818 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.788064 1.138988 0.482746</size>
+              <size>1.78806 1.13899 0.482746</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-
-        <collision name="back_bumper">
-          <pose>0.0 2.054454 0.577870 0.0 0 0</pose>
+        <collision name='back_bumper'>
+          <pose>0 2.05445 0.57787 0 -0 0</pose>
           <geometry>
             <box>
-              <size>1.781650 0.512093 0.581427</size>
+              <size>1.78165 0.512093 0.581427</size>
             </box>
           </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <link name="steering_wheel">
-        <pose>0.627868 0.357734 0.988243 -1.302101 0 1.57</pose>
+      <link name='steering_wheel'>
+        <pose>0.627868 0.357734 0.988243 -1.3021 0 1.57</pose>
         <inertial>
-          <mass>1.0</mass>
+          <mass>1</mass>
           <inertia>
-            <ixx>0.14583300</ixx>
+            <ixx>0.145833</ixx>
             <ixy>0</ixy>
             <ixz>0</ixz>
-            <iyy>0.14583300</iyy>
+            <iyy>0.145833</iyy>
             <iyz>0</iyz>
-            <izz>0.12500000</izz>
+            <izz>0.125</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-        <collision name="collision">
+        <collision name='collision'>
           <geometry>
             <cylinder>
               <radius>0.178172</radius>
@@ -181,53 +282,62 @@
                 <min_depth>0.003</min_depth>
               </ode>
             </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
           </surface>
+          <max_contacts>10</max_contacts>
         </collision>
-        <visual name="visual">
-          <pose>0 0 0 1.302101 0 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 1.3021 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Steering_Wheel</name>
-                <center>true</center>
+                <center>1</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <link name="front_left_wheel">
-        <pose>1.41 0.76 0.3 0 0 1.57</pose>
+      <link name='front_left_wheel'>
+        <pose>1.41 0.76 0.3 0 -0 1.57</pose>
         <inertial>
           <mass>11</mass>
           <inertia>
-            <ixx>0.58631238</ixx>
-            <ixy>0.0</ixy>
-            <iyy>0.33552910</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
-            <izz>0.33552910</izz>
+            <ixx>0.586312</ixx>
+            <ixy>0</ixy>
+            <iyy>0.335529</iyy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+            <izz>0.335529</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-
-        <visual name="visual">
-          <pose>0.04 0.0 0.0 0 0 0</pose>
+        <visual name='visual'>
+          <pose>0.04 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Wheel_Front_Left_</name>
-                <center>true</center>
+                <center>1</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="collision">
-          <pose>0.0 0.0 0.0 0 1.5707963267948966 0</pose>
+        <collision name='collision'>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
           <geometry>
             <sphere>
               <radius>0.31265</radius>
@@ -238,51 +348,57 @@
               <ode>
                 <mu>0.9</mu>
                 <mu2>0.9</mu2>
-                <slip1>0.0</slip1>
-                <slip2>0.0</slip2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
               </ode>
+              <torsional>
+                <ode/>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <min_depth>0.001</min_depth>
-                <kp>1e9</kp>
+                <kp>1e+09</kp>
               </ode>
             </contact>
+            <bounce/>
           </surface>
-
+          <max_contacts>10</max_contacts>
         </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <link name="front_right_wheel">
-        <pose>1.41 -0.76 0.3 0 0 1.57</pose>
+      <link name='front_right_wheel'>
+        <pose>1.41 -0.76 0.3 0 -0 1.57</pose>
         <inertial>
           <mass>11</mass>
           <inertia>
-            <ixx>0.58631238</ixx>
-            <ixy>0.0</ixy>
-            <iyy>0.33552910</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
-            <izz>0.33552910</izz>
+            <ixx>0.586312</ixx>
+            <ixy>0</ixy>
+            <iyy>0.335529</iyy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+            <izz>0.335529</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-        <visual name="visual">
-          <pose>-0.04 0.0 0.0 0 0 0</pose>
-          <pose>0 0 0.0 0 0 0</pose>
+        <visual name='visual'>
+          <pose>-0.04 0 0 0 -0 0</pose>
+          <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Wheel_Front_Right</name>
-                <center>true</center>
+                <center>1</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="collision">
-          <pose>0.0 0.0 0.0 0 1.5707963267948966 0</pose>
+        <collision name='collision'>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
           <geometry>
             <sphere>
               <radius>0.31265</radius>
@@ -293,52 +409,56 @@
               <ode>
                 <mu>0.9</mu>
                 <mu2>0.9</mu2>
-                <slip1>0.0</slip1>
-                <slip2>0.0</slip2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
               </ode>
+              <torsional>
+                <ode/>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <min_depth>0.001</min_depth>
-                <kp>1e9</kp>
+                <kp>1e+09</kp>
               </ode>
             </contact>
+            <bounce/>
           </surface>
-
+          <max_contacts>10</max_contacts>
         </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-
-      <link name="rear_left_wheel">
-        <pose>-1.45 0.786 0.3 0 0 1.57</pose>
+      <link name='rear_left_wheel'>
+        <pose>-1.45 0.786 0.3 0 -0 1.57</pose>
         <inertial>
           <mass>11</mass>
           <inertia>
-            <ixx>0.58631238</ixx>
-            <ixy>0.0</ixy>
-            <iyy>0.33552910</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
-            <izz>0.33552910</izz>
+            <ixx>0.586312</ixx>
+            <ixy>0</ixy>
+            <iyy>0.335529</iyy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+            <izz>0.335529</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-
-        <visual name="visual">
-          <pose>0.04 0.0 0.0 0 0 0</pose>
+        <visual name='visual'>
+          <pose>0.04 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Wheel_Front_Left_</name>
-                <center>true</center>
+                <center>1</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="collision">
-          <pose>0.0 0.0 0.0 0 1.5707963267948966 0</pose>
+        <collision name='collision'>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
           <geometry>
             <sphere>
               <radius>0.31265</radius>
@@ -349,50 +469,56 @@
               <ode>
                 <mu>1.1</mu>
                 <mu2>1.1</mu2>
-                <slip1>0.0</slip1>
-                <slip2>0.0</slip2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
               </ode>
+              <torsional>
+                <ode/>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <min_depth>0.001</min_depth>
-                <kp>1e9</kp>
+                <kp>1e+09</kp>
               </ode>
             </contact>
+            <bounce/>
           </surface>
-
+          <max_contacts>10</max_contacts>
         </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <link name="rear_right_wheel">
-        <pose>-1.45 -0.786 0.3 0 0 1.57</pose>
+      <link name='rear_right_wheel'>
+        <pose>-1.45 -0.786 0.3 0 -0 1.57</pose>
         <inertial>
           <mass>11</mass>
           <inertia>
-            <ixx>0.58631238</ixx>
-            <ixy>0.0</ixy>
-            <iyy>0.33552910</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
-            <izz>0.33552910</izz>
+            <ixx>0.586312</ixx>
+            <ixy>0</ixy>
+            <iyy>0.335529</iyy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+            <izz>0.335529</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-        <visual name="visual">
-          <pose>-0.04 0.0 0.0 0 0 0</pose>
+        <visual name='visual'>
+          <pose>-0.04 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://prius_hybrid/meshes/Hybrid.obj</uri>
               <scale>0.01 0.01 0.01</scale>
               <submesh>
                 <name>Wheel_Front_Right</name>
-                <center>true</center>
+                <center>1</center>
               </submesh>
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="collision">
-          <pose>0.0 0.0 0.0 0 1.5707963267948966 0</pose>
+        <collision name='collision'>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
           <geometry>
             <sphere>
               <radius>0.31265</radius>
@@ -403,75 +529,99 @@
               <ode>
                 <mu>1.1</mu>
                 <mu2>1.1</mu2>
-                <slip1>0.0</slip1>
-                <slip2>0.0</slip2>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
               </ode>
+              <torsional>
+                <ode/>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <min_depth>0.001</min_depth>
-                <kp>1e9</kp>
+                <kp>1e+09</kp>
               </ode>
             </contact>
+            <bounce/>
           </surface>
+          <max_contacts>10</max_contacts>
         </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <joint type="universal" name="front_left_combined_joint">
-        <pose>0 0 0 -0.08726646259971647 0 0</pose>
+      <joint name='front_left_combined_joint' type='universal'>
+        <pose>0 0 0 -0.087266 0 0</pose>
         <child>front_left_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
-            <!-- +- 50 degrees -->
             <lower>-0.8727</lower>
             <upper>0.8727</upper>
           </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
         </axis>
         <axis2>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <friction>18.0474092253</friction>
+            <friction>18.0474</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
           </dynamics>
+          <limit>
+            <upper>1e+16</upper>
+            <lower>-1e+16</lower>
+          </limit>
         </axis2>
       </joint>
-
-      <joint type="universal" name="front_right_combined_joint">
-        <pose>0 0 0 -0.08726646259971647 0 0</pose>
+      <joint name='front_right_combined_joint' type='universal'>
+        <pose>0 0 0 -0.087266 0 0</pose>
         <child>front_right_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
-            <!-- +- 50 degrees -->
             <lower>-0.8727</lower>
             <upper>0.8727</upper>
           </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
         </axis>
         <axis2>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <friction>18.0474092253</friction>
+            <friction>18.0474</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
           </dynamics>
+          <limit>
+            <upper>1e+16</upper>
+            <lower>-1e+16</lower>
+          </limit>
         </axis2>
       </joint>
-
-      <link name="rear_axle">
-        <pose>-1.45 0 0.3 0 0 0</pose>
+      <link name='rear_axle'>
+        <pose>-1.45 0 0.3 0 -0 0</pose>
         <inertial>
-          <mass>30.0</mass>
+          <mass>30</mass>
           <inertia>
-            <ixx>0.08437499999999999</ixx>
-            <ixy>0.0</ixy>
+            <ixx>0.084375</ixx>
+            <ixy>0</ixy>
             <iyy>4.64581</iyy>
-            <ixz>0.0</ixz>
-            <iyz>0.0</iyz>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
             <izz>4.64581</izz>
           </inertia>
+          <pose>0 0 0 0 -0 0</pose>
         </inertial>
-        <visual name="visual">
-          <pose>0.0 0.0 0.0 0 1.5707963267948966 0</pose>
+        <visual name='visual'>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
           <geometry>
             <cylinder>
               <length>1.357</length>
@@ -485,160 +635,170 @@
             </script>
           </material>
         </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <joint type="revolute" name="rear_axle_joint">
+      <joint name='rear_axle_joint' type='revolute'>
         <child>rear_axle</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 1 0</xyz>
           <limit>
-            <lower>-0.05089058524173028</lower>
-            <upper>0.05089058524173028</upper>
+            <lower>-0.0508906</lower>
+            <upper>0.0508906</upper>
           </limit>
           <dynamics>
-            <spring_stiffness>20000.0</spring_stiffness>
-            <damping>2000.0</damping>
+            <spring_stiffness>20000</spring_stiffness>
+            <damping>2000</damping>
+            <spring_reference>0</spring_reference>
           </dynamics>
         </axis>
       </joint>
-      <joint type="revolute" name="rear_left_wheel_joint">
+      <joint name='rear_left_wheel_joint' type='revolute'>
         <child>rear_left_wheel</child>
         <parent>rear_axle</parent>
         <axis>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <friction>12.031606150200002</friction>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
           </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-      <joint type="revolute" name="rear_right_wheel_joint">
+      <joint name='rear_right_wheel_joint' type='revolute'>
         <child>rear_right_wheel</child>
         <parent>rear_axle</parent>
         <axis>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <friction>12.031606150200002</friction>
+            <friction>12.0316</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
           </dynamics>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-
-      <joint name="steering_joint" type="revolute">
-        <pose>-0.002 0 0 0 0 0</pose>
+      <joint name='steering_joint' type='revolute'>
+        <pose>-0.002 0 0 0 -0 0</pose>
         <parent>chassis</parent>
         <child>steering_wheel</child>
         <axis>
-          <xyz>-0.964118 0.000768 0.265556</xyz>
+          <xyz expressed_in='__model__'>-0.964118 0.000768 0.265556</xyz>
           <limit>
             <lower>-7.85</lower>
             <upper>7.85</upper>
           </limit>
           <dynamics>
-            <damping>1.0</damping>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
           </dynamics>
-          <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
         <physics>
           <ode>
             <cfm_damping>1</cfm_damping>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
           </ode>
         </physics>
       </joint>
-
-      <!-- laser -->
-      <joint name="laser_joint" type="fixed">
+      <joint name='laser_joint' type='fixed'>
         <parent>chassis</parent>
         <child>laser_link</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <axis>
           <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-      <link name="laser_link">
+      <link name='laser_link'>
         <pose relative_to='chassis'>0 -2.3 0.6 0 0 -1.58</pose>
-        <!-- <visual name="visual_box">
-            <geometry>
-              <box>
-                <size>0.05 0.05 0.05</size>
-              </box>
-            </geometry>
-          </visual>
-          <collision name="collision_box">
-            <geometry>
-              <box>
-                <size>0.05 0.05 0.05</size>
-              </box>
-            </geometry>
-            <laser_retro>100.0</laser_retro>
-          </collision> -->
-        <sensor name="front_laser_sensor" type="ray">
-          <always_on>false</always_on>
-          <!-- <visualize>true</visualize> -->
-          <visualize>false</visualize>
+        <sensor name='front_laser_sensor' type='ray'>
+          <always_on>0</always_on>
+          <visualize>0</visualize>
           <update_rate>30</update_rate>
           <ray>
             <scan>
               <horizontal>
                 <samples>720</samples>
-                <resolution>1.000000</resolution>
-                <min_angle>-1.570796</min_angle>
-                <max_angle>1.570796</max_angle>
+                <resolution>1</resolution>
+                <min_angle>-1.5708</min_angle>
+                <max_angle>1.5708</max_angle>
               </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
             </scan>
             <range>
-              <min>0.120000</min>
-              <max>30.0</max>
-              <resolution>0.010</resolution>
+              <min>0.12</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
             </range>
             <noise>
               <type>gaussian</type>
-              <mean>0.0</mean>
+              <mean>0</mean>
               <stddev>0.01</stddev>
             </noise>
           </ray>
-          <plugin name="gazebo_ros_head_laser_controller" filename="libgazebo_ros_ray_sensor.so">
+          <plugin name='gazebo_ros_head_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
             <ros>
-              <remapping>~/out:=scan</remapping>
+              <!-- <remapping>~/out:=scan</remapping> -->
+              <remapping>~/out:=/sensing/lidar/front/scan</remapping>
             </ros>
             <output_type>sensor_msgs/LaserScan</output_type>
             <frame_name>laser_link</frame_name>
           </plugin>
         </sensor>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-      
-      <!-- depth_camera -->
-      <joint name="depth_camera_joint" type="fixed">
+      <joint name='depth_camera_joint' type='fixed'>
         <parent>chassis</parent>
         <child>depth_camera_link</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <axis>
           <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-      <link name="depth_camera_link">
-        <!-- <pose relative_to='chassis'>0 -0.3 1.5 0 0 -1.58</pose> -->
+      <link name='depth_camera_link'>
         <pose relative_to='chassis'>0 -2.3 0.6 0 0 -1.58</pose>
-        <!-- <visual name="visual_box">
-            <geometry>
-              <box>
-                <size>0.05 0.05 0.05</size>
-              </box>
-            </geometry>
-        </visual>
-        <collision name="collision_box">
-          <geometry>
-            <box>
-              <size>0.05 0.05 0.05</size>
-            </box>
-          </geometry>
-          <laser_retro>100.0</laser_retro>
-        </collision> -->
-        <sensor name="depth_camera_sensor" type="depth">
-          <always_on>false</always_on>
+        <sensor name='depth_camera_sensor' type='depth'>
+          <always_on>0</always_on>
           <update_rate>20</update_rate>
-          <!-- <always_on>true</always_on> -->
-          <visualize>true</visualize>
-          <!-- <visualize>false</visualize> -->
+          <visualize>1</visualize>
           <camera>
             <horizontal_fov>1.92</horizontal_fov>
             <image>
@@ -647,6 +807,7 @@
               <format>B8G8R8</format>
             </image>
             <depth_camera>
+              <output>depths</output>
             </depth_camera>
             <clip>
               <near>0.02</near>
@@ -654,114 +815,168 @@
             </clip>
             <noise>
               <type>gaussian</type>
-              <!-- Noise is sampled independently per pixel on each frame.
-                   That pixel's noise value is added to each of its color
-                   channels, which at that point lie in the range [0,1]. -->
-              <mean>0.0</mean>
+              <mean>0</mean>
               <stddev>0.007</stddev>
             </noise>
           </camera>
-          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
             <ros>
-              <namespace>camera</namespace>
-              <!-- topics need to be prefixed with camera_name for remapping -->
-              <!-- <remapping>autoware/image_raw:=image_raw</remapping>
-              <remapping>autoware/depth/image_raw:=depth/image_raw</remapping>
-              <remapping>autoware/camera_info:=camera_info</remapping>
-              <remapping>autoware/depth/camera_info:=depth/camera_info</remapping>
-              <remapping>autoware/points:=points</remapping> -->
+              <namespace>sensing/camera</namespace>
+              <!-- <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
+              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping> -->
             </ros>
-            <!-- omit camera_name to default to sensor name -->
-            <camera_name>depth_camera</camera_name>
-            <!-- frame_name>omit so it defaults to link name</frame_name-->
+            <camera_name>traffic_light</camera_name>
+            <frame_name>traffic_light_left_camera/camera_link</frame_name>
             <min_depth>0.1</min_depth>
             <max_depth>500</max_depth>
           </plugin>
         </sensor>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <!-- imu -->
-      <joint name="imu_joint" type="fixed">
+      <joint name='imu_joint' type='fixed'>
         <parent>chassis</parent>
         <child>imu_link</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <axis>
           <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-      <link name="imu_link">
-        <pose relative_to='chassis'>0 0 0.15 0 0 0</pose>
-        <visual name="visual_box">
-            <geometry>
-              <box>
-                <size>0.05 0.05 0.05</size>
-              </box>
-            </geometry>
-        </visual>
-        <collision name="collision_box">
+      <link name='imu_link'>
+        <pose relative_to='chassis'>0 0.47 1.55 0 -0 0</pose>
+        <visual name='visual_box'>
           <geometry>
             <box>
               <size>0.05 0.05 0.05</size>
             </box>
           </geometry>
-          <laser_retro>100.0</laser_retro>
+        </visual>
+        <collision name='collision_box'>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <laser_retro>100</laser_retro>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-        <sensor name="imu_sensor" type="imu">
-            <always_on>true</always_on>
-            <update_rate>200</update_rate>
-            <visualize>true</visualize>
-            <topic>__default_topic__</topic>
-            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu">
-                <ros>
-                  <namespace>autoware</namespace>
-                  <remapping>/autoware/imu/out:=/imu</remapping>
-                </ros>
-                <update_rate>0</update_rate>
-                <updateRateHZ>200.0</updateRateHZ>
-                <gaussianNoise>0.00</gaussianNoise>
-                <xyzOffset>0 0 0</xyzOffset>     
-                <rpyOffset>0 0 0</rpyOffset>
-                <initialOrientationAsReference>false</initialOrientationAsReference>
-            </plugin>
+        <sensor name='imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>200</update_rate>
+          <visualize>1</visualize>
+          <topic>__default_topic__</topic>
+          <plugin name='imu' filename='libgazebo_ros_imu_sensor.so'>
+            <ros>
+              <namespace>autoware</namespace>
+              <remapping>/autoware/imu/out:=/sensing/imu/tamagawa/imu_raw</remapping>
+            </ros>
+            <update_rate>0</update_rate>
+            <frame_name>tamagawa/imu_link</frame_name>
+            <updateRateHZ>200.0</updateRateHZ>
+            <gaussianNoise>0.00</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <initialOrientationAsReference>0</initialOrientationAsReference>
+          </plugin>
+          <imu/>
         </sensor>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
-      <!-- velodyne 16 -->
-      <joint name="velodyne_joint" type="fixed">
+      <joint name='velodyne_joint' type='fixed'>
         <parent>chassis</parent>
         <child>velodyne_link</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <axis>
           <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
         </axis>
       </joint>
-      <link name="velodyne_link">
+      <link name='velodyne_link'>
         <pose relative_to='chassis'>0 0.47 1.55 0 0 -1.58</pose>
-        <visual name="visual_box">
+        <visual name='visual_box'>
           <geometry>
             <mesh>
               <uri>model://velodyne_hdl32/meshes/velodyne_top.dae</uri>
             </mesh>
           </geometry>
         </visual>
-        <collision name="collision_box">
+        <collision name='collision_box'>
           <geometry>
             <box>
               <size>0.05 0.05 0.05</size>
             </box>
           </geometry>
-          <laser_retro>100.0</laser_retro>
+          <laser_retro>100</laser_retro>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
         </collision>
-        <sensor name="velodyne_V16" type="ray">
-          <visualize>false</visualize>
+        <sensor name='velodyne_V16' type='ray'>
+          <visualize>0</visualize>
           <update_rate>10</update_rate>
           <ray>
             <scan>
               <horizontal>
                 <samples>440</samples>
                 <resolution>1</resolution>
-                <min_angle>-3.141592653589793</min_angle>
-                <max_angle>3.141592653589793</max_angle>
+                <min_angle>-3.14159</min_angle>
+                <max_angle>3.14159</max_angle>
               </horizontal>
               <vertical>
                 <samples>16</samples>
@@ -772,41 +987,52 @@
             </scan>
             <range>
               <min>2.1</min>
-              <max>131.0</max>
+              <max>131</max>
               <resolution>0.001</resolution>
             </range>
             <noise>
               <type>gaussian</type>
-              <mean>0.0</mean>
-              <stddev>0.0</stddev>
+              <mean>0</mean>
+              <stddev>0</stddev>
             </noise>
           </ray>
-          <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_laser.so">
+          <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
             <ros>
               <namespace>/velodyne_V16</namespace>
-              <remapping>~/out:=/velodyne_V16/pointcloud2</remapping>
+              <update_rate>10</update_rate>
+              <remapping>~/out:=/sensing/lidar/top/pointcloud_raw</remapping>
+              <!-- <remapping>~/out:=/points_raw</remapping> -->
             </ros>
-            <!-- <tf_prefix>""</tf_prefix> -->
-            <frame_name>velodyne_link</frame_name>
-            <organize_cloud>false</organize_cloud>
+            <!-- <frame_name>velodyne</frame_name> -->
+            <frame_name>velodyne_top_base_link</frame_name>
             <min_range>2.5</min_range>
             <max_range>130</max_range>
             <gaussian_noise>0.008</gaussian_noise>
           </plugin>
         </sensor>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1</mass>
+        </inertial>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
-
       <plugin name='ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
         <ros>
-          <!-- <namespace>demo</namespace> -->
           <remapping>cmd_vel:=cmd_vel</remapping>
           <remapping>odom:=odom</remapping>
           <remapping>distance:=distance</remapping>
         </ros>
-
         <update_rate>50.0</update_rate>
-
-        <!-- wheels -->
         <front_left_joint>front_left_combined_joint</front_left_joint>
         <front_right_joint>front_right_combined_joint</front_right_joint>
         <rear_left_joint>rear_left_wheel_joint</rear_left_joint>
@@ -814,34 +1040,21 @@
         <left_steering_joint>front_left_combined_joint</left_steering_joint>
         <right_steering_joint>front_right_combined_joint</right_steering_joint>
         <steering_wheel_joint>steering_joint</steering_wheel_joint>
-
-        <!-- Max absolute steer angle for tyre in radians-->
-        <!-- Any cmd_vel angular z greater than this would be capped -->
         <max_steer>0.6458</max_steer>
-
-        <!-- Max absolute steering angle of steering wheel -->
         <max_steering_angle>7.85</max_steering_angle>
-
-        <!-- Max absolute linear speed in m/s -->
         <max_speed>20</max_speed>
-
-        <!-- PID tuning -->
         <left_steering_pid_gain>1500 0 1</left_steering_pid_gain>
         <left_steering_i_range>0 0</left_steering_i_range>
         <right_steering_pid_gain>1500 0 1</right_steering_pid_gain>
         <right_steering_i_range>0 0</right_steering_i_range>
         <linear_velocity_pid_gain>1000 0 1</linear_velocity_pid_gain>
         <linear_velocity_i_range>0 0</linear_velocity_i_range>
-
-        <!-- output -->
-        <publish_odom>false</publish_odom>
+        <publish_odom>true</publish_odom>
         <publish_odom_tf>false</publish_odom_tf>
         <publish_wheel_tf>false</publish_wheel_tf>
-        <publish_distance>true</publish_distance>
-
+        <publish_distance>1</publish_distance>
         <odometry_frame>odom</odometry_frame>
         <robot_base_frame>base_link</robot_base_frame>
-
       </plugin>
     </model>
 

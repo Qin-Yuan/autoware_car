@@ -1,0 +1,42 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/robot/somo_ws/install/webots_ros2_control/include/**",
+        "/home/robot/somo_ws/install/webots_ros2_driver/include/**",
+        "/home/robot/somo_ws/install/webots_ros2_msgs/include/**",
+        "/home/robot/somo_ws/install/somo_behavior_tree/include/**",
+        "/home/robot/somo_ws/install/somo_msgs/include/**",
+        "/home/robot/somo_ws/install/somo_diff_drive_controller/include/**",
+        "/home/robot/somo_ws/install/cmd_vel_mux/include/**",
+        "/home/robot/somo_ws/install/cartographer_rviz/include/**",
+        "/home/robot/somo_ws/install/cartographer_ros/include/**",
+        "/home/robot/somo_ws/install/cartographer_ros_msgs/include/**",
+        "/home/robot/autoware_universe/autoware_sim_ws/install/velodyne_gazebo_plugins/include/**",
+        "/home/robot/autoware_universe/autoware_sim_ws/install/scanmatcher/include/**",
+        "/home/robot/autoware_universe/autoware_sim_ws/install/graph_based_slam/include/**",
+        "/home/robot/autoware_universe/autoware_sim_ws/install/ndt_omp_ros2/include/**",
+        "/home/robot/autoware_universe/autoware_sim_ws/install/lidarslam_msgs/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/robot/somo_ws/src/cartographer_ros/cartographer_ros/include/**",
+        "/home/robot/somo_ws/src/cartographer_ros/cartographer_rviz/include/**",
+        "/home/robot/somo_ws/src/somo_behavior_tree/include/**",
+        "/home/robot/somo_ws/src/somo_cmd_vel_mux/include/**",
+        "/home/robot/somo_ws/src/somo_diff_drive_controller/include/**",
+        "/home/robot/somo_ws/src/webots_ros2/webots_ros2_control/include/**",
+        "/home/robot/somo_ws/src/webots_ros2/webots_ros2_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

@@ -28269,7 +28269,8 @@
           </ray>
           <plugin name='gazebo_ros_head_laser_controller' filename='libgazebo_ros_ray_sensor.so'>
             <ros>
-              <remapping>~/out:=scan</remapping>
+              <!-- <remapping>~/out:=scan</remapping> -->
+              <remapping>~/out:=/sensing/lidar/front/scan</remapping>
             </ros>
             <output_type>sensor_msgs/LaserScan</output_type>
             <frame_name>laser_link</frame_name>

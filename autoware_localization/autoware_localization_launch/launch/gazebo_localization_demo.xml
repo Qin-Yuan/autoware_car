@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- map file and path -->
+  <arg name="launch_map" default="true" description="launch map"/>
+  <arg name="map_path" default="/home/robot/autoware_universe/autoware_sim_ws/src/autoware_slam/map/lio_sam_maps" description="point cloud and lanelet2 map directory path"/>
+  <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
+  <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
   <!-- Parameter files -->
   <arg name="ndt_scan_matcher_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/ndt_scan_matcher.param.yaml"/>
   <arg name="localization_error_monitor_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/autoware_localization_error_monitor.param.yaml"/>
@@ -12,6 +17,12 @@
       <arg name="vehicle_model" value="sample_vehicle"/>
     </include>
   </group>
+
+  <!-- Map module -->
+  <group if="$(var launch_map)">
+    <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_map_component.launch.xml"/>
+  </group>
+  
   <!-- localization module -->
   <group>
     <push-ros-namespace namespace="localization"/>

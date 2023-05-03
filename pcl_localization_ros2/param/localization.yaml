@@ -12,7 +12,7 @@
       scan_min_range: 2.0
       scan_period: 0.5
       use_pcd_map: true
-      map_path: "/home/robot/autoware_universe/autoware_map/gazebo_map/pointcloud_map.pcd"
+      map_path: "/home/robot/autoware_universe/autoware_sim_ws/src/autoware_slam/map/lio_sam_maps/pointcloud_map.pcd"
       set_initial_pose: true
       initial_pose_x: 0.0
       initial_pose_y: 0.0

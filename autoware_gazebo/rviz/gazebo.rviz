@@ -1,18 +1,20 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 78
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
-        - /TF1
-        - /TF1/Frames1
         - /RobotModel1/Mass Properties1
         - /RobotModel1/Description Topic1
-        - /LaserScan1
-      Splitter Ratio: 0.5
-    Tree Height: 719
+        - /lidar1/3D1
+        - /lidar1/3D1/Dowsamp_pointclouds1/Topic1
+        - /map1
+        - /map1/3D1
+        - /map1/3D1/pointcloud2_map1
+        - /map1/3D1/pointcloud2_map1/Topic1
+      Splitter Ratio: 0.6088235378265381
+    Tree Height: 409
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -30,7 +32,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: PointCloud2_raw
 Visualization Manager:
   Class: ""
   Displays:
@@ -58,53 +60,45 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_link:
-          Value: true
-        depth_camera_link:
-          Value: true
-        front_left_wheel:
-          Value: true
-        front_right_wheel:
-          Value: true
-        imu_link:
-          Value: true
+          Value: false
+        gnss_link:
+          Value: false
         laser_link:
+          Value: false
+        map:
           Value: true
-        odom:
+        ndt_base_link:
           Value: true
-        rear_left_wheel:
+        tamagawa/imu_link:
           Value: false
-        rear_right_wheel:
+        traffic_light_left_camera/camera_link:
           Value: false
-        steering_wheel:
-          Value: false
-        velodyne_link:
-          Value: false
+        velodyne_top_base_link:
+          Value: true
+        viewer:
+          Value: true
       Marker Scale: 10
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
+        map:
           base_link:
-            depth_camera_link:
-              {}
-            front_left_wheel:
-              {}
-            front_right_wheel:
-              {}
-            imu_link:
+            gnss_link:
               {}
             laser_link:
               {}
-            rear_left_wheel:
+            tamagawa/imu_link:
               {}
-            rear_right_wheel:
+            traffic_light_left_camera/camera_link:
               {}
-            steering_wheel:
+            velodyne_top_base_link:
               {}
-            velodyne_link:
-              {}
+          ndt_base_link:
+            {}
+          viewer:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -130,12 +124,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        depth_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
+        gnss_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -145,7 +134,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        velodyne_link:
+        tamagawa/imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        traffic_light_left_camera/camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_top_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -158,78 +157,223 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 3.4771742820739746
-        Min Value: -1.5772863626480103
-        Value: true
-      Axis: Z
-      Channel Name: ring
-      Class: rviz_default_plugins/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 0.6000000238418579
+                Min Value: 0.6000000238418579
+                Value: true
+              Axis: Z
+              Channel Name: intensity
+              Class: rviz_default_plugins/LaserScan
+              Color: 255; 255; 255
+              Color Transformer: Intensity
+              Decay Time: 0
+              Enabled: true
+              Invert Rainbow: false
+              Max Color: 255; 255; 255
+              Max Intensity: 0
+              Min Color: 0; 0; 0
+              Min Intensity: 0
+              Name: LaserScan
+              Position Transformer: XYZ
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.10000000149011612
+              Style: Points
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /scan
+              Use Fixed Frame: true
+              Use rainbow: true
+              Value: true
+          Enabled: true
+          Name: 2D
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 3.4771742820739746
+                Min Value: -1.5772863626480103
+                Value: true
+              Axis: Z
+              Channel Name: ring
+              Class: rviz_default_plugins/PointCloud2
+              Color: 255; 255; 255
+              Color Transformer: Intensity
+              Decay Time: 0
+              Enabled: true
+              Invert Rainbow: true
+              Max Color: 255; 255; 255
+              Max Intensity: 15
+              Min Color: 0; 0; 0
+              Min Intensity: 0
+              Name: PointCloud2_raw
+              Position Transformer: XYZ
+              Selectable: true
+              Size (Pixels): 2
+              Size (m): 0.10000000149011612
+              Style: Points
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /sensing/lidar/top/pointcloud_raw
+              Use Fixed Frame: true
+              Use rainbow: true
+              Value: true
+            - Alpha: 1
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 10
+                Min Value: -10
+                Value: true
+              Axis: Z
+              Channel Name: intensity
+              Class: rviz_default_plugins/PointCloud2
+              Color: 255; 255; 255
+              Color Transformer: Intensity
+              Decay Time: 0
+              Enabled: false
+              Invert Rainbow: false
+              Max Color: 255; 255; 255
+              Max Intensity: 0
+              Min Color: 0; 0; 0
+              Min Intensity: 0
+              Name: Dowsamp_pointclouds
+              Position Transformer: XYZ
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.009999999776482582
+              Style: Points
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Best Effort
+                Value: /localization/util/downsample/pointcloud
+              Use Fixed Frame: true
+              Use rainbow: true
+              Value: false
+          Enabled: true
+          Name: 3D
       Enabled: true
-      Invert Rainbow: true
-      Max Color: 255; 255; 255
-      Max Intensity: 15
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 2
-      Size (m): 0.10000000149011612
-      Style: Points
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /velodyne_V16/pointcloud2
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
+      Name: lidar
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_default_plugins/Image
+          Enabled: true
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Image_raw
+          Normalize Range: true
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /sensing/camera/traffic_light/image_raw
+          Value: true
+        - Class: rviz_default_plugins/Image
+          Enabled: true
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: deepth_raw
+          Normalize Range: true
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /sensing/camera/traffic_light/depth/image_raw
+          Value: true
       Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 0
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: LaserScan
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.10000000149011612
-      Style: Flat Squares
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /scan
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
+      Name: camera
+    - Class: rviz_common/Group
+      Displays:
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 0.699999988079071
+              Class: rviz_default_plugins/Map
+              Color Scheme: map
+              Draw Behind: false
+              Enabled: true
+              Name: Map
+              Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: ""
+              Update Topic:
+                Depth: 5
+                Durability Policy: Volatile
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: ""
+              Use Timestamp: false
+              Value: true
+          Enabled: false
+          Name: 2D
+        - Class: rviz_common/Group
+          Displays:
+            - Alpha: 1
+              Autocompute Intensity Bounds: true
+              Autocompute Value Bounds:
+                Max Value: 19.13417625427246
+                Min Value: -1.6924773454666138
+                Value: true
+              Axis: Z
+              Channel Name: intensity
+              Class: rviz_default_plugins/PointCloud2
+              Color: 255; 255; 255
+              Color Transformer: FlatColor
+              Decay Time: 0
+              Enabled: true
+              Invert Rainbow: false
+              Max Color: 255; 255; 255
+              Max Intensity: 0
+              Min Color: 0; 0; 0
+              Min Intensity: 0
+              Name: pointcloud2_map
+              Position Transformer: XYZ
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.05000000074505806
+              Style: Squares
+              Topic:
+                Depth: 5
+                Durability Policy: Transient Local
+                Filter size: 10
+                History Policy: Keep Last
+                Reliability Policy: Reliable
+                Value: /map/pointcloud_map
+              Use Fixed Frame: true
+              Use rainbow: true
+              Value: true
+          Enabled: true
+          Name: 3D
+      Enabled: true
+      Name: map
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: velodyne_link
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -272,25 +416,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 29.31175422668457
+      Distance: 116.11140441894531
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.8206488490104675
-        Y: -1.280053973197937
-        Z: 0.3970654010772705
+        X: 3.9920711517333984
+        Y: -2.6225180625915527
+        Z: 11.414519309997559
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9597969055175781
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1554067134857178
+      Yaw: 3.1271133422851562
     Saved: ~
 Window Geometry:
   Displays:
@@ -298,7 +442,9 @@ Window Geometry:
   Height: 1016
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000035afc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000035a000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000035afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000035a000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000039b0000003efc0100000002fb0000000800540069006d006501000000000000039b000002fb00fffffffb0000000800540069006d006501000000000000045000000000000000000000023f0000035a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Image_raw:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000002430000035afc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000001d6000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000002d1000000c60000000000000000fb0000000a0049006d00610067006501000002c1000000d60000000000000000fb000000120049006d006100670065005f0072006100770100000219000000bc0000002800fffffffb00000014006400650065007000740068005f00720061007701000002db000000bc0000002800ffffff000000010000010f0000035afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000035a000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007360000003efc0100000002fb0000000800540069006d0065010000000000000736000002fb00fffffffb0000000800540069006d00650100000000000004500000000000000000000004ed0000035a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -307,6 +453,8 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 923
-  X: 997
+  Width: 1846
+  X: 74
   Y: 27
+  deepth_raw:
+    collapsed: false

@@ -6,7 +6,17 @@
     <color rgba="0.2 0.2 0.2 1" />
   </material>
 
-  <link name="imu_link">
+  <link name="tamagawa/imu_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.06 0.04 0.02" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <link name="gnss_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -26,7 +36,7 @@
     </visual>
   </link>
 
-  <link name="velodyne_link">
+  <link name="velodyne_top_base_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -36,7 +46,7 @@
     </visual>
   </link>
 
-  <link name="depth_camera_link">
+  <link name="traffic_light_left_camera/camera_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -75,15 +85,21 @@
     </collision>
   </link>
 
-  <joint name="imu_link_joint" type="fixed">
+  <joint name="gnss_link_joint" type="fixed">
     <parent link="base_link" />
-    <child link="imu_link" />
+    <child link="gnss_link" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="tamagawa/imu_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="tamagawa/imu_link" />
     <origin xyz="-0.47 0 1.55" rpy="0 0 0"/>
   </joint>
 
-  <joint name="velodyne_link_joint" type="fixed">
+  <joint name="velodyne_top_base_link_joint" type="fixed">
     <parent link="base_link" />
-    <child link="velodyne_link" />
+    <child link="velodyne_top_base_link" />
     <origin xyz="-0.47 0 1.55" rpy="0 0 0"/>
   </joint>
 
@@ -94,9 +110,9 @@
     <!-- -1.58 -->
   </joint>
 
-  <joint name="depth_camera_link_joint" type="fixed">
+  <joint name="traffic_light_left_camera/camera_link_joint" type="fixed">
     <parent link="base_link" />
-    <child link="depth_camera_link" />
+    <child link="traffic_light_left_camera/camera_link" />
     <origin xyz="2.3 0 0.6" rpy="0 0 0"/>
   </joint>
 

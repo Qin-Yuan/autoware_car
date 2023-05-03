@@ -1,5 +1,5 @@
 <launch>
-  <arg name="pointcloud_map_path" default="/home/robot/autoware_universe/autoware_map/gazebo_map"/>
+  <arg name="pointcloud_map_path" default="/home/robot/autoware_universe/autoware_sim_ws/src/autoware_slam/map/lio_sam_maps"/>
   <arg name="pointcloud_map_loader_param_path" default="$(find-pkg-share pcl_localization_ros2)/param/pointcloud_map_loader.param.yaml"/>
 
   <node pkg="map_loader" exec="pointcloud_map_loader" name="pointcloud_map_loader" output="screen">
