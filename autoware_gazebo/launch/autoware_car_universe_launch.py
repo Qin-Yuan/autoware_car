@@ -24,6 +24,7 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.substitutions import Command
 
 
 def generate_launch_description():
@@ -59,8 +60,8 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{'use_sim_time': use_sim_time}],
-            arguments=[urdf]
+            parameters=[{'use_sim_time': use_sim_time , "robot_description":Command(["xacro", " ", urdf])}],
+            # arguments=[urdf]
         )
     
     return LaunchDescription([
