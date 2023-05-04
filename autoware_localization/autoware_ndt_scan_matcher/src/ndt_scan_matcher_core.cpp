@@ -353,6 +353,8 @@ void NDTScanMatcher::callback_sensor_points(
   
   // calculate initial pose
   std::unique_lock<std::mutex> initial_pose_array_lock(initial_pose_array_mtx_);
+  // RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), *this->get_clock(), 1, "initial_pose_msg_ptr_array_.size : ");
+  // RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), *this->get_clock(), 1, initial_pose_msg_ptr_array_.size());
   if (initial_pose_msg_ptr_array_.size() <= 1) {
     RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), *this->get_clock(), 1, "No Pose!");
     return;

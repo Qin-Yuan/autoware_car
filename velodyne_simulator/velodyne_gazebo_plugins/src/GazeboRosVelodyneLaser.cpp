@@ -119,7 +119,7 @@ void GazeboRosVelodyneLaser::Load(sensors::SensorPtr _parent, sdf::ElementPtr _s
   // ROS2 publishers do not support connection callbacks (at least as of foxy)
   // Use timer to emulate ROS1 style connection callback
   using namespace std::chrono_literals;
-  timer_ = ros_node_->create_wall_timer(0.5s, std::bind(&GazeboRosVelodyneLaser::ConnectCb, this));
+  timer_ = ros_node_->create_wall_timer(0.1s, std::bind(&GazeboRosVelodyneLaser::ConnectCb, this));
 
   RCLCPP_INFO(ros_node_->get_logger(), "Velodyne laser plugin ready");
   gzdbg << "GazeboRosVelodyneLaser LOADED\n";

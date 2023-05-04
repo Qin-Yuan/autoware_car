@@ -28241,7 +28241,7 @@
         <sensor name='front_laser_sensor' type='ray'>
           <always_on>0</always_on>
           <visualize>0</visualize>
-          <update_rate>30</update_rate>
+          <update_rate>12</update_rate>
           <ray>
             <scan>
               <horizontal>
@@ -28308,7 +28308,7 @@
         <pose relative_to='chassis'>0 -2.3 0.6 0 0 -1.58</pose>
         <sensor name='depth_camera_sensor' type='depth'>
           <always_on>0</always_on>
-          <update_rate>20</update_rate>
+          <update_rate>10</update_rate>
           <visualize>1</visualize>
           <camera>
             <horizontal_fov>1.92</horizontal_fov>
@@ -28321,8 +28321,8 @@
               <output>depths</output>
             </depth_camera>
             <clip>
-              <near>0.02</near>
-              <far>300</far>
+              <near>0.1</near>
+              <far>20</far>
             </clip>
             <noise>
               <type>gaussian</type>
@@ -28333,13 +28333,13 @@
           <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
             <ros>
               <namespace>sensing/camera</namespace>
-              <!-- <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
-              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping> -->
+              <remapping>/camera/depth_camera/camera_info:=/sensing/camera/traffic_light/camera_info</remapping>
+              <remapping>/camera/depth_camera/image_raw:=/sensing/camera/traffic_light/image_raw</remapping>
             </ros>
             <camera_name>traffic_light</camera_name>
             <frame_name>traffic_light_left_camera/camera_link</frame_name>
             <min_depth>0.1</min_depth>
-            <max_depth>500</max_depth>
+            <max_depth>20</max_depth>
           </plugin>
         </sensor>
         <self_collide>0</self_collide>
@@ -28402,7 +28402,7 @@
         </collision>
         <sensor name='imu_sensor' type='imu'>
           <always_on>1</always_on>
-          <update_rate>200</update_rate>
+          <update_rate>100</update_rate>
           <visualize>1</visualize>
           <topic>__default_topic__</topic>
           <plugin name='imu' filename='libgazebo_ros_imu_sensor.so'>
@@ -28410,9 +28410,8 @@
               <namespace>autoware</namespace>
               <remapping>/autoware/imu/out:=/sensing/imu/tamagawa/imu_raw</remapping>
             </ros>
-            <update_rate>0</update_rate>
             <frame_name>tamagawa/imu_link</frame_name>
-            <updateRateHZ>200.0</updateRateHZ>
+            <updateRateHZ>100.0</updateRateHZ>
             <gaussianNoise>0.00</gaussianNoise>
             <xyzOffset>0 0 0</xyzOffset>
             <rpyOffset>0 0 0</rpyOffset>
@@ -28497,8 +28496,8 @@
               </vertical>
             </scan>
             <range>
-              <min>2.1</min>
-              <max>131</max>
+              <min>2.5</min>
+              <max>51</max>
               <resolution>0.001</resolution>
             </range>
             <noise>
@@ -28517,7 +28516,7 @@
             <!-- <frame_name>velodyne</frame_name> -->
             <frame_name>velodyne_top_base_link</frame_name>
             <min_range>2.5</min_range>
-            <max_range>130</max_range>
+            <max_range>50</max_range>
             <gaussian_noise>0.008</gaussian_noise>
           </plugin>
         </sensor>
@@ -28543,7 +28542,7 @@
           <remapping>odom:=odom</remapping>
           <remapping>distance:=distance</remapping>
         </ros>
-        <update_rate>50.0</update_rate>
+        <update_rate>100.0</update_rate>
         <front_left_joint>front_left_combined_joint</front_left_joint>
         <front_right_joint>front_right_combined_joint</front_right_joint>
         <rear_left_joint>rear_left_wheel_joint</rear_left_joint>
