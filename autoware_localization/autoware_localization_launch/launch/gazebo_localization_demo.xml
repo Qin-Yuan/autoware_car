@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <!-- map file and path -->
-  <arg name="launch_map" default="true" description="launch map"/>
+  <arg name="launch_map" default="false" description="launch map"/>
   <arg name="map_path" default="/home/robot/autoware_universe/autoware_sim_ws/src/autoware_slam/map/lio_sam_maps" description="point cloud and lanelet2 map directory path"/>
   <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
   <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
@@ -75,8 +75,8 @@
     </group>
     
     <!-- API -->
-    <group>
+    <!-- <group>
       <include file="$(find-pkg-share autoware_gazebo_launch)/launch/components/tier4_autoware_api_component.launch.xml"/>
-    </group>
+    </group> -->
   </group>
 </launch>

@@ -50,6 +50,7 @@ class vehlicle_gazebo_pub(Node):
         self.velocity_status_msgs.longitudinal_velocity = self.odom_msg.twist.twist.linear.x
         self.velocity_status_msgs.lateral_velocity = self.odom_msg.twist.twist.linear.y
         self.velocity_status_msgs.heading_rate = self.odom_msg.twist.twist.angular.z
+        self.steering_status_msgs.steering_tire_angle = self.odom_msg.twist.twist.angular.z
 
         self.control_mode_msgs.stamp = self.get_clock().now().to_msg()
         self.gear_status_msgs.stamp = self.get_clock().now().to_msg()

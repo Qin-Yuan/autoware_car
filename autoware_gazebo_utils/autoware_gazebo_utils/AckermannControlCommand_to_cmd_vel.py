@@ -17,10 +17,10 @@ class AckermannControlCommand_to_cmd_vel(Node):
     def AckermannControlCommand_sub_callback(self,date):
         # self.AckermannControlCommand_msg = date
         self.AckermannControlCommand_msg.longitudinal.speed = date.longitudinal.speed
-        self.AckermannControlCommand_msg.longitudinal.acceleration = date.longitudinal.acceleration
+        self.AckermannControlCommand_msg.longitudinal.acceleration = date.lateral.steering_tire_angle
         # print(self.AckermannControlCommand_msg.longitudinal.speed," - ",self.AckermannControlCommand_msg.longitudinal.acceleration)
         self.Cmd_vel_msg.linear.x = self.AckermannControlCommand_msg.longitudinal.speed
-        self.Cmd_vel_msg.angular.z = -self.AckermannControlCommand_msg.longitudinal.acceleration
+        self.Cmd_vel_msg.angular.z = self.AckermannControlCommand_msg.lateral.steering_tire_angle
         self.cmd_vel_pub.publish(self.Cmd_vel_msg)
 
 
