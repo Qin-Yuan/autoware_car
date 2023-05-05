@@ -3,6 +3,8 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
 from autoware_auto_vehicle_msgs.msg import ControlModeReport,GearReport,HazardLightsReport,SteeringReport,TurnIndicatorsReport,VelocityReport
+import math
+
 class vehlicle_gazebo_pub(Node):
     def __init__(self,node_name):
         super().__init__(node_name)
@@ -46,11 +48,13 @@ class vehlicle_gazebo_pub(Node):
 
         if abs(self.odom_msg.twist.twist.angular.z) < 0.01 :
             self.odom_msg.twist.twist.angular.z = 0.0
-            
+        
+        
+
         self.velocity_status_msgs.longitudinal_velocity = self.odom_msg.twist.twist.linear.x
         self.velocity_status_msgs.lateral_velocity = self.odom_msg.twist.twist.linear.y
-        self.velocity_status_msgs.heading_rate = self.odom_msg.twist.twist.angular.z
-        self.steering_status_msgs.steering_tire_angle = self.odom_msg.twist.twist.angular.z
+        self.velocity_status_msgs.heading_rate = self.angular2degree()
+        self.steering_status_msgs.steering_tire_angle = self.angular2degree()
 
         self.control_mode_msgs.stamp = self.get_clock().now().to_msg()
         self.gear_status_msgs.stamp = self.get_clock().now().to_msg()
@@ -65,6 +69,18 @@ class vehlicle_gazebo_pub(Node):
         self.steering_status_pub.publish(self.steering_status_msgs)
         self.turn_indicators_status_pub.publish(self.turn_indicators_status_msgs)
         self.velocity_status_pub.publish(self.velocity_status_msgs)
+    
+    def angular2degree(self):
+        wheelbase = 1.52  # 小车轮距
+        lenbase = 2.86    # 小车轴距
+        inner_angle =  0.0
+        # 内轮转角 = arctan(车子轴距 * 角速度 / 车子线速度)
+        # 其中，车子轴距是车子前后轮的距离，角速度是车子绕垂直于地面的轴旋转的速率，车子线速度是车子沿着地面运动的速率。
+        if self.odom_msg.twist.twist.linear.x != 0 and self.odom_msg.twist.twist.angular.z != 0 :
+            # inner_angle = (2 * self.odom_msg.twist.twist.linear.x) / (wheelbase * self.odom_msg.twist.twist.angular.z)
+            inner_angle = math.atan(lenbase * self.odom_msg.twist.twist.angular.z / self.odom_msg.twist.twist.linear.x)
+        return inner_angle
+
 
 def main(args=None):
     rclpy.init(args=args)			    
