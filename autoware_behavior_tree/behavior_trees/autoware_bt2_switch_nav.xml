@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<root>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt0_navigation.xml"/>
+    <!-- autoware nav 功能分类 三级 -->
+    <BehaviorTree ID="NavSwitch">
+        <Switch2 name="NavMission" variable="{child_type}" case_1="to_goal" case_2="with_people">
+            <IfThenElse name="NavToGoal">
+                <SubTree ID="NavToGoal" __shared_blackboard="true"/>
+                <IsSayCondition name="nav_success" tts_type="tts" tts_cmd="成功到达目标点！" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                <IsSayCondition name="nav_failure" tts_type="tts" tts_cmd="无法到达目标点！" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                <!-- <AlwaysSuccess/>
+                <AlwaysSuccess/> -->
+            </IfThenElse>
+            <Sequence>
+                <IsSayCondition name="put_tips" tts_type="tts" tts_cmd="请跟随我参观我们的公司吧!" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                <Parallel success_threshold="1" failure_threshold="1">
+                    <IfThenElse name="NavToGoal">
+                        <SubTree ID="NavToGoal" __shared_blackboard="true"/>
+                        <IsSayCondition name="nav_success" tts_type="tts" tts_cmd="成功到达目标点！" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                        <IsSayCondition name="nav_failure" tts_type="tts" tts_cmd="无法到达目标点！" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                    </IfThenElse>
+                    <RetryUntilSuccessful num_attempts="10000">
+                        <ReactiveSequence>
+                            <Delay delay_msec="10000">
+                                <Sequence>
+                                    <CheckPeopleCondition name="check_people" target_pose_topic="/follow_me_target_pose" />
+                                    <IsSayCondition name="over_distance" tts_type="tts" tts_cmd="请注意四周环境安全，跟紧我嗷!" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                                </Sequence>
+                            </Delay>
+                            <AlwaysFailure/>
+                        </ReactiveSequence>
+                    </RetryUntilSuccessful>
+                </Parallel>
+            </Sequence>
+            <!-- 其他未设置任务默认返回失败 -->
+            <AlwaysFailure/>
+        </Switch2>
+    </BehaviorTree>
+</root> 

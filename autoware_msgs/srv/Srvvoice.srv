@@ -1,0 +1,4 @@
+#ros2 interface show user_interfaces/srv/Srvvoice.srv
+string cmd    # get_fenda_position
+---
+bool success   # indicate successful run of robot_analyse service

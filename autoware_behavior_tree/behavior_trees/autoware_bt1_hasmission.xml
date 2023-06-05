@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<root>
+    <!-- autoware hasmission 二级 -->
+    <BehaviorTree ID="HasMission">
+        <HasMissionCondition mission_number="{true/false}"/>
+    </BehaviorTree>
+</root>

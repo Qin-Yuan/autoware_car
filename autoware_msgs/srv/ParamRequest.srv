@@ -1,0 +1,6 @@
+string mission_type
+string param
+---
+geometry_msgs/PoseStamped goal
+geometry_msgs/PoseStamped[] goals
+string image_label

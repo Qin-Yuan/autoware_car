@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt2_switch_nav.xml"/>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt2_switch_rviz2.xml"/>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt2_switch_introduction.xml"/>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt2_switch_vision.xml"/>
+    <!-- autoware 功能分类  二级 -->
+    <BehaviorTree ID="FuncSwitch">
+        <Switch5 name="SelectMission" variable="{mission_type}" case_1="nav" case_2="vision" case_3="service" case_4="introduction" case_5="rviz2">
+            <SubTree ID="NavSwitch" __shared_blackboard="true"/>
+            <SubTree ID='VisionSwitch' __shared_blackboard="true"/>
+            <AlwaysSuccess/>
+            <SubTree ID="IntroductionSwitch" __shared_blackboard="true"/>
+            <SubTree ID="Rviz2Switch" __shared_blackboard="true"/>
+            <!-- 其他未设置任务默认返回失败 -->
+            <AlwaysFailure/>
+        </Switch5>
+    </BehaviorTree>
+</root>

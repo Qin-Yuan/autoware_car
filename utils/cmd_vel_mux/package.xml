@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>cmd_vel_mux</name>
+  <version>0.12.1</version>
+  <description>
+     A multiplexer for command velocity inputs. Arbitrates incoming cmd_vel messages from several topics,
+     allowing one topic at a time to command the robot, based on priorities. It also deallocates current
+     allowed topic if no messages are received after a configured timeout. All topics, together with their
+     priority and timeout are configured through a YAML file, that can be reload at runtime.
+  </description>
+  <author>Jorge Santos Simon</author>
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/yocs_cmd_vel_mux</url>
+  <url type="repository">https://github.com/yujinrobot/yujin_ocs</url>
+  <url type="bugtracker">https://github.com/yujinrobot/yujin_ocs/issues</url>
+
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>rcl_interfaces</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>rclcpp_components</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>rclcpp_components</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

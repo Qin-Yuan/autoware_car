@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<root>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt0_navigation.xml"/>
+    <!-- autoware CheckHome 二级 -->
+    <BehaviorTree ID="CheckHome">
+        <!-- else-无任务tick检查是否回初始位置等待 -->
+        <IfThenElse name="CheckHome">
+            <IsHomeCondition name="IsHome" localization_topic="/amcl_pose" home_position="{home_position}" check_threshold="{check_threshold}"/>
+            <AlwaysSuccess/>
+            <Sequence>                
+                <IsSayCondition name="NavToHome" tts_type="tts" tts_cmd="{go_home_state}" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                <SubTree ID="NavToGoal" __shared_blackboard="true"/>
+            </Sequence>
+        </IfThenElse>
+    </BehaviorTree>
+</root>

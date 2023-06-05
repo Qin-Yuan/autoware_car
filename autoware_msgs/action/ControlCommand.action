@@ -1,0 +1,11 @@
+#goal defination (custome and add command type)
+string behavior_tree
+bool mission_number
+string mission_type
+string child_type
+string parameters
+---
+#result defination
+bool result
+---
+string feedback

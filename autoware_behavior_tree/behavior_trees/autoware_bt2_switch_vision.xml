@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<root>
+    <BehaviorTree ID="VisionSwitch">
+        <ReactiveSequence>
+            <!-- <RetryUntilSuccessful num_attempts="100"> -->
+            <ReactiveSequence>
+                <FaceIdSentCondition name="FaceIdSentCondition" face_id_topic="/face_id"/>
+                <IsNearbyCondition name="IsNearbyCondition"/>
+            </ReactiveSequence>
+            <!-- </RetryUntilSuccessful>  -->
+            <IsSayCondition name="vision" tts_type="tts" tts_cmd="{welcome_string}" tts_topic="/speak_tts"  IsWaitEnd="false" />
+        </ReactiveSequence>
+    </BehaviorTree>
+</root>

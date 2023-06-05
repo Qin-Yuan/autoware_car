@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+    <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt0_navigation.xml"/>
+    <!-- autoware introduction 功能分类 三级 -->
+    <BehaviorTree ID="IntroductionSwitch">
+            <Repeat num_cycles="{array_pose_length}">
+                <!-- <Delay delay_msec="10000">
+                    <AlwaysSuccess/>
+                </Delay> -->
+                <Sequence>
+                    <QueueConsumerService/>
+                    <Sequence>
+                        <SubTree ID="NavToGoal" __shared_blackboard="true"/>
+                        <IsSayCondition name="introduction" tts_type="introduction" tts_cmd="{Introduction_goal}" tts_topic="/speak_tts"  IsWaitEnd="false" />
+                    </Sequence>
+                </Sequence>
+            </Repeat>
+    </BehaviorTree>
+</root>

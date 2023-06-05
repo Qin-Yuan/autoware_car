@@ -1,0 +1,5 @@
+geometry_msgs/PoseStamped targetpose #目标位置请求
+int16 flag
+---
+int16 count #
+int16 arm # choose arm

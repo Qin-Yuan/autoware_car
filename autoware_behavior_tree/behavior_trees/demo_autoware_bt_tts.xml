@@ -1,0 +1,8 @@
+<!-- 
+    tts demo 
+-->
+<root>
+  <BehaviorTree ID="Txt2Tts">
+    <IsSayCondition name="introduction" tts_type="introduction" tts_cmd="tts播报内容" tts_topic="/speak_tts"  IsWaitEnd="false" />
+  </BehaviorTree>
+</root>

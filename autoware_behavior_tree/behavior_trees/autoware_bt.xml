@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="MainTree">
+  <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt0_navigation.xml"/>
+  <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt1_switch.xml"/>
+  <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt1_checkhome.xml"/>
+  <include ros_pkg="autoware_behavior_tree" path="behavior_trees/autoware_bt1_hasmission.xml"/>
+  <!-- 收到任务 主树 一级 -->
+  <BehaviorTree ID="MainTree">
+    <!-- <IsBatteryLow battery_topic="/battery_status" min_battery="30.0"/> -->
+    <IfThenElse name="CheckMisson">
+      <!-- if-是否有任务 -->
+      <SubTree ID="HasMission" __shared_blackboard="true"/>
+      <!-- then-任务功能分类处理 -->
+      <!-- <AlwaysSuccess/> -->
+      <SubTree ID="FuncSwitch" __shared_blackboard="true"/>
+      <!-- else-无任务tick检查是否回初始位置等待 -->
+      <AlwaysSuccess/>
+      <!-- <SubTree ID="CheckHome" __shared_blackboard="true"/> -->
+    </IfThenElse>
+  </BehaviorTree>
+</root>
