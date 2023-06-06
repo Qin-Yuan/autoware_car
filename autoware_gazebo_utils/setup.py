@@ -27,6 +27,7 @@ setup(
             "odom_to_gnss = autoware_gazebo_utils.odom_to_gnss:main",
             "tf2_base_link_to_map = autoware_gazebo_utils.tf2_base_link_to_map:main",
             "vehlicle_gazebo_pub = autoware_gazebo_utils.vehlicle_gazebo_pub:main",
+            'virtual_wall = autoware_gazebo_utils.virtual_wall:main',
         ],
     },
 )

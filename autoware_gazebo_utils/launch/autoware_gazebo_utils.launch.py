@@ -42,6 +42,13 @@ def generate_launch_description():
         name='odom_to_gnss',
         parameters=[{'use_sim_time': use_sim_time}],
         output='screen')
+    
+    virtual_wall_node = Node(
+        package='autoware_gazebo_utils',
+        executable='virtual_wall',
+        name='virtual_wall',
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen')
 
     tf2_base_link_to_map = Node(
         package='autoware_gazebo_utils',
@@ -67,4 +74,5 @@ def generate_launch_description():
         # tf2_base_link_to_map ,
         vehlicle_gazebo_pub ,
         cmd_vel_mux_node,
+        virtual_wall_node,
     ])
