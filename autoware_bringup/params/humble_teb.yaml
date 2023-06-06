@@ -156,8 +156,8 @@ controller_server:
     odom_topic: /localization/pose_twist_fusion_filter/kinematic_state
     #TEB_Param
     FollowPath:
-      # plugin: teb_local_planner::TebLocalPlannerROS
-      plugin: "nav2_rotation_shim_controller::RotationShimController"
+      plugin: teb_local_planner::TebLocalPlannerROS
+      # plugin: "nav2_rotation_shim_controller::RotationShimController"
       primary_controller: "teb_local_planner::TebLocalPlannerROS"
       teb_autosize: 3.0
       dt_ref: 0.3           #0.4    #1.0
@@ -173,14 +173,15 @@ controller_server:
       feasibility_check_no_poses: 2
       publish_feedback: False
       # Robot
-      max_vel_x: 1.0
-      max_vel_theta: 1.4 
-      max_vel_x_backwards: 0.1 
-      acc_lim_x: 0.5
-      acc_lim_theta: 0.5
+      max_vel_x: 3.0
+      max_vel_theta: 3.4 
+      max_vel_x_backwards: 3.0 
+      acc_lim_x: 1.0
+      acc_lim_theta: 1.0
+      min_turning_radius: 2.0  # 最小转弯半径
       footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
         type: "polygon"
-        vertices: "[ [4.00, 1.20], [4.00, -1.20], [-0.90, -1.20], [-0.90, 1.20] ]"
+        vertices: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       # GoalTolerance
       xy_goal_tolerance: 0.15
       yaw_goal_tolerance: 0.20        
@@ -210,7 +211,7 @@ controller_server:
       weight_kinematics_nh: 7000.0
       weight_kinematics_forward_drive: 10.0 #20.0
       # weight_kinematics_forward_drive: 3.0
-      weight_kinematics_turning_radius: 0.7
+      weight_kinematics_turning_radius: 100.0
       weight_optimaltime: 1.0 # must be > 0
       weight_shortest_path: 0.0
       weight_obstacle: 100.0
@@ -265,8 +266,7 @@ local_costmap:
       height: 20                # 局部代价地图 costmap
       resolution: 0.05
       # robot_radius: 0.3
-      footprint: "[ [4.00, 1.20], [4.00, -1.20], [-0.90, -1.20], [-0.90, 1.20] ]"
-      
+      footprint: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       plugins: ["obstacle_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
@@ -292,7 +292,7 @@ local_costmap:
         max_obstacle_height: 2.0
         mark_threshold: 0
         # observation_sources: scan virtual_wall downsample_pointcloud
-        observation_sources: scan 
+        observation_sources: scan
         scan:
           topic: /sensing/lidar/front/scan
           max_obstacle_height: 2.0
@@ -309,9 +309,9 @@ local_costmap:
         #   clearing: True
         #   marking: True
         #   data_type: "PointCloud2"
-        #   raytrace_max_range: 1000.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   raytrace_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
         #   raytrace_min_range: 0.0
-        #   obstacle_max_range: 1000.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   obstacle_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
         #   obstacle_min_range: 0.0
         # downsample_pointcloud:
         #   topic: /localization/util/downsample/pointcloud
@@ -342,7 +342,7 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: True
       # robot_radius: 0.3
-      footprint: "[ [4.00, 1.20], [4.00, -1.20], [-0.90, -1.20], [-0.90, 1.20] ]"
+      footprint: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
@@ -369,7 +369,8 @@ global_costmap:
         z_voxels: 16
         max_obstacle_height: 2.0
         mark_threshold: 0
-        observation_sources: scan virtual_wall downsample_pointcloud
+        # observation_sources: scan virtual_wall downsample_pointcloud
+        observation_sources: scan virtual_wall
         scan:
           topic: /sensing/lidar/front/scan
           max_obstacle_height: 2.0
@@ -391,16 +392,16 @@ global_costmap:
           obstacle_max_range: 1000.0    # 虚拟墙使用点云的最大有效距离
           obstacle_min_range: 0.0
           
-        downsample_pointcloud:
-          topic: /localization/util/downsample/pointcloud
-          max_obstacle_height: 4.0
-          clearing: True
-          marking: True
-          data_type: "PointCloud2"
-          raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
-          raytrace_min_range: 0.0
-          obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
-          obstacle_min_range: 0.0
+        # downsample_pointcloud:
+        #   topic: /localization/util/downsample/pointcloud
+        #   max_obstacle_height: 4.0
+        #   clearing: True
+        #   marking: True
+        #   data_type: "PointCloud2"
+        #   raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   raytrace_min_range: 0.0
+        #   obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   obstacle_min_range: 0.0
 
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
@@ -490,11 +491,11 @@ velocity_smoother:
     smoothing_frequency: 200.0
     scale_velocities: false
     feedback: "OPEN_LOOP"
-    max_velocity: [1.0, 0.0, 2.5]
-    min_velocity: [-0.1, 0.0, -2.5]
+    max_velocity: [3.0, 0.0, 3.5]
+    min_velocity: [-2.0, 0.0, -3.5]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
-    max_accel: [0.5, 0.0, 3.2]
-    max_decel: [-0.5, 0.0, -3.2]
+    max_accel: [1.0, 0.0, 3.2]
+    max_decel: [-1.0, 0.0, -3.2]
     odom_topic: "/localization/pose_twist_fusion_filter/kinematic_state"
     odom_duration: 0.1
