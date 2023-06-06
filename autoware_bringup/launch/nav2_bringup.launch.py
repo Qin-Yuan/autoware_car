@@ -140,18 +140,18 @@ def generate_launch_description():
                             'use_respawn': use_respawn,
                             'params_file': params_file}.items()),
         # 1 - BEGIN - amcl 定位
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource(os.path.join(autoware_launch_dir,
-        #                                             'amcl_map.launch.py')),
-        #     condition=IfCondition(PythonExpression(['not ', slam])),
-        #     launch_arguments={'namespace': namespace,
-        #                     'map': map_yaml_file,
-        #                     'use_sim_time': use_sim_time,
-        #                     'autostart': autostart,
-        #                     'params_file': params_file,
-        #                     'use_composition': use_composition,
-        #                     'use_respawn': use_respawn,
-        #                     'container_name': 'nav2_container'}.items()),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(os.path.join(autoware_launch_dir,
+                                                    'nav2_map.launch.py')),
+            condition=IfCondition(PythonExpression(['not ', slam])),
+            launch_arguments={'namespace': namespace,
+                            'map': map_yaml_file,
+                            'use_sim_time': use_sim_time,
+                            'autostart': autostart,
+                            'params_file': params_file,
+                            'use_composition': use_composition,
+                            'use_respawn': use_respawn,
+                            'container_name': 'nav2_container'}.items()),
         # 1 - END - amcl 定位
         
         IncludeLaunchDescription(
@@ -168,7 +168,7 @@ def generate_launch_description():
     # Create the launch description and populate
     ld = LaunchDescription()
 
-    # Set environment variables
+    # Set environment variablesx
     ld.add_action(stdout_linebuf_envvar)
 
     # Declare the launch options

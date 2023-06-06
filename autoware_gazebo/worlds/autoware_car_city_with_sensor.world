@@ -28538,7 +28538,7 @@
       </link>
       <plugin name='ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
         <ros>
-          <remapping>cmd_vel:=cmd_vel</remapping>
+          <remapping>cmd_vel:=chassis_vel_cmd</remapping>
           <remapping>odom:=odom</remapping>
           <remapping>distance:=distance</remapping>
         </ros>

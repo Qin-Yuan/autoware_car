@@ -1,0 +1,40 @@
+cmd_vel_mux:
+  ros__parameters:
+    subscribers:
+        # 导航控制
+        navigation_input:
+          topic:       "input/nav_cmd_vel"   #"input/nav_vel"
+          timeout:     0.1
+          priority:    0
+          short_desc:  "nav_cmd_vel"
+        navigation_smooth_input:
+          topic:       "input/nav_cmd_vel_smoothed"   #"input/cmd_vel_smoothed"
+          timeout:     0.1
+          priority:    1
+          short_desc:  "nav_cmd_vel_smoothed"
+        # sound_vel_input:
+        #   topic:       "input/sound_servoing_vel"
+        #   timeout:     0.5
+        #   priority:    3
+        #   short_desc:  "sound_servoing"
+        # visual_vel_input:
+        #   topic:       "input/visual_servoing_vel"
+        #   timeout:     0.1
+        #   priority:    4
+        #   short_desc:  "visual_servoing"
+        # 键盘控制
+        teleoperation_input:
+          topic:       "input/cmd_vel"
+          timeout:     0.1
+          priority:    6
+          short_desc:  "cmd_vel"
+        # youbotui_input:
+        #   topic:       "input/youbot_ui_vel"
+        #   timeout:     0.1
+        #   priority:    8
+        #   short_desc:  "youbot_ui/vel operation"
+        # safety_controller:
+        #   topic:       "stop/cmd_vel"
+        #   timeout:     0.3
+        #   priority:    11
+        #   short_desc:  "Safety controller"

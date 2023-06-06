@@ -1,59 +1,3 @@
-amcl:
-  ros__parameters:
-    use_sim_time: true
-    alpha1: 0.1
-    alpha2: 0.2
-    alpha3: 0.2
-    alpha4: 0.2
-    alpha5: 0.1
-    base_frame_id: "base_link"
-    beam_skip_distance: 0.5
-    beam_skip_error_threshold: 0.9
-    beam_skip_threshold: 0.3
-    do_beamskip: false
-    global_frame_id: "map"
-    lambda_short: 0.1
-    laser_likelihood_max_dist: 2.0
-    laser_max_range: -1.0
-    laser_min_range: -1.0
-    laser_model_type: "likelihood_field"
-    max_beams: 60
-    max_particles: 2000
-    min_particles: 500
-    odom_frame_id: "odom"
-    pf_err: 0.05
-    pf_z: 0.99
-    recovery_alpha_fast: 0.001   # 0.0
-    recovery_alpha_slow: 0.001   # 0.0
-    resample_interval: 1
-    robot_model_type: "nav2_amcl::DifferentialMotionModel"
-    save_pose_rate: 0.5
-    sigma_hit: 0.2
-    tf_broadcast: true
-    transform_tolerance: 1.0   # 1.0
-    update_min_a: 0.2
-    update_min_d: 0.25
-    z_hit: 0.8
-    z_max: 0.05
-    z_rand: 0.05
-    z_short: 0.1
-    scan_topic: scan
-    # scan_topic: amcl_scan
-    set_initial_pose: True
-    # 实体小车
-    initial_pose.x: 0.000
-    initial_pose.y: 0.000
-    initial_pose.z: 0.000
-    initial_pose.yaw: 0.000
-
-amcl_map_client:
-  ros__parameters:
-    use_sim_time: False
-
-amcl_rclcpp_node:
-  ros__parameters:
-    use_sim_time: False
-
 bt_task_manager:
   ros__parameters:
     use_sim_time: True
@@ -63,7 +7,7 @@ bt_task_manager:
     # groot_zmq_publisher_port: 1666
     # groot_zmq_server_port: 1667
     # 
-    default_bt_xml_filename: "/home/benny/autoware_ws/install/somo_behavior_tree/share/somo_behavior_tree/behavior_trees/somo_bt.xml"
+    default_bt_xml_filename: "/home/robot/autoware_universe/autoware_sim_ws/src/autoware_behavior_tree/behavior_trees/autoware_bt.xml"
     plugin_lib_names:
     - queue_producer_consumer_service_bt_node
     - has_mission_condition_bt_node 
@@ -121,7 +65,7 @@ bt_navigator:
     use_sim_time: True
     global_frame: map
     robot_base_frame: base_link
-    odom_topic: /odom
+    odom_topic: /localization/pose_twist_fusion_filter/kinematic_state
     bt_loop_duration: 10
     default_server_timeout: 20
     # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
@@ -209,13 +153,13 @@ controller_server:
       xy_goal_tolerance: 0.25
       yaw_goal_tolerance: 0.25
     controller_plugin_types: ["teb_local_planner::TebLocalPlannerROS"]
-    odom_topic: /odom
+    odom_topic: /localization/pose_twist_fusion_filter/kinematic_state
     #TEB_Param
     FollowPath:
       # plugin: teb_local_planner::TebLocalPlannerROS
       plugin: "nav2_rotation_shim_controller::RotationShimController"
       primary_controller: "teb_local_planner::TebLocalPlannerROS"
-      teb_autosize: 1.0
+      teb_autosize: 3.0
       dt_ref: 0.3           #0.4    #1.0
       dt_hysteresis: 0.03    #0.04    #0.5
       max_samples: 500
@@ -229,14 +173,15 @@ controller_server:
       feasibility_check_no_poses: 2
       publish_feedback: False
       # Robot
-      max_vel_x: 1.0
-      max_vel_theta: 1.4 
+      max_vel_x: 3.0
+      max_vel_theta: 5.4 
       max_vel_x_backwards: 0.1 
-      acc_lim_x: 0.5
-      acc_lim_theta: 0.5
+      acc_lim_x: 3.0
+      acc_lim_theta: 3.0
       footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
         type: "polygon"
-        vertices: "[ [0.30, 0.25], [0.30, -0.25], [-0.30, -0.25], [-0.30, 0.25] ]"
+        # vertices: "[ [0.30, 0.25], [0.30, -0.25], [-0.30, -0.25], [-0.30, 0.25] ]"
+        vertices: "[ [4.10, 1.20], [4.10, -1.20], [-0.70, -1.20], [-0.70, 1.20] ]"
       # GoalTolerance
       xy_goal_tolerance: 0.15
       yaw_goal_tolerance: 0.20        
@@ -317,15 +262,15 @@ local_costmap:
       robot_base_frame: base_link
       use_sim_time: False
       rolling_window: true
-      width: 5                 # 局部代价地图 costmap
-      height: 5                # 局部代价地图 costmap
+      width: 20                 # 局部代价地图 costmap
+      height: 20                # 局部代价地图 costmap
       resolution: 0.05
       # robot_radius: 0.3
-      footprint: "[ [0.30, 0.25], [0.30, -0.25], [-0.30, -0.25], [-0.30, 0.25] ]"
+      footprint: "[ [4.10, 1.20], [4.10, -1.20], [-0.70, -1.20], [-0.70, 1.20] ]"
       plugins: ["obstacle_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.3       # 膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物
+        inflation_radius: 1.7       # 膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物 0.3
         cost_scaling_factor: 3.0
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -347,16 +292,16 @@ local_costmap:
         max_obstacle_height: 2.0
         mark_threshold: 0
         # observation_sources: scan virtual_wall
-        observation_sources: scan
+        observation_sources: scan downsample_pointcloud
         scan:
           topic: /sensing/lidar/front/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 10.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          raytrace_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
           raytrace_min_range: 0.0
-          obstacle_max_range: 10.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          obstacle_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
           obstacle_min_range: 0.0
         # virtual_wall:
         #   topic: /sensing/virtual_wall/point_cloud
@@ -368,6 +313,16 @@ local_costmap:
         #   raytrace_min_range: 0.0
         #   obstacle_max_range: 1000.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
         #   obstacle_min_range: 0.0
+        downsample_pointcloud:
+          topic: /localization/util/downsample/pointcloud
+          max_obstacle_height: 4.0
+          clearing: True
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          raytrace_min_range: 0.0
+          obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          obstacle_min_range: 0.0
       static_layer:
         map_subscribe_transient_local: True
       always_send_full_costmap: True
@@ -387,7 +342,7 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: True
       # robot_radius: 0.3
-      footprint: "[ [0.30, 0.25], [0.30, -0.25], [-0.30, -0.25], [-0.30, 0.25] ]"
+      footprint: "[ [4.10, 1.20], [4.10, -1.20], [-0.70, -1.20], [-0.70, 1.20] ]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
@@ -401,9 +356,9 @@ global_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 3.0
+          raytrace_max_range: 20.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
+          obstacle_max_range: 20.0
           obstacle_min_range: 0.0
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -414,16 +369,16 @@ global_costmap:
         z_voxels: 16
         max_obstacle_height: 2.0
         mark_threshold: 0
-        observation_sources: scan virtual_wall
+        observation_sources: scan virtual_wall downsample_pointcloud
         scan:
           topic: /sensing/lidar/front/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 4.0
+          raytrace_max_range: 20.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 3.5
+          obstacle_max_range: 20.0
           obstacle_min_range: 0.0
         virtual_wall:
           topic: /sensing/virtual_wall/point_cloud
@@ -435,6 +390,17 @@ global_costmap:
           raytrace_min_range: 0.0
           obstacle_max_range: 1000.0    # 虚拟墙使用点云的最大有效距离
           obstacle_min_range: 0.0
+          
+        downsample_pointcloud:
+          topic: /localization/util/downsample/pointcloud
+          max_obstacle_height: 4.0
+          clearing: True
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          raytrace_min_range: 0.0
+          obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          obstacle_min_range: 0.0
 
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
@@ -442,7 +408,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.55
+        inflation_radius: 1.8  # 0.55
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -524,11 +490,11 @@ velocity_smoother:
     smoothing_frequency: 200.0
     scale_velocities: false
     feedback: "OPEN_LOOP"
-    max_velocity: [1.0, 2.0, 2.5]
+    max_velocity: [2.0, 0.0, 2.5]
     min_velocity: [-0.1, 0.0, -2.5]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
-    max_accel: [0.5, 2.0, 3.2]
-    max_decel: [-0.5, 0.0, -3.2]
-    odom_topic: "odom"
+    max_accel: [1.0, 0.0, 2.2]
+    max_decel: [-1.0, 0.0, -2.2]
+    odom_topic: "/localization/pose_twist_fusion_filter/kinematic_state"
     odom_duration: 0.1

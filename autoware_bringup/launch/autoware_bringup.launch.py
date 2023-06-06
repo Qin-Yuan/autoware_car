@@ -48,11 +48,7 @@ def generate_launch_description():
             'use_sim_time',
             default_value='true',
             description='Use simulation (Gazebo) clock if true'),
-
-        # IncludeLaunchDescription(
-        #     PythonLaunchDescriptionSource([autoware_utils_launch_file_dir, '/autoware_utils.launch.py']),
-        # ),
-
+            
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([nav2_launch_file_dir, '/nav2_bringup.launch.py']),
             launch_arguments={
