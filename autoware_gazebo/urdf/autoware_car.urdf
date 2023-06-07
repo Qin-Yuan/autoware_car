@@ -106,7 +106,8 @@
   <joint name="laser_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="laser_link" />
-    <origin xyz="2.3 0 0.6" rpy="0 0 0"/>
+    <!-- 修改laser的高度，适配 local_costmap ，不至于激光雷达在地面下无法膨胀使用 -->
+    <origin xyz="2.3 0 1.9" rpy="0 0 0"/>
     <!-- -1.58 -->
   </joint>
 
