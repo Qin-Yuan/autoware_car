@@ -166,25 +166,25 @@ controller_server:
       # global_plan_overwrite_orientation: False
       global_plan_overwrite_orientation: True
       allow_init_with_backwards_motion: False
-      max_global_plan_lookahead_dist: 1.5
-      global_plan_viapoint_sep: 0.3
-      global_plan_prune_distance: 1.0
+      max_global_plan_lookahead_dist: 8.0 # 规划最大可视范围
+      global_plan_viapoint_sep: 0.3     # 规划点距离
+      global_plan_prune_distance: 2.0   # 全球计划修剪距离
       exact_arc_length: False
       feasibility_check_no_poses: 2
       publish_feedback: False
       # Robot
-      max_vel_x: 3.0
-      max_vel_theta: 3.4 
+      max_vel_x: 2.0
+      max_vel_theta: 3.4
       max_vel_x_backwards: 3.0 
-      acc_lim_x: 1.0
-      acc_lim_theta: 1.0
-      min_turning_radius: 2.0  # 最小转弯半径
+      acc_lim_x: 0.4
+      acc_lim_theta: 1.5
+      min_turning_radius: 1.0  # 最小转弯半径
       footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
         type: "polygon"
-        vertices: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
+        vertices: "[ [2.20, 1.20], [2.20, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       # GoalTolerance
-      xy_goal_tolerance: 0.15
-      yaw_goal_tolerance: 0.20        
+      xy_goal_tolerance: 0.8
+      yaw_goal_tolerance: 0.9        
       free_goal_vel: False
       # Obstacles
       min_obstacle_dist: 0.3
@@ -266,11 +266,11 @@ local_costmap:
       height: 20                # 局部代价地图 costmap
       resolution: 0.05
       # robot_radius: 0.3
-      footprint: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
+      footprint: "[ [2.20, 1.20], [2.20, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       plugins: ["obstacle_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 1.7       # 膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物 0.3
+        inflation_radius: 0.7       # 膨胀半径，扩展在碰撞区域以外的代价区域，使得机器人规划路径避开障碍物 0.3
         cost_scaling_factor: 3.0
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -299,9 +299,9 @@ local_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
           raytrace_min_range: 0.0
-          obstacle_max_range: 20.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+          obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
           obstacle_min_range: 0.0
         # virtual_wall:
         #   topic: /sensing/virtual_wall/point_cloud
@@ -319,9 +319,9 @@ local_costmap:
         #   clearing: True
         #   marking: True
         #   data_type: "PointCloud2"
-        #   raytrace_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   raytrace_max_range: 10.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
         #   raytrace_min_range: 0.0
-        #   obstacle_max_range: 30.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
+        #   obstacle_max_range: 10.0      # 局部代价地图 costmap 中使用的最大激光雷达距离
         #   obstacle_min_range: 0.0
       static_layer:
         map_subscribe_transient_local: True
@@ -342,23 +342,33 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: True
       # robot_radius: 0.3
-      footprint: "[ [2.00, 1.20], [2.00, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
+      footprint: "[ [2.30, 1.20], [2.30, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
-        observation_sources: scan
+        observation_sources: scan virtual_wall
         scan:
           topic: /sensing/lidar/front/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 20.0
+          raytrace_max_range: 30.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 20.0
+          obstacle_max_range: 30.0
+          obstacle_min_range: 0.0
+        virtual_wall:
+          topic: /sensing/virtual_wall/point_cloud
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 1000.0    # 虚拟墙使用点云的最大有效距离
+          raytrace_min_range: 0.0
+          obstacle_max_range: 1000.0    # 虚拟墙使用点云的最大有效距离
           obstacle_min_range: 0.0
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -377,10 +387,11 @@ global_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 20.0
+          raytrace_max_range: 30.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 20.0
+          obstacle_max_range: 30.0
           obstacle_min_range: 0.0
+
         virtual_wall:
           topic: /sensing/virtual_wall/point_cloud
           max_obstacle_height: 2.0
@@ -409,7 +420,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 1.8  # 0.55
+        inflation_radius: 1.2  # 0.55
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -430,6 +441,43 @@ map_saver:
     free_thresh_default: 0.25
     occupied_thresh_default: 0.65
     map_subscribe_transient_local: True
+
+planner_server:
+  ros__parameters:
+    planner_plugins: ["GridBased"]
+
+    GridBased:
+      plugin: "nav2_smac_planner/SmacPlannerHybrid"
+      tolerance: 0.8                      # tolerance for planning if unable to reach exact pose, in meters
+      downsample_costmap: false           # whether or not to downsample the map
+      downsampling_factor: 1              # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
+      allow_unknown: true                # allow traveling in unknown space
+      max_iterations: 1000000             # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
+      max_on_approach_iterations: 1000    # maximum number of iterations to attempt to reach goal once in tolerance
+      max_planning_time: 10.5              # max time in s for planner to plan, smooth, and upsample. Will scale maximum smoothing and upsampling times based on remaining time after planning.
+      motion_model_for_search: "REEDS_SHEPP"    # For Hybrid Dubin, Redds-Shepp  REEDS_SHEPP DUBIN
+      cost_travel_multiplier: 2.0         # For 2D: Cost multiplier to apply to search to steer away from high cost areas. Larger values will place in the center of aisles more exactly (if non-`FREE` cost potential field exists) but take slightly longer to compute. To optimize for speed, a value of 1.0 is reasonable. A reasonable tradeoff value is 2.0. A value of 0.0 effective disables steering away from obstacles and acts like a naive binary search A*.
+      angle_quantization_bins: 64         # For Hybrid nodes: Number of angle bins for search, must be 1 for 2D node (no angle search)
+      analytic_expansion_ratio: 3.5       # For Hybrid/Lattice nodes: The ratio to attempt analytic expansions during search for final approach.
+      analytic_expansion_max_length: 3.0    # For Hybrid/Lattice nodes: The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting (in meters). This should be scaled with minimum turning radius and be no less than 4-5x the minimum radius
+      minimum_turning_radius: 2.00        # For Hybrid/Lattice nodes: minimum turning radius in m of path / vehicle
+      reverse_penalty: 2.1                # For Reeds-Shepp model: penalty to apply if motion is reversing, must be => 1
+      change_penalty: 0.0                 # For Hybrid nodes: penalty to apply if motion is changing directions, must be >= 0
+      non_straight_penalty: 1.20          # For Hybrid nodes: penalty to apply if motion is non-straight, must be => 1
+      cost_penalty: 2.0                   # For Hybrid nodes: penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
+      retrospective_penalty: 0.025        # For Hybrid/Lattice nodes: penalty to prefer later maneuvers before earlier along the path. Saves search time since earlier nodes are not expanded until it is necessary. Must be >= 0.0 and <= 1.0
+      rotation_penalty: 5.0               # For Lattice node: Penalty to apply only to pure rotate in place commands when using minimum control sets containing rotate in place primitives. This should always be set sufficiently high to weight against this action unless strictly necessary for obstacle avoidance or there may be frequent discontinuities in the plan where it requests the robot to rotate in place to short-cut an otherwise smooth path for marginal path distance savings.
+      lookup_table_size: 20.0               # For Hybrid nodes: Size of the dubin/reeds-sheep distance window to cache, in meters.
+      cache_obstacle_heuristic: True      # For Hybrid nodes: Cache the obstacle map dynamic programming distance expansion heuristic between subsiquent replannings of the same goal location. Dramatically speeds up replanning performance (40x) if costmap is largely static.  
+      allow_reverse_expansion: False      # For Lattice nodes: Whether to expand state lattice graph in forward primitives or reverse as well, will double the branching factor at each step.   
+      smooth_path: True                   # For Lattice/Hybrid nodes: Whether or not to smooth the path, always true for 2D nodes.
+      viz_expansions: True                # For Hybrid nodes: Whether to publish expansions on the /expansions topic as an array of poses (the orientation has no meaning). WARNING: heavy to compute and to display, for debug only as it degrades the performance. 
+      smoother:
+        max_iterations: 1000
+        w_smooth: 0.3
+        w_data: 0.2
+        tolerance: 0.1
+        do_refinement: true               # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
 
 planner_server_rclcpp_node:
   ros__parameters:
@@ -495,7 +543,7 @@ velocity_smoother:
     min_velocity: [-2.0, 0.0, -3.5]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
-    max_accel: [1.0, 0.0, 3.2]
-    max_decel: [-1.0, 0.0, -3.2]
+    max_accel: [2.0, 0.0, 3.2]
+    max_decel: [-2.0, 0.0, -3.2]
     odom_topic: "/localization/pose_twist_fusion_filter/kinematic_state"
     odom_duration: 0.1

@@ -174,11 +174,11 @@ controller_server:
       publish_feedback: False
       # Robot
       max_vel_x: 2.0
-      max_vel_theta: 1.4
+      max_vel_theta: 3.4
       max_vel_x_backwards: 3.0 
-      acc_lim_x: 1.5
-      acc_lim_theta: 0.5
-      min_turning_radius: 2.0  # 最小转弯半径
+      acc_lim_x: 0.4
+      acc_lim_theta: 1.5
+      min_turning_radius: 1.0  # 最小转弯半径
       footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
         type: "polygon"
         vertices: "[ [2.20, 1.20], [2.20, -1.20], [-0.80, -1.20], [-0.80, 1.20] ]"
@@ -454,13 +454,13 @@ planner_server:
       allow_unknown: true                # allow traveling in unknown space
       max_iterations: 1000000             # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
       max_on_approach_iterations: 1000    # maximum number of iterations to attempt to reach goal once in tolerance
-      max_planning_time: 3.5              # max time in s for planner to plan, smooth, and upsample. Will scale maximum smoothing and upsampling times based on remaining time after planning.
+      max_planning_time: 10.5              # max time in s for planner to plan, smooth, and upsample. Will scale maximum smoothing and upsampling times based on remaining time after planning.
       motion_model_for_search: "REEDS_SHEPP"    # For Hybrid Dubin, Redds-Shepp  REEDS_SHEPP DUBIN
       cost_travel_multiplier: 2.0         # For 2D: Cost multiplier to apply to search to steer away from high cost areas. Larger values will place in the center of aisles more exactly (if non-`FREE` cost potential field exists) but take slightly longer to compute. To optimize for speed, a value of 1.0 is reasonable. A reasonable tradeoff value is 2.0. A value of 0.0 effective disables steering away from obstacles and acts like a naive binary search A*.
       angle_quantization_bins: 64         # For Hybrid nodes: Number of angle bins for search, must be 1 for 2D node (no angle search)
       analytic_expansion_ratio: 3.5       # For Hybrid/Lattice nodes: The ratio to attempt analytic expansions during search for final approach.
       analytic_expansion_max_length: 3.0    # For Hybrid/Lattice nodes: The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting (in meters). This should be scaled with minimum turning radius and be no less than 4-5x the minimum radius
-      minimum_turning_radius: 3.00        # For Hybrid/Lattice nodes: minimum turning radius in m of path / vehicle
+      minimum_turning_radius: 2.00        # For Hybrid/Lattice nodes: minimum turning radius in m of path / vehicle
       reverse_penalty: 2.1                # For Reeds-Shepp model: penalty to apply if motion is reversing, must be => 1
       change_penalty: 0.0                 # For Hybrid nodes: penalty to apply if motion is changing directions, must be >= 0
       non_straight_penalty: 1.20          # For Hybrid nodes: penalty to apply if motion is non-straight, must be => 1
