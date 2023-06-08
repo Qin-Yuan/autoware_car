@@ -68,7 +68,7 @@ class VirtualWall(Node):
         wx = image_x * self.map_yaml_data["resolution"] + self.map_yaml_data["origin"][0]
         wy = image_y * self.map_yaml_data["resolution"] + self.map_yaml_data["origin"][1]
         # 这里的wy计算出世界地图中的位置有问题，做了一个反转并+0.5调试了一下
-        return wx,-wy+21
+        return wx,-wy+27.8
 
     def init_virtual_cloud(self):
         self.rate = 5                       # virtual_wall 点云发布频率

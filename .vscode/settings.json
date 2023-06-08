@@ -139,5 +139,6 @@
     ],
     "files.associations": {
         "memory": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/home/robot/autoware_universe/autoware_sim_ws/src/autoware_localization/autoware_gyro_odometer"
 }
