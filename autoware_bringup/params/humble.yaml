@@ -176,7 +176,7 @@ controller_server:
       max_vel_x: 2.0
       max_vel_theta: 3.4
       max_vel_x_backwards: 3.0 
-      acc_lim_x: 0.4
+      acc_lim_x: 0.3
       acc_lim_theta: 1.5
       min_turning_radius: 1.0  # 最小转弯半径
       footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
@@ -452,7 +452,7 @@ planner_server:
       downsample_costmap: false           # whether or not to downsample the map
       downsampling_factor: 1              # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
       allow_unknown: true                # allow traveling in unknown space
-      max_iterations: 1000000             # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
+      max_iterations: 100000000             # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
       max_on_approach_iterations: 1000    # maximum number of iterations to attempt to reach goal once in tolerance
       max_planning_time: 10.5              # max time in s for planner to plan, smooth, and upsample. Will scale maximum smoothing and upsampling times based on remaining time after planning.
       motion_model_for_search: "REEDS_SHEPP"    # For Hybrid Dubin, Redds-Shepp  REEDS_SHEPP DUBIN
