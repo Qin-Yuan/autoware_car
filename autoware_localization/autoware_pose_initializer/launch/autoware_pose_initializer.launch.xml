@@ -2,7 +2,7 @@
 <launch>
   <!-- pose_initializer -->
   <group>
-    <include file="$(find-pkg-share pose_initializer)/launch/pose_initializer.launch.xml">
+    <include file="$(find-pkg-share autoware_pose_initializer)/launch/pose_initializer.launch.xml">
       <arg name="gnss_enabled" value="true"/>
       <arg name="ndt_enabled" value="true"/>
       <arg name="ekf_enabled" value="true"/>
