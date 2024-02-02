@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/imi/somo_ws/install/webots_ros2_control/include/**",
+        "/home/imi/somo_ws/install/webots_ros2_driver/include/**",
+        "/home/imi/somo_ws/install/webots_ros2_msgs/include/**",
+        "/home/imi/somo_ws/install/somo_behavior_tree/include/**",
+        "/home/imi/somo_ws/install/somo_msgs/include/**",
+        "/home/imi/somo_ws/install/somo_diff_drive_controller/include/**",
+        "/home/imi/somo_ws/install/cmd_vel_mux/include/**",
+        "/home/imi/somo_ws/install/cartographer_rviz/include/**",
+        "/home/imi/somo_ws/install/cartographer_ros/include/**",
+        "/home/imi/somo_ws/install/cartographer_ros_msgs/include/**",
+        "/home/imi/turtlebot3_drlnav/install/turtlebot3_fake_node/include/**",
+        "/home/imi/turtlebot3_drlnav/install/turtlebot3_msgs/include/**",
+        "/home/imi/turtlebot3_drlnav/install/turtlebot3_gazebo/include/**",
+        "/home/imi/humanoid_ws/install/webots_ros2_control/include/**",
+        "/home/imi/humanoid_ws/install/webots_ros2_driver/include/**",
+        "/home/imi/humanoid_ws/install/webots_ros2_msgs/include/**",
+        "/home/imi/humanoid_ws/install/robot_msgs/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/imi/somo_ws/src/cartographer_ros/cartographer_ros/include/**",
+        "/home/imi/somo_ws/src/cartographer_ros/cartographer_rviz/include/**",
+        "/home/imi/somo_ws/src/somo_behavior_tree/include/**",
+        "/home/imi/somo_ws/src/somo_cmd_vel_mux/include/**",
+        "/home/imi/somo_ws/src/somo_diff_drive_controller/include/**",
+        "/home/imi/somo_ws/src/webots_ros2/webots_ros2_control/include/**",
+        "/home/imi/somo_ws/src/webots_ros2/webots_ros2_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
