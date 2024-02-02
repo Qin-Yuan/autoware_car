@@ -54,6 +54,7 @@ void Droid::RunNPC() {
         NPC1Deta = -abs(NPC1Deta) ;
     }
     NPC1newPosition[1] += NPC1Deta ;
+    NPC1newPosition[2] = 0.4 ;
     NPC1positionField->setSFVec3f(NPC1newPosition);
 
     // NPC2 
@@ -65,6 +66,7 @@ void Droid::RunNPC() {
         NPC2Deta = -abs(NPC2Deta) ;
     }
     NPC2newPosition[0] += NPC2Deta ;
+    NPC2newPosition[2] = 0.4 ;
     NPC2positionField->setSFVec3f(NPC2newPosition);
 }
 
@@ -86,7 +88,7 @@ void Droid::iniRobot()
     } else if(IsCameraAble == 1) {
         camera->enable(timeStep);
         // 摄像头初始化 mImage
-        mImage.header.frame_id = "camera_link";
+        mImage.header.frame_id = "traffic_light_left_camera/camera_link";
         mImage.height = camera->getHeight();
         mImage.width = camera->getWidth();
         mImage.is_bigendian = false;
@@ -94,7 +96,7 @@ void Droid::iniRobot()
         mImage.data.resize(4 * camera->getWidth() * camera->getHeight());
         mImage.encoding = sensor_msgs::image_encodings::BGRA8;
         // 摄像头初始化 cameraInfo
-        mCameraInfo.header.frame_id = "camera_link";
+        mCameraInfo.header.frame_id = "traffic_light_left_camera/camera_link";
         mCameraInfo.height = camera->getHeight();
         mCameraInfo.width = camera->getWidth();
         mCameraInfo.distortion_model = "plumb_bob";
@@ -139,7 +141,7 @@ void Droid::iniRobot()
             lidar->enable(timeStep);
             // lidar->enablePointCloud();
             lidar_mode = 2 ;
-            mPC2.header.frame_id = "laser_link";
+            mPC2.header.frame_id = "velodyne_top_base_link";
             mPC2.height = lidar->getNumberOfLayers();
             mPC2.width = lidar->getHorizontalResolution();
             // webots 激光点云默认包含  float x;  float y;  float z;  int layer_id;  float time; 因此为 20，这已经是最小了

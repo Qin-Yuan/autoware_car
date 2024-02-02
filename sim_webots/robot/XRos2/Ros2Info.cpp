@@ -22,12 +22,12 @@ void Ros2Info::publishLidarData(void) {
         ;
     } else if (ex_state->IsLidarAble == 1) {
         if (ex_state->lidar_mode == 1) {
-            mScanPublisher = create_publisher<sensor_msgs::msg::LaserScan>("/sensor/lidar/scan", 10);
+            mScanPublisher = create_publisher<sensor_msgs::msg::LaserScan>("/sensing/lidar/top/scan", 10);
             ex_state->mScan.header.stamp = this->get_clock()->now() ;
             mScanPublisher->publish(ex_state->mScan);
         }
         else if(ex_state->lidar_mode == 2) {
-            mLidarPublisher = create_publisher<sensor_msgs::msg::PointCloud2>("/sensor/lidar/point_cloud2", 10);
+            mLidarPublisher = create_publisher<sensor_msgs::msg::PointCloud2>("/sensing/lidar/top/pointcloud_raw", 10);
             ex_state->mPC2.header.stamp = this->get_clock()->now() ;
             mLidarPublisher->publish(ex_state->mPC2) ;
         }
@@ -38,7 +38,7 @@ void Ros2Info::publishImageDate(void) {
     if (ex_state->IsCameraAble == 0) {
         ;
     } else if (ex_state->IsCameraAble == 1) {
-        mImagePublisher = create_publisher<sensor_msgs::msg::Image>("/sensor/camera/image_raw", rclcpp::SensorDataQoS().reliable());
+        mImagePublisher = create_publisher<sensor_msgs::msg::Image>("/sensing/camera/traffic_light/image_raw", rclcpp::SensorDataQoS().reliable());
         ex_state->mImage.header.stamp = this->get_clock()->now() ;
         mImagePublisher->publish(ex_state->mImage) ;
     }
@@ -49,7 +49,7 @@ void Ros2Info::publishImuData(void) {
     double angularVelocity[] = {0.0, 0.0, 0.0};
     double linearAcceleration[] = {0.0, 0.0, 0.0};
     msg.header.stamp = now();
-    msg.header.frame_id = "imu_link";
+    msg.header.frame_id = "tamagawa/imu_link";
     msg.orientation.x =  ex_state->qigt.x();
     msg.orientation.y =  ex_state->qigt.y();
     msg.orientation.z =  ex_state->qigt.z();

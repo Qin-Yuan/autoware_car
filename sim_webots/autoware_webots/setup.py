@@ -11,6 +11,7 @@ data_files.append(('share/ament_index/resource_index/packages', ['resource/' + p
 data_files.append((os.path.join('share', package_name, 'launch'), glob('launch/*.py')))
 data_files.append((os.path.join('share', package_name, 'worlds'), glob('worlds/*.wbt')))
 data_files.append((os.path.join('share', package_name, 'resource'), glob('resource/*.urdf')))
+data_files.append((os.path.join('share', package_name, 'urdf'), glob('urdf/*.urdf')))
 
 data_files.append(('share/' + package_name, ['package.xml']))
 
@@ -39,7 +40,8 @@ setup(
     entry_points={
         'console_scripts': [
             'lane_follower = autoware_webots.lane_follower:main',
-            'key = autoware_webots.teleop_twist_keyboard:main'
+            'teleop_key = autoware_webots.teleop_twist_keyboard:main',
+            'autoware_webots_run = autoware_webots.autoware_webots_run:main',
         ],
         'launch.frontend.launch_extension': ['launch_ros = launch_ros']
     }

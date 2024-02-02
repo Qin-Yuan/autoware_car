@@ -2,13 +2,15 @@
   ros__parameters:
 
     # Topics
-    pointCloudTopic: "/velodyne_V16/pointcloud2"                   # Point cloud data
-    imuTopic: "/imu"                        # IMU data
+    # pointCloudTopic: "/velodyne_V16/pointcloud2"                   # Point cloud data
+    # imuTopic: "/imu"                        # IMU data
+    pointCloudTopic: "/sensing/lidar/top/pointcloud_raw_new"                   # Point cloud data
+    imuTopic: "/sensing/imu/tamagawa/imu_raw_new"                        # IMU data
     odomTopic: "odometry/imu"                    # IMU pre-preintegration odometry, same frequency as IMU
     gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
     # Frames
-    lidarFrame: "lidar_link"
+    lidarFrame: "velodyne_top_base_link"
     baselinkFrame: "base_link"
     odometryFrame: "odom"
     mapFrame: "map"
@@ -29,8 +31,10 @@
     Horizon_SCAN: 1800                            # lidar horizontal resolution (Velodyne:1800, Ouster:512,1024,2048, Livox Horizon: 4000)
     downsampleRate: 1                            # default: 1. Downsample your data if too many
     # points. i.e., 16 = 64 / 4, 16 = 16 / 1
-    lidarMinRange: 2.1                           # default: 1.0, minimum lidar range to be used
-    lidarMaxRange: 50.0                        # default: 1000.0, maximum lidar range to be used
+    # lidarMinRange: 2.1                           # default: 1.0, minimum lidar range to be used
+    # lidarMaxRange: 50.0                        # default: 1000.0, maximum lidar range to be used
+    lidarMinRange: 1.0                           # default: 1.0, minimum lidar range to be used
+    lidarMaxRange: 100.0                        # default: 1000.0, maximum lidar range to be used
 
     # IMU Settings
     imuAccNoise: 3.9939570888238808e-03
