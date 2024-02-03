@@ -84,8 +84,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.2560733857939144 -0.3943880332635022 0.8825443333377582 5.09967399821193
-  position -7.389553087793763 77.29530812336287 21.07304848761916
+  orientation -0.22108148946362693 -0.05454299865236184 0.9737289336948722 3.7070323813857287
+  position 48.74375164421431 74.84732898345804 25.7482768060453
   near 1
   followSmoothness 0
 }
@@ -268,8 +268,7 @@ DEF vehicle Robot {
       numberOfLayers 16
       minRange 1
       maxRange 100
-      noise 0.003
-      defaultFrequency 5
+      defaultFrequency 20
       minFrequency 5
       maxFrequency 20
     }
