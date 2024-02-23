@@ -49,7 +49,7 @@ def generate_launch_description():
             description='Use simulation (Webots) clock if true'
         ),
         webots,
-        autoware_webots_run,
+        # autoware_webots_run,
         # autoware_tf2,
         # autoware_utils_launch,
         robot_state_publisher,

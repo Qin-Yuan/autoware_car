@@ -23,7 +23,7 @@ public:
     //========= Robot状态信息=============================
     uint32_t sysTic = 0; // 单位ms，以ITS为刻度对齐
     RC_t rc{}; // 遥控器指令
-    CWheels lL; // 左右腿当前值：当前速度、位置 ； 目标速度
+    CWheels lL; // 左右轮当前值：当前速度、位置 ； 目标速度
     CWheels lR; //
     Vector3d wImu; // IMU angular velocity
     Vector3d aImu; // IMU linear acceleration

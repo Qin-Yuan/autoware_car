@@ -16,4 +16,5 @@ public:
 	float wl_p = 0 ;		// 位置
 	// 控制
 	double wl_cmd_v = 0 ;  	// 控制速度
+	double wl_cmd_p = 0 ;  	// 控制位置
 };

@@ -1,5 +1,5 @@
 ﻿#include "CState.h"
-#include "DiffeDriver.h"
+#include "RobotDriver.h"
 #include "Ros2Info.hpp"
 #include <iostream>
 
@@ -11,7 +11,7 @@ int main(int argc, char * argv[])
     CState state;
     // state.rbt->testRobot();
     /*== 移动和操作任务主循环 ================================*/
-    DiffeDriver move_df(state);
+    RobotDriver move_df(state);
     // CManu manu(state);
     auto node = std::make_shared<Ros2Info>(&state);
     RCLCPP_INFO(node->get_logger(), "ROBOT RUNNING ...");

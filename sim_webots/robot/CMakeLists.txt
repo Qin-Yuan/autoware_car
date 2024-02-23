@@ -54,7 +54,7 @@ include_directories(
 
 set(COM_SRC
         ${SRC_DIR}/Locomotion/CWheels.cpp
-        ${SRC_DIR}/Locomotion/DiffeDriver.cpp
+        ${SRC_DIR}/Locomotion/RobotDriver.cpp
         ${SRC_DIR}/XRos2/Ros2Info.cpp
         ${SRC_DIR}/Task/CState.cpp
         ${SRC_DIR}/Task/main.cpp)

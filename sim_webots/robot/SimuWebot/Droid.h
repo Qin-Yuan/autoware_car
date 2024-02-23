@@ -37,7 +37,12 @@ public:
     bool IsCameraAble = 1 ; // 是否打开相机
 	int timeStep = 0;       // the time step of the current world.
 	long robotTic = 0;      // 机器人控制时间刻度，单位ms
-
+    // 前轮角度控制
+    Motor* rwlr = nullptr;   // 前右侧车轮
+	Motor* rwll = nullptr;   // 前左侧车轮
+    PositionSensor* rwlrs = nullptr;  // 右侧车轮转向关节
+    PositionSensor* rwlls = nullptr;  // 左侧车轮转向关节
+    // 后轮速度控制
 	Motor* wlr = nullptr;   // 右侧车轮
 	Motor* wll = nullptr;   // 左侧车轮 
     PositionSensor* wlrs = nullptr;  // 右侧车轮转向关节

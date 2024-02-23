@@ -15,5 +15,7 @@ typedef struct {
 #define IP "127.0.0.1"     // 本机
 #define ITS  20             // Int 单位毫秒 ms;
 // ================== 机器人参数 ===================================
-#define wheel_separation    0.320       // 差速地盘轮间距
-#define wheel_radius        0.115       // 轮子半径
+#define RobotMode           2           // 车辆模型，1-差速 ， 2-阿克曼 ， 3-全向
+#define wheel_separation    0.86*2      // 轮间距
+#define wheel_radius        0.5         // 轮子半径
+#define wheel_base          2.94        // 车轴距

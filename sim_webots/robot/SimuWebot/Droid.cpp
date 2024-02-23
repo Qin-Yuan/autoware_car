@@ -182,41 +182,40 @@ void Droid::iniRobot()
     iniWheels();
 }
 void Droid::iniWheels()
-{
+{   
+    // 前驱动角度控制轮子
+    rwll = robot->getMotor("left_steer") ;
+    rwll->setAvailableTorque(10);
+    rwll->setControlPID(30, 0, 0);
+    rwll->setPosition(0.0);
+    // rwll->setPosition(INFINITY) ;
+    // rwll->setVelocity(1.0);
+    rwlls = robot->getPositionSensor("left_steer_sensor");
+    rwlls->enable(timeStep);
+
+    rwlr = robot->getMotor("right_steer") ;
+    rwlr->setAvailableTorque(10);
+    rwlr->setControlPID(30, 0, 0);
+    rwlr->setPosition(0.0);
+    rwlrs = robot->getPositionSensor("right_steer_sensor");
+    rwlrs->enable(timeStep);
+
+    // 后驱动速度控制轮子
     wlr = robot->getMotor("right_rear_wheel");   // 右轮
     wlr->setPosition(INFINITY) ;
     wlr->setAcceleration(10);
     wlr->setAvailableTorque(10);
     wlr->setControlPID(30, 0, 0);
-    // wlr->setVelocity(0);
-    // wlr->enableTorqueFeedback(timeStep);
     wlrs = robot->getPositionSensor("right_rear_sensor");   // 右轮向关节
     wlrs->enable(timeStep);
-
 
     wll = robot->getMotor("left_rear_wheel");    // 左轮
     wll->setPosition(INFINITY) ;
     wll->setAcceleration(10);
     wll->setAvailableTorque(10);
     wll->setControlPID(30, 0, 0);
-    // wll->setVelocity(0);
-    // wll->enableTorqueFeedback(timeStep);
     wlls = robot->getPositionSensor("left_rear_sensor");    // 左轮向关节
     wlls->enable(timeStep);
-
-    // wlr->setVelocity(1) ;
-    // testRobot();
-    // wll->setPosition(INFINITY) ;
-    // wlr->setPosition(INFINITY) ;
-    // while(1)
-    // {
-
-    //         wll->setVelocity(10);
-    //         wlr->setVelocity(10);
-    //         // wll->setTorque(5);
-    //         // wll->setTorque(5);
-    //         robot->step(timeStep);
-    // }
 }
 
 void Droid::resetRobot()
@@ -432,6 +431,11 @@ void Droid::wrWheels(CWheels& lL, CWheels& lR)
     wlr->setPosition(INFINITY) ;
     wll->setVelocity(lL.wl_cmd_v);
     wlr->setVelocity(lR.wl_cmd_v);
+
+    rwll->setPosition(lL.wl_cmd_p) ;
+    rwlr->setPosition(lR.wl_cmd_p) ;
+    // rwll->setVelocity(INFINITY);
+    // rwlr->setVelocity(INFINITY);
 }
 
 

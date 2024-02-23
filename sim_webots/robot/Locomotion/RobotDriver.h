@@ -5,11 +5,11 @@
 #include <cmath>
 
 
-class DiffeDriver
+class RobotDriver
 {
 public:
-	explicit DiffeDriver(CState& st);
-	~DiffeDriver();
+	explicit RobotDriver(CState& st);
+	~RobotDriver();
 
     IRobot *rbt = nullptr;  // 机器人接口
     CState& state;  // 机器人状态数据
