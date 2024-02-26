@@ -36,10 +36,16 @@ void RobotDriver::task()
         // 计算车辆后轮的速度
         double wheel_velocity_ = linear_command / wheel_radius ;
         // 这里单独根据角速度直接控制轮子转角，没有运动学解算
-        double wheel_angle_ = linear_command / wheel_base ;
+        double wheel_angle_ = -angular_command / wheel_base ;
+        if (abs(wheel_angle_) >= 1.0 ) {
+            wheel_angle_ = abs(wheel_angle_) / wheel_angle_ ;
+        }
         // 赋值控制机器人轮子
         lL.wl_cmd_v = wheel_velocity_ ;
+        lL.wl_cmd_p = wheel_angle_ ;
         lR.wl_cmd_v = wheel_velocity_ ;
+        lR.wl_cmd_p = wheel_angle_ ;
+        // std::cout << wheel_angle_ << std::endl;
     }
     
     // 归零
