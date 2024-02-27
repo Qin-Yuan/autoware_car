@@ -1,0 +1,30 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_webots/lib/python3.10/site-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_driver/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/lio_sam/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_webots_utils/lib/python3.10/site-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_vehicle_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_planning_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_mapping_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_geometry_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_control_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_webots/lib/python3.10/site-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_driver/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/lio_sam/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_webots_utils/lib/python3.10/site-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_vehicle_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_planning_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_mapping_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_geometry_msgs/local/lib/python3.10/dist-packages",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_auto_control_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

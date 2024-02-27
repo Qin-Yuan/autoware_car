@@ -7,6 +7,8 @@ void Ros2Info::publishData(void){
     publishLidarData();
     publishImuData();
     publishImageDate();
+    publishOdomData();
+    publishClockData() ;
     publishPoint32Data(ex_state->pigt[0], ex_state->pigt[1], ex_state->pigt[2]);
     // publishTargetPose();
 }
@@ -44,6 +46,13 @@ void Ros2Info::publishImageDate(void) {
     }
 }
 
+void Ros2Info::publishClockData(void) {
+    auto msg = rosgraph_msgs::msg::Clock() ;
+    msg.clock.sec = this->get_clock()->now().seconds() ;
+    msg.clock.nanosec = this->get_clock()->now().nanoseconds() ;
+    mClockPublisher->publish(msg) ;
+}
+
 void Ros2Info::publishImuData(void) {
     auto msg = sensor_msgs::msg::Imu();
     double angularVelocity[] = {0.0, 0.0, 0.0};
@@ -63,6 +72,29 @@ void Ros2Info::publishImuData(void) {
     //printf("%6.3f %6.3f %6.3f %6.3f\n",msg.orientation.x,msg.orientation.y,msg.orientation.z,msg.orientation.w);
 
     mImuPublisher->publish(msg);
+}
+
+
+void Ros2Info::publishOdomData(void) {
+    auto msg = nav_msgs::msg::Odometry();
+    msg.header.stamp = this->get_clock()->now() ;
+    msg.header.frame_id = "base_link" ;
+    // 机器人位置
+    msg.pose.pose.position.x = ex_state->pigt[0] ;
+    msg.pose.pose.position.y = ex_state->pigt[1] ;
+    msg.pose.pose.position.z = ex_state->pigt[2] ;
+    msg.pose.pose.orientation.x = ex_state->qigt.x() ;
+    msg.pose.pose.orientation.y = ex_state->qigt.y() ;
+    msg.pose.pose.orientation.z = ex_state->qigt.z() ;
+    msg.pose.pose.orientation.w = ex_state->qigt.w() ;
+    // 控制指令
+    msg.twist.twist.linear.x = ex_state->rc.vx ;
+    msg.twist.twist.linear.y = ex_state->rc.vy ;
+    msg.twist.twist.linear.z = 0.0 ;
+    msg.twist.twist.angular.x = 0.0 ;
+    msg.twist.twist.angular.y = 0.0 ;
+    msg.twist.twist.angular.z = ex_state->rc.wz ;
+    mOdomtryPublisher->publish(msg);
 }
 
 void Ros2Info::publishPoint32Data(float x, float y, float z){

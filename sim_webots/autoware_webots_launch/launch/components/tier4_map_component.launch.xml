@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find-pkg-share tier4_map_launch)/launch/map.launch.py">
+    <arg name="lanelet2_map_path" value="$(var map_path)/$(var lanelet2_map_file)"/>
+    <arg name="pointcloud_map_path" value="$(var map_path)/$(var pointcloud_map_file)"/>
+
+    <arg name="pointcloud_map_loader_param_path" value="$(find-pkg-share autoware_webots_launch)/config/map/pointcloud_map_loader.param.yaml"/>
+    <arg name="lanelet2_map_loader_param_path" value="$(find-pkg-share autoware_webots_launch)/config/map/lanelet2_map_loader.param.yaml"/>
+  </include>
+</launch>

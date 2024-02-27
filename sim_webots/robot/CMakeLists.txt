@@ -17,6 +17,7 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(rosgraph_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(visualization_msgs REQUIRED)
@@ -72,6 +73,7 @@ ament_target_dependencies(${PROJECT_NAME}
         sensor_msgs
         nav_msgs
         visualization_msgs
+        rosgraph_msgs
 )
 # 链接webots库
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})

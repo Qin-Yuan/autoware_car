@@ -18,7 +18,7 @@
         "/home/imi/somo_ws/install/cartographer_ros_msgs/include/**",
         "/home/imi/turtlebot3_drlnav/install/turtlebot3_fake_node/include/**",
         "/home/imi/turtlebot3_drlnav/install/turtlebot3_msgs/include/**",
-        "/home/imi/turtlebot3_drlnav/install/turtlebot3_gazebo/include/**",
+        "/home/imi/turtlebot3_drlnav/install/turtlebot3_webots/include/**",
         "/home/imi/humanoid_ws/install/webots_ros2_control/include/**",
         "/home/imi/humanoid_ws/install/webots_ros2_driver/include/**",
         "/home/imi/humanoid_ws/install/webots_ros2_msgs/include/**",

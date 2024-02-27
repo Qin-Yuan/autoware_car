@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- NOTE: optional parameters are written here -->
+  <!-- behavior -->
+  <arg name="use_experimental_lane_change_function" default="false"/>
+  <!-- motion -->
+  <arg name="cruise_planner_type" default="obstacle_stop_planner" description="options: obstacle_stop_planner, obstacle_cruise_planner, none"/>
+  <arg name="use_surround_obstacle_check" default="true"/>
+  <arg name="smoother_type" default="JerkFiltered" description="options: JerkFiltered, L2, Analytical, Linf(Unstable)"/>
+
+  <include file="$(find-pkg-share tier4_planning_launch)/launch/planning.launch.xml">
+    <arg name="vehicle_param_file" value="$(find-pkg-share $(var vehicle_model)_description)/config/vehicle_info.param.yaml"/>
+    <arg name="use_pointcloud_container" value="$(var use_pointcloud_container)"/>
+    <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
+    <arg name="smoother_type" value="$(var smoother_type)"/>
+
+    <!-- common -->
+    <arg name="common_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/common.param.yaml"/>
+    <arg name="nearest_search_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/nearest_search.param.yaml"/>
+
+    <!-- rtc -->
+    <arg
+      name="rtc_auto_mode_manager_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/rtc_auto_mode_manager/rtc_auto_mode_manager.param.yaml"
+    />
+
+    <!-- mission planner -->
+    <arg name="mission_planner_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/mission_planning/mission_planner/mission_planner.param.yaml"/>
+
+    <!-- behavior path planner -->
+    <arg
+      name="side_shift_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/side_shift/side_shift.param.yaml"
+    />
+    <arg name="avoidance_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/avoidance/avoidance.param.yaml"/>
+    <arg
+      name="lane_change_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/lane_change/lane_change.param.yaml"
+    />
+    <arg
+      name="lane_following_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/lane_following/lane_following.param.yaml"
+    />
+    <arg name="pull_over_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/pull_over/pull_over.param.yaml"/>
+    <arg name="pull_out_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/pull_out/pull_out.param.yaml"/>
+    <arg
+      name="drivable_area_expansion_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/drivable_area_expansion.param.yaml"
+    />
+    <arg
+      name="behavior_path_planner_tree_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/behavior_path_planner_tree.xml"
+    />
+    <arg
+      name="behavior_path_planner_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/behavior_path_planner.param.yaml"
+    />
+
+    <!-- behavior velocity planner -->
+    <arg name="behavior_velocity_smoother_type_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/motion_velocity_smoother/Analytical.param.yaml"/>
+    <arg name="blind_spot_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/blind_spot.param.yaml"/>
+    <arg name="crosswalk_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/crosswalk.param.yaml"/>
+    <arg
+      name="detection_area_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/detection_area.param.yaml"
+    />
+    <arg name="intersection_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/intersection.param.yaml"/>
+    <arg name="stop_line_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/stop_line.param.yaml"/>
+    <arg name="traffic_light_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/traffic_light.param.yaml"/>
+    <arg
+      name="virtual_traffic_light_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/virtual_traffic_light.param.yaml"
+    />
+    <arg
+      name="occlusion_spot_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/occlusion_spot.param.yaml"
+    />
+    <arg
+      name="no_stopping_area_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/no_stopping_area.param.yaml"
+    />
+    <arg name="run_out_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/run_out.param.yaml"/>
+    <arg name="speed_bump_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/speed_bump.param.yaml"/>
+    <arg
+      name="behavior_velocity_planner_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/behavior_velocity_planner.param.yaml"
+    />
+
+    <!-- parking -->
+    <arg name="freespace_planner_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/parking/freespace_planner/freespace_planner.param.yaml"/>
+
+    <!-- motion -->
+    <arg
+      name="obstacle_avoidance_planner_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/obstacle_avoidance_planner.param.yaml"
+    />
+    <arg
+      name="obstacle_velocity_limiter_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/obstacle_velocity_limiter/obstacle_velocity_limiter.param.yaml"
+    />
+    <arg
+      name="surround_obstacle_checker_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/surround_obstacle_checker/surround_obstacle_checker.param.yaml"
+    />
+    <arg
+      name="obstacle_stop_planner_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/obstacle_stop_planner.param.yaml"
+    />
+    <arg
+      name="obstacle_stop_planner_acc_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/adaptive_cruise_control.param.yaml"
+    />
+    <arg
+      name="obstacle_cruise_planner_param_path"
+      value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/lane_driving/motion_planning/obstacle_cruise_planner/obstacle_cruise_planner.param.yaml"
+    />
+    <arg name="cruise_planner_type" value="$(var cruise_planner_type)"/>
+    <arg name="use_surround_obstacle_check" value="$(var use_surround_obstacle_check)"/>
+    <arg name="use_experimental_lane_change_function" value="$(var use_experimental_lane_change_function)"/>
+    <arg name="smoother_type" value="$(var smoother_type)"/>
+
+    <!-- motion velocity smoother -->
+    <arg name="motion_velocity_smoother_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/motion_velocity_smoother/motion_velocity_smoother.param.yaml"/>
+    <arg name="smoother_type_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/motion_velocity_smoother/$(var smoother_type).param.yaml"/>
+
+    <!-- planning validator -->
+    <arg name="planning_validator_param_path" value="$(find-pkg-share autoware_webots_launch)/config/planning/scenario_planning/common/planning_validator/planning_validator.param.yaml"/>
+  </include>
+</launch>

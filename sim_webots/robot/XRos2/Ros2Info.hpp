@@ -10,7 +10,9 @@
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <std_msgs/msg/float32_multi_array.hpp>
 #include <visualization_msgs/msg/marker_array.hpp>
-#include <std_srvs/srv/empty.hpp>
+#include <std_srvs/srv/empty.hpp> 
+#include <nav_msgs/msg/odometry.hpp>
+#include <rosgraph_msgs/msg/clock.hpp>
 #include "CState.h"
 
 class Ros2Info : public rclcpp::Node{
@@ -24,7 +26,11 @@ public:
         // rclcpp::QoS(rclcpp::KeepLast(10)).transient_local().reliable()
         mImuPublisher = create_publisher<sensor_msgs::msg::Imu>("/sensing/imu/tamagawa/imu_raw", 10);
         mPoint32Publisher = create_publisher<geometry_msgs::msg::Point32>("vehicle/pose/point32", 10);
+        mOdomtryPublisher = create_publisher<nav_msgs::msg::Odometry>("odom", 10);
+        mClockPublisher = create_publisher<rosgraph_msgs::msg::Clock>("clock", 10);
+
         targetPosePub = create_publisher<std_msgs::msg::Float32MultiArray>("webots/device/target_pose", 10);
+
         /***********订阅者************************/
 
         mTwistSubscription = create_subscription<geometry_msgs::msg::Twist>(
@@ -50,8 +56,10 @@ private:
     rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr mScanPublisher;      // 发布lidar消息 单线 激光雷达
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr mImagePublisher;         // 发布image图像信息发布
     rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr mImuPublisher;             // 发布IMU消息
+    rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr mOdomtryPublisher;       // 发布odom消息
     rclcpp::Publisher<geometry_msgs::msg::Point32>::SharedPtr mPoint32Publisher;   // 发布位置消息
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr targetPosePub;  // 发布目标位置
+    rclcpp::Publisher<rosgraph_msgs::msg::Clock>::SharedPtr mClockPublisher;       // 发布时钟信息
 
     rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr mTwistSubscription;                  // 订阅Twist控制消息
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr mJointStateSubscription;          // 订阅关节状态消息
@@ -62,6 +70,8 @@ private:
     void publishLidarData(void);
     void publishImageDate(void);
     void publishImuData(void);
+    void publishOdomData(void);
+    void publishClockData(void);
     void publishPoint32Data(float x, float y, float z);
     void publishTargetPose();//发送以IMU为坐标原点，圆柱体以及茶几的坐标
 

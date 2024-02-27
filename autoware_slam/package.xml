@@ -9,11 +9,11 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   
-  <build_depend>cartographer_ros</build_depend>
+  <!-- <build_depend>cartographer_ros</build_depend> -->
   <build_depend>launch_ros</build_depend>
 
   <exec_depend>launch_ros</exec_depend>
-  <exec_depend>cartographer_ros</exec_depend>
+  <!-- <exec_depend>cartographer_ros</exec_depend> -->
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

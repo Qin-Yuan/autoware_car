@@ -2,10 +2,10 @@
   ros__parameters:
 
     # Topics
-    pointCloudTopic: "/sensing/lidar/top/pointcloud_raw"                   # Point cloud data
-    imuTopic: "/sensing/imu/tamagawa/imu_raw"                        # IMU data
+    pointCloudTopic: "/sensing/lidar/top/pointcloud_raw_new"                   # Point cloud data
+    imuTopic: "/sensing/imu/tamagawa/imu_raw_new"                        # IMU data
     odomTopic: "odometry/imu"                    # IMU pre-preintegration odometry, same frequency as IMU
-    gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
+    gpsTopic: "/odom/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
     # Frames
     lidarFrame: "velodyne_top_base_link"
@@ -21,7 +21,7 @@
 
     # Export settings
     savePCD: true                               # https://github.com/TixiaoShan/LIO-SAM/issues/3
-    savePCDDirectory: "/autoware_universe/autoware_sim_ws/lio_sam_map/"         # in your home folder, starts and ends with "/". Warning: the code deletes "LOAM" folder then recreates it. See "mapOptimization" for implementation
+    savePCDDirectory: "/autoware_ws/lio_sam_map/"      # in your home folder, starts and ends with "/". Warning: the code deletes "LOAM" folder then recreates it. See "mapOptimization" for implementation
 
     # Sensor Settings
     sensor: velodyne                               # lidar sensor type, either 'velodyne', 'ouster' or 'livox'

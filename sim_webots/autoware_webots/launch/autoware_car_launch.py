@@ -42,6 +42,10 @@ def generate_launch_description():
     #         PythonLaunchDescriptionSource([os.path.join(get_package_share_directory('autoware_utils'), 'launch'), '/autoware_utils_launch.py'])
     #     )
     
+    autoware_webots_utils_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(get_package_share_directory('autoware_webots_utils'), 'launch'), '/autoware_webots_utils.launch.py'])
+        )
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -49,8 +53,9 @@ def generate_launch_description():
             description='Use simulation (Webots) clock if true'
         ),
         webots,
-        # autoware_webots_run,
+        autoware_webots_run,
         # autoware_tf2,
         # autoware_utils_launch,
+        autoware_webots_utils_launch,
         robot_state_publisher,
     ])

@@ -1,0 +1,16 @@
+#include "autoware_auto_planning_msgs/msg/PathPointWithLaneId.idl"
+#include "nav_msgs/msg/OccupancyGrid.idl"
+#include "std_msgs/msg/Header.idl"
+
+module autoware_auto_planning_msgs {
+  module msg {
+    @verbatim (language = "comment", text=
+      "Contains a PathPointWithLaneId path and left and right bound.")
+    struct PathWithLaneId {
+      std_msgs::msg::Header header;
+      sequence<autoware_auto_planning_msgs::msg::PathPointWithLaneId> points;
+      sequence<geometry_msgs::msg::Point> left_bound;
+      sequence<geometry_msgs::msg::Point> right_bound;
+    };
+  };
+};

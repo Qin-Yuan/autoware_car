@@ -1,0 +1,41 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_driver/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/webots_ros2_msgs/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/install/lio_sam/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_ekf_localizer/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_gyro_odometer/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_localization_error_monitor/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_ndt_scan_matcher/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_pose2twist/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_stop_filter/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_twist2accel/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/utils/autoware_pointcloud_preprocessor/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/utils/autoware_vehicle_velocity_converter/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/sim_webots/webots_ros2/webots_ros2_driver/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/cartographer_ros2/cartographer_ros/cartographer_ros/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/cartographer_ros2/cartographer_ros/cartographer_rviz/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/lidarslam_ros2/Thirdparty/ndt_omp_ros2/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/lidarslam_ros2/graph_based_slam/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/lidarslam_ros2/scanmatcher/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/lio_sam/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/pcl_localization_ros2/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/utils/velodyne_simulator/velodyne_webots_plugins/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

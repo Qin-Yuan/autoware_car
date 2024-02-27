@@ -84,8 +84,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.22108148946362693 -0.05454299865236184 0.9737289336948722 3.7070323813857287
-  position 48.74375164421431 74.84732898345804 25.7482768060453
+  orientation 0.358352835906221 0.09434406935645992 -0.9288069990989691 2.60430705780614
+  position 58.65124542395342 75.68686141191644 52.35221266006539
   near 1
   followSmoothness 0
 }
@@ -628,6 +628,30 @@ DEF GROUND Solid {
   boundingObject USE GROUND_PLANE
   locked TRUE
 }
+CurvedRoadSegment {
+  translation 4.5 -4.5 0.02
+  rotation 0 0 1 -1.5708
+  name "road(9)"
+  id "9"
+  startJunction "27"
+  endJunction "26"
+  width 21.5
+  numberOfLanes 4
+  numberOfForwardLanes 2
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      color 0.85 0.75 0.3
+      type "double"
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  rightBarrier TRUE
+  leftBarrier TRUE
+  curvatureRadius 40.5
+}
 DEF vehicle_npc1 MercedesBenzSprinter {
   translation -62.74 96.87 0.4445
   name "vehicle_npc1"
@@ -930,30 +954,6 @@ BmwX5 {
   translation -75.788 -47.0353 0.4
   rotation 0 0 1 -0.261795307179586
   name "vehicle(3)"
-}
-CurvedRoadSegment {
-  translation 4.5 -4.5 0.02
-  rotation 0 0 1 -1.5708
-  name "road(9)"
-  id "9"
-  startJunction "27"
-  endJunction "26"
-  width 21.5
-  numberOfLanes 4
-  numberOfForwardLanes 2
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      color 0.85 0.75 0.3
-      type "double"
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  rightBarrier TRUE
-  leftBarrier TRUE
-  curvatureRadius 40.5
 }
 StraightRoadSegment {
   translation 45 -4.5 0.02
@@ -1376,12 +1376,188 @@ Cypress {
   name "tree(2)"
 }
 Sassafras {
-  translation 75.9885 -36.8744 0
+  translation 89.6244 -13.2238 1.42109e-14
   name "tree(3)"
 }
+Sassafras {
+  translation 30.4243 9.58139 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(30)"
+}
+Sassafras {
+  translation 29.9034 -53.487 1.12266e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(42)"
+}
+Sassafras {
+  translation 12.9677 -57.9226 1.1795e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(43)"
+}
+Sassafras {
+  translation -76.5666 -60.0343 -1.26477e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(44)"
+}
+Sassafras {
+  translation -30.4658 -58.6178 -1.26477e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(55)"
+}
+Sassafras {
+  translation -51.6606 -97.917 -6.53703e-13
+  rotation 0 0 1 -2.094395307179586
+  name "tree(50)"
+}
+Sassafras {
+  translation -22.5735 -82.7477 -1.26477e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(51)"
+}
+Sassafras {
+  translation 39.1878 112.194 0
+  rotation 0 0 1 3.14159
+  name "tree(32)"
+}
+Sassafras {
+  translation -13.0217 123.421 0
+  rotation 0 0 1 3.14159
+  name "tree(67)"
+}
+Sassafras {
+  translation -19.7095 89.9258 0
+  rotation 0 0 1 3.14159
+  name "tree(66)"
+}
+Sassafras {
+  translation -0.327771 89.3888 0
+  rotation 0 0 1 3.14159
+  name "tree(65)"
+}
+Sassafras {
+  translation 26.8472 -16.3313 1.42109e-14
+  rotation 0 0 1 3.14159
+  name "tree(38)"
+}
+Sassafras {
+  translation 16.7174 -26.625 -4.12115e-13
+  rotation 0 0 1 3.14159
+  name "tree(39)"
+}
+Sassafras {
+  translation 2.20232 -28.7117 -3.97904e-13
+  rotation 0 0 1 3.14159
+  name "tree(40)"
+}
+Sassafras {
+  translation -30.2245 -2.98211 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(41)"
+}
+Sassafras {
+  translation -28.3206 10.3592 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(47)"
+}
+Sassafras {
+  translation -19.7089 23.5757 -4.40537e-13
+  rotation 0 0 1 -1.047195307179586
+  name "tree(48)"
+}
+Sassafras {
+  translation -29.9042 -17.9983 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(49)"
+}
+Sassafras {
+  translation 5.89128 27.8362 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(46)"
+}
+Sassafras {
+  translation -15.9617 -29.4457 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(45)"
+}
+Sassafras {
+  translation 59.3612 22.6658 3.41061e-13
+  rotation 0 0 1 3.14159
+  name "tree(33)"
+}
+Sassafras {
+  translation 57.7745 -21.7461 5.40013e-13
+  rotation 0 0 1 3.14159
+  name "tree(34)"
+}
+Sassafras {
+  translation 29.8252 25.0001 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(31)"
+}
+Sassafras {
+  translation 32.5827 -119.185 2.84217e-14
+  name "tree(21)"
+}
+Sassafras {
+  translation 96.2286 -110.749 2.84217e-14
+  name "tree(64)"
+}
+Sassafras {
+  translation 112.573 -94.4784 2.84217e-14
+  name "tree(63)"
+}
+Sassafras {
+  translation 88.4457 -43.7 2.84217e-14
+  name "tree(62)"
+}
+Sassafras {
+  translation 85.63 -71.3941 -6.6791e-13
+  name "tree(22)"
+}
+Sassafras {
+  translation 125.021 -50.4779 0
+  name "tree(23)"
+}
+Sassafras {
+  translation 86.4534 15.4695 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(24)"
+}
+Sassafras {
+  translation 117.852 30.464 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(27)"
+}
+Sassafras {
+  translation 89.7122 57.1444 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(26)"
+}
+Sassafras {
+  translation 71.3954 28.4591 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(29)"
+}
+Sassafras {
+  translation 117.852 30.464 0
+  rotation 0 0 1 -2.094395307179586
+  name "tree(28)"
+}
+Sassafras {
+  translation 123.373 -4.69949 0
+  name "tree(20)"
+}
+Sassafras {
+  translation 28.7823 72.3612 0
+  name "tree(25)"
+}
 BigSassafras {
-  translation 54.5924 -35.4355 0
+  translation 51.9467 -34.5892 -3.55271e-14
   name "tree(4)"
+}
+Pine {
+  translation 44.1956 -42.9543 0
+  name "tree(37)"
 }
 Oak {
   translation -5.24018 61.566 0
@@ -1391,17 +1567,37 @@ Pine {
   translation 68.7408 -26.6541 0
   name "tree(6)"
 }
+Pine {
+  translation 58.7228 -11.4211 -7.60281e-13
+  name "tree(35)"
+}
+Pine {
+  translation 58.9423 12.1373 0
+  name "tree(36)"
+}
 Cypress {
   translation 62.6042 26.6454 0
   name "tree(7)"
 }
 Sassafras {
-  translation -79.3778 68.1255 0
+  translation -83.173 70.8693 0
   name "tree(8)"
+}
+Sassafras {
+  translation -87.9912 9.20223 0
+  name "tree(59)"
+}
+Sassafras {
+  translation -73.2249 -28.4833 0
+  name "tree(60)"
 }
 BigSassafras {
   translation -79.9763 121.7561 0
   name "tree(9)"
+}
+BigSassafras {
+  translation -61.3898 83.7592 0
+  name "tree(61)"
 }
 Oak {
   translation -87.5263 45.3761 0
@@ -1416,12 +1612,37 @@ Cypress {
   name "tree(12)"
 }
 Sassafras {
-  translation 9.61883 -85.8355 0
+  translation 4.95164 -87.0754 0
   name "tree(13)"
 }
 BigSassafras {
-  translation 24.9703 -84.6727 0
+  translation 29.7966 -87.8004 0
   name "tree(14)"
+}
+Sassafras {
+  translation -35.7244 -110.887 -1.26477e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(52)"
+}
+Sassafras {
+  translation -60.1297 -66.5281 -1.26477e-12
+  rotation 0 0 1 -2.094395307179586
+  name "tree(53)"
+}
+Sassafras {
+  translation -121.261 16.6898 -1.46372e-12
+  rotation 0 0 1 -2.8797953071795863
+  name "tree(54)"
+}
+Sassafras {
+  translation -120.052 68.3394 -1.46372e-12
+  rotation 0 0 1 -2.8797953071795863
+  name "tree(58)"
+}
+Sassafras {
+  translation -110.412 -37.17 -1.26477e-12
+  rotation 0 0 1 -2.8797953071795863
+  name "tree(56)"
 }
 Oak {
   translation -81.8021 -76.3128 0
@@ -1436,8 +1657,13 @@ Cypress {
   name "tree(17)"
 }
 Sassafras {
-  translation -115.416 -32.2671 0
+  translation -120.231 -15.7064 0
   name "tree(18)"
+}
+Sassafras {
+  translation -91.669 -54.8849 -1.26477e-12
+  rotation 0 0 1 -2.8797953071795863
+  name "tree(57)"
 }
 BigSassafras {
   translation -33.1395 121.921 0

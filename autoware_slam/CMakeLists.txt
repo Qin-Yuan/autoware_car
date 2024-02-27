@@ -4,7 +4,6 @@ project(autoware_slam)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(cartographer_ros REQUIRED)
 
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
