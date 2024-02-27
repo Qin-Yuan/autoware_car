@@ -24,12 +24,12 @@ public:
         // mScanPublisher = create_publisher<sensor_msgs::msg::LaserScan>("scan", 1);
         // mImagePublisher = create_publisher<sensor_msgs::msg::Image>("image_ray", rclcpp::SensorDataQoS().reliable());
         // rclcpp::QoS(rclcpp::KeepLast(10)).transient_local().reliable()
-        mImuPublisher = create_publisher<sensor_msgs::msg::Imu>("/sensing/imu/tamagawa/imu_raw", 10);
-        mPoint32Publisher = create_publisher<geometry_msgs::msg::Point32>("vehicle/pose/point32", 10);
+        mImuPublisher = create_publisher<sensor_msgs::msg::Imu>("/sensing/imu/tamagawa/imu_raw_", 10);
+        mPoint32Publisher = create_publisher<geometry_msgs::msg::Point32>("vehicle/pose/point32_", 10);
         mOdomtryPublisher = create_publisher<nav_msgs::msg::Odometry>("odom", 10);
         mClockPublisher = create_publisher<rosgraph_msgs::msg::Clock>("clock", 10);
 
-        targetPosePub = create_publisher<std_msgs::msg::Float32MultiArray>("webots/device/target_pose", 10);
+        targetPosePub = create_publisher<std_msgs::msg::Float32MultiArray>("webots/device/target_pose_", 10);
 
         /***********订阅者************************/
 

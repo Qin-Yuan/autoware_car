@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Header
-from sensor_msgs.msg import PointCloud2, PointField,Imu
+from sensor_msgs.msg import PointCloud2, PointField,Imu,Image
 from sensor_msgs_py import point_cloud2
 import numpy as np
 
@@ -11,26 +11,37 @@ class PointCloudSubscriberPublisher(Node):
         self.point2 = PointCloud2()
         self.subscription_point = self.create_subscription(
             PointCloud2,
-            '/sensing/lidar/top/pointcloud_raw',
+            '/sensing/lidar/top/pointcloud_raw_',
             self.pointcloud_callback,
             10
         )
         self.publisher_point = self.create_publisher(
             PointCloud2,
-            '/sensing/lidar/top/pointcloud_raw_new',
+            '/sensing/lidar/top/pointcloud_raw',
             10
         )
 
         self.subscription_imu = self.create_subscription(
             Imu,
-            '/sensing/imu/tamagawa/imu_raw',  
+            '/sensing/imu/tamagawa/imu_raw_',  
             self.imu_callback,
             10
         )
-
         self.publisher_imu = self.create_publisher(
             Imu,
-            '/sensing/imu/tamagawa/imu_raw_new',
+            '/sensing/imu/tamagawa/imu_raw',
+            10
+        )
+
+        self.subscription_image = self.create_subscription(
+            Image,
+            '/sensing/camera/traffic_light/image_raw_',  
+            self.image_callback,
+            10
+        )
+        self.publisher_image = self.create_publisher(
+            Image,
+            '/sensing/camera/traffic_light/image_raw',
             10
         )
         # self.timer = self.create_timer(0.1, self.timer_callback)
@@ -42,6 +53,9 @@ class PointCloudSubscriberPublisher(Node):
 
     def imu_callback(self, msg):
         self.publisher_imu.publish(msg)
+
+    def image_callback(self, msg):
+        self.publisher_image.publish(msg)
 
     def timer_callback(self):
         self.publisher_point.publish(self.point2)
