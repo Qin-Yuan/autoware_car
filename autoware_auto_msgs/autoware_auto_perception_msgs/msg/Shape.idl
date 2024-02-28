@@ -1,0 +1,27 @@
+#include "geometry_msgs/msg/Polygon.idl"
+
+module autoware_auto_perception_msgs {
+  module msg {
+    module Shape_Constants {
+      const uint8 BOUNDING_BOX=0;
+      const uint8 CYLINDER=1;
+      const uint8 POLYGON=2;
+    };
+
+    struct Shape {
+      @verbatim (language="comment", text=
+        " Type of the shape")
+      uint8 type;
+
+      @verbatim (language="comment", text=
+        " The contour of the shape (POLYGON)")
+      geometry_msgs::msg::Polygon footprint;
+
+      @verbatim (language="comment", text=
+        " x: the length of the object (BOUNDING_BOX) or diameter (CYLINDER)"
+        " y: the width of the object (BOUNDING_BOX)"
+        " z: the overall height of the object")
+      geometry_msgs::msg::Vector3 dimensions;
+    };
+  };
+};

@@ -1,0 +1,12 @@
+<launch>
+  <!-- 切换使用 gazebo_lio_sam_maps 或者 webots_lio_sam_maps 的点云地图-->
+  <arg name="pointcloud_map_path" default="$(find-pkg-share autoware_slam)/maps/gazebo_lio_sam_maps/pointcloud_map.pcd" />
+  <arg name="pointcloud_map_loader_param_path" default="$(find-pkg-share map_loader)/config/pointcloud_map_loader.param.yaml"/>
+
+  <node pkg="map_loader" exec="pointcloud_map_loader" name="pointcloud_map_loader" output="screen">
+    <remap from="output/pointcloud_map" to="/map/pointcloud_map"/>
+    <remap from="service/get_partial_pcd_map" to="/map/get_partial_pointcloud_map"/>
+    <param name="pcd_paths_or_directory" value="[$(var pointcloud_map_path)]"/>
+    <param from="$(var pointcloud_map_loader_param_path)"/>
+  </node>
+</launch>
