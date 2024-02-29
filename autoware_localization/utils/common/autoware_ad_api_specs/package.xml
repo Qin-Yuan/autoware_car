@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>component_interface_specs</name>
+  <name>autoware_ad_api_specs</name>
   <version>0.0.0</version>
-  <description>The component_interface_specs package</description>
+  <description>The autoware_ad_api_specs package</description>
   <maintainer email="isamu.takagi@tier4.jp">Takagi, Isamu</maintainer>
   <maintainer email="makoto.yabuta@tier4.jp">yabuta</maintainer>
   <maintainer email="kahhooi.tan@tier4.jp">Kah Hooi Tan</maintainer>
@@ -13,11 +13,6 @@
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
   <build_depend>autoware_cmake</build_depend>
-
-  <depend>autoware_adapi_v1_msgs</depend>
-  <depend>tier4_control_msgs</depend>
-  <depend>autoware_auto_planning_msgs</depend>
-  <depend>autoware_planning_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>autoware_lint_common</test_depend>
