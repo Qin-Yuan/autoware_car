@@ -46,5 +46,8 @@
         "/home/imi/autoware_ws/autoware_sim_ws/install/autoware_adapi_v1_msgs/local/lib/python3.10/dist-packages",
         "/opt/ros/humble/lib/python3.10/site-packages",
         "/opt/ros/humble/local/lib/python3.10/dist-packages"
-    ]
+    ],
+    "files.associations": {
+        "chrono": "cpp"
+    }
 }

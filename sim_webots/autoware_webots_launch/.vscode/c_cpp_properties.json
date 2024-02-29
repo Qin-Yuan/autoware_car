@@ -18,7 +18,7 @@
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_ekf_localizer/include/**",
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_gyro_odometer/include/**",
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_localization_error_monitor/include/**",
-        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_ndt_scan_matcher/include/**",
+        "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/ndt_scan_matcher/include/**",
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_pose2twist/include/**",
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_stop_filter/include/**",
         "/home/imi/autoware_ws/autoware_sim_ws/src/autoware_localization/autoware_twist2accel/include/**",

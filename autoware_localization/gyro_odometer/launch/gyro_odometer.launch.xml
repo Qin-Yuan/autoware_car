@@ -1,7 +1,7 @@
 <launch>
   <arg name="input_vehicle_twist_with_covariance_topic" default="/sensing/vehicle_velocity_converter/twist_with_covariance" description="input twist with covariance topic name from vehicle"/>
 
-  <arg name="input_imu_topic" default="/sensing/imu/imu_data" description="input imu topic name"/>
+  <arg name="input_imu_topic" default="/sensing/imu/tamagawa/imu_raw" description="input imu topic name"/>
 
   <arg name="output_twist_raw_topic" default="gyro_twist_raw" description="output raw twist topic name"/>
   <arg name="output_twist_with_covariance_raw_topic" default="gyro_twist_with_covariance_raw" description="output raw twist with covariance topic name"/>

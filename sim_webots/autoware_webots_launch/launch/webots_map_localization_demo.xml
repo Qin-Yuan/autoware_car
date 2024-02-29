@@ -7,8 +7,8 @@
   <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
   <arg name="pointcloud_map_file" default="pointcloud_map.pcd" description="pointcloud map file name"/>
   <!-- Parameter files -->
-  <arg name="ndt_scan_matcher_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/ndt_scan_matcher.param.yaml"/>
-  <arg name="localization_error_monitor_param_path" default="$(find-pkg-share autoware_gazebo_launch)/config/localization/localization_error_monitor.param.yaml"/>
+  <arg name="ndt_scan_matcher_param_path" default="$(find-pkg-share ndt_scan_matcher)/config/ndt_scan_matcher.param.yaml"/>
+  <arg name="localization_error_monitor_param_path" default="$(find-pkg-share localization_error_monitor)/config/localization_error_monitor.param.yaml"/>
   <!-- Global parameters -->
   <arg name="use_sim_time" default="true" description="use_sim_time"/>
   <!-- Global parameters -->
@@ -21,7 +21,7 @@
 
   <!-- Map module -->
   <group if="$(var launch_map)">
-    <include file="$(find-pkg-share autoware_webots_launch)/launch/components/tier4_map_component.launch.xml"/>
+    <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_map_component.launch.xml"/>
   </group>
   
   <!-- localization module -->
@@ -48,7 +48,13 @@
       <!-- pose_initializer (Automatic call from AD API) -->
       <include file="$(find-pkg-share automatic_pose_initializer)/launch/automatic_pose_initializer.launch.xml"/>
       <!-- vehicle_velocity_converter -->
-      <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml"/>
+      <!-- <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml"/> -->
+      <include file="$(find-pkg-share vehicle_velocity_converter)/launch/vehicle_velocity_converter.launch.xml">
+        <!-- 输入 car 的速度相关信息，这个在 autoware_gazebo_utils/vehlicle_gazebo_pub 节点中做了发布-->
+        <arg name="input_vehicle_velocity_topic" value="/vehicle/status/velocity_status"/>
+        <!-- 输出，作为 Gyro_odometer 的 input_vehicle_twist_with_covariance_topic 输入-->
+        <arg name="output_twist_with_covariance" value="/sensing/vehicle_velocity_converter/twist_with_covariance"/>
+      </include>
     </group>
 
     <!-- pose_estimator module 位置初预测，NDT点云匹配 -->
@@ -77,7 +83,7 @@
     
     <!-- API -->
     <group>
-      <include file="$(find-pkg-share autoware_webots_launch)/launch/components/tier4_autoware_api_component.launch.xml"/>
+      <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_autoware_api_component.launch.xml"/>
     </group>
   </group>
 </launch>

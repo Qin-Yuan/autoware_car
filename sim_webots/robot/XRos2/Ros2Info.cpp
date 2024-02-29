@@ -48,8 +48,7 @@ void Ros2Info::publishImageDate(void) {
 
 void Ros2Info::publishClockData(void) {
     auto msg = rosgraph_msgs::msg::Clock() ;
-    msg.clock.sec = this->get_clock()->now().seconds() ;
-    msg.clock.nanosec = this->get_clock()->now().nanoseconds() ;
+    msg.clock = this->get_clock()->now();
     mClockPublisher->publish(msg) ;
 }
 
@@ -57,7 +56,7 @@ void Ros2Info::publishImuData(void) {
     auto msg = sensor_msgs::msg::Imu();
     double angularVelocity[] = {0.0, 0.0, 0.0};
     double linearAcceleration[] = {0.0, 0.0, 0.0};
-    msg.header.stamp = now();
+    msg.header.stamp = this->get_clock()->now();
     msg.header.frame_id = "tamagawa/imu_link";
     msg.orientation.x =  ex_state->qigt.x();
     msg.orientation.y =  ex_state->qigt.y();
@@ -163,53 +162,4 @@ void Ros2Info::onResetSimServerCallback(const std::shared_ptr<std_srvs::srv::Emp
 
 void Ros2Info::onJointStatesReceived(const sensor_msgs::msg::JointState::SharedPtr msg)
 {
-    // ex_state->armL.jPt = msg->position[2]; // shoulder_left_y;
-    // ex_state->armL.jRt = msg->position[0]; // shoulder_left_x;
-    // ex_state->armL.jYt = msg->position[4]; // arm_left_1_z;
-    // ex_state->armL.jEt = msg->position[6]; // elbow_left_y;
-    // ex_state->armL.jyt = msg->position[8]; // arm_left_2_z;
-    // ex_state->armL.jWt = msg->position[10]; // wrist_left_y;
-    // ex_state->armL.jpt = msg->position[12]; // palm_left_x;
-    // ex_state->armL.jft = msg->position[14]; // finger_left_x;
-
-    // ex_state->armR.jPt = msg->position[3]; // shoulder_right_y;
-    // ex_state->armR.jRt = msg->position[1]; // shoulder_right_x;
-    // ex_state->armR.jYt = msg->position[5]; // arm_right_1_z;
-    // ex_state->armR.jEt = msg->position[7]; // elbow_right_y;
-    // ex_state->armR.jyt = msg->position[9]; // arm_right_2_z;
-    // ex_state->armR.jWt = msg->position[11]; // wrist_right_y;
-    // ex_state->armR.jpt = msg->position[13]; // palm_right_x;
-    // ex_state->armR.jft = msg->position[15]; // finger_right_x;
-    // for(uint32_t i = 0; i < 26; i ++)
-    // {
-    //     // RCLCPP_INFO(get_logger(), "idx: %d, name: %15s, pos: %f", i, msg->name[i], msg->position[i]);
-    //     // std::cout << i << ":" <<msg->name[i]<<"->"<<msg->position[i]<<std::endl;
-    //     joint_map[msg->name[i]] = msg->position[i];
-    // }
-    // ex_state->armL.jPt = joint_map["shoulder_left_y"]; // shoulder_left_y;
-    // ex_state->armL.jRt = joint_map["shoulder_left_x"]; // shoulder_left_x;
-    // ex_state->armL.jYt = joint_map["arm_left_1_z"]; // arm_left_1_z;
-    // ex_state->armL.jEt = joint_map["elbow_left_y"]; // elbow_left_y;
-    // ex_state->armL.jyt = joint_map["arm_left_2_z"]; // arm_left_2_z;
-    // ex_state->armL.jWt = joint_map["wrist_left_y"]; // wrist_left_y;
-    // ex_state->armL.jpt = joint_map["palm_left_x"]; // palm_left_x;
-    // ex_state->armL.jft = joint_map["finger_left_x"]; // finger_left_x;
-
-    // ex_state->armR.jPt = joint_map["shoulder_right_y"]; // shoulder_right_y;
-    // ex_state->armR.jRt = joint_map["shoulder_right_x"]; // shoulder_right_x;
-    // ex_state->armR.jYt = joint_map["arm_right_1_z"]; // arm_right_1_z;
-    // ex_state->armR.jEt = joint_map["elbow_right_y"]; // elbow_right_y;
-    // ex_state->armR.jyt = joint_map["arm_right_2_z"]; // arm_right_2_z;
-    // ex_state->armR.jWt = joint_map["wrist_right_y"]; // wrist_right_y;
-    // ex_state->armR.jpt = joint_map["palm_right_x"]; // palm_right_x;
-    // ex_state->armR.jft = joint_map["finger_right_x"]; // finger_right_x;
 }
-
-// void Ros2Info::onMarkerArrayReceived(const visualization_msgs::msg::MarkerArray::SharedPtr msg)
-// {
-//     // cout << "Marker Array:" << msg->markers[0].id <<endl;
-// }
-
-// ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.5, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.5}}"
-// ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
-// ros2 run teleop_twist_keyboard teleop_twist_keyboard

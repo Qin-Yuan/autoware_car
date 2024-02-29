@@ -44,12 +44,12 @@ class PointCloudSubscriberPublisher(Node):
             '/sensing/camera/traffic_light/image_raw',
             10
         )
-        # self.timer = self.create_timer(0.1, self.timer_callback)
+        self.timer = self.create_timer(0.05, self.timer_callback)
 
     def pointcloud_callback(self, msg):
         # 获取点云数据
         self.point2 = msg
-        self.publisher_point.publish(self.point2)
+        # self.publisher_point.publish(self.point2)
 
     def imu_callback(self, msg):
         self.publisher_imu.publish(msg)
