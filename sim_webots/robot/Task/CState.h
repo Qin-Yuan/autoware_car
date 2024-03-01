@@ -57,6 +57,9 @@ public:
     void nextTic(int ts=ITS);
     bool FailCheck();
 
+    // 仿真时间
+    float sim_time ;                
+
     //TODO 参数系统外部配置
     //======= 参数设置信息 ==============================
     //在机械坐标系下b，坐标原点是左右s轴中心的中心，前x，右y，下z

@@ -50,7 +50,7 @@ public:
 private:
     RC_t rcInfo{};
     CState* ex_state;
-    
+    rosgraph_msgs::msg::Clock sim_time ;                                           // 仿真时间
     rclcpp::TimerBase::SharedPtr mPubTimer;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr mLidarPublisher;   // 发布lidar消息 多线 点云
     rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr mScanPublisher;      // 发布lidar消息 单线 激光雷达
@@ -66,7 +66,7 @@ private:
     rclcpp::Subscription<visualization_msgs::msg::MarkerArray>::SharedPtr mMarkerArraySubscription; // 订阅骨骼跟踪消息
 
     rclcpp::Service<std_srvs::srv::Empty>::SharedPtr mResetSimServer ;                              // 订阅重置仿真服务
-    
+
     void publishLidarData(void);
     void publishImageDate(void);
     void publishImuData(void);

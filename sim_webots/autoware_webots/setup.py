@@ -42,6 +42,7 @@ setup(
             'lane_follower = autoware_webots.lane_follower:main',
             'teleop_key = autoware_webots.teleop_twist_keyboard:main',
             'autoware_webots_run = autoware_webots.autoware_webots_run:main',
+            'pubOdom = autoware_webots.pubOdom:main',
         ],
         'launch.frontend.launch_extension': ['launch_ros = launch_ros']
     }

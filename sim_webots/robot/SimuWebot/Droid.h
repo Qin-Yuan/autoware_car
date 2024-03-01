@@ -61,7 +61,7 @@ public:
     webots::Camera* camera;      // 摄像头节点
     sensor_msgs::msg::Image mImage;            // 图像信息
     sensor_msgs::msg::CameraInfo mCameraInfo;  // 摄像头信息, 当有节点订阅该话题时再发布
-
+    
 	//--------- interface ------------------------------------------------------------------------------------------------------
     void iniRobot() override;
     void iniWheels() override;

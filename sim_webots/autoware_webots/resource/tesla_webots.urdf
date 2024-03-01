@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<robot name="Tesla Webots">
+    <webots>
+        <plugin type="webots_ros2_tesla.tesla_driver.TeslaDriver" />
+        
+        <device reference="Laser" type="Lidar">
+            <ros>
+                <enabled>true</enabled>
+                <updateRate>15</updateRate>
+                <alwaysOn>true</alwaysOn>
+                <topicName>/sensing/lidar/top/pointcloud_raw</topicName>
+                <frameName>velodyne_top_base_link</frameName>
+            </ros>
+        </device>
+
+        <device reference="gps" type="GPS">
+            <ros>
+                <updateRate>30</updateRate>
+                <alwaysOn>true</alwaysOn>
+                <topicName>/sensing/gps/gps_raw</topicName>
+                <frameName>gps_link</frameName>
+            </ros>
+        </device>
+        
+        <plugin type="webots_ros2_driver::Ros2IMU">
+            <enabled>true</enabled>
+            <updateRate>20</updateRate>
+            <topicName>/imu</topicName>
+            <alwaysOn>true</alwaysOn>
+            <inertialUnitName>inertialunit</inertialUnitName>
+            <gyroName>gyro</gyroName>
+            <accelerometerName>accelerometer</accelerometerName>
+            <topicName>/sensing/imu/tamagawa/imu_raw</topicName>
+            <frameName>tamagawa/imu_link</frameName>
+        </plugin>
+        
+        <device reference="camera" type="Camera">
+            <ros>
+                <updateRate>10</updateRate>
+                <alwaysOn>true</alwaysOn>
+                <topicName>/sensing/camera/traffic_light/image_raw</topicName>
+                <frameName>traffic_light_left_camera/camera_link</frameName>
+            </ros>
+        </device>
+
+    </webots>
+</robot>

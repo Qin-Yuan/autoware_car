@@ -38,6 +38,9 @@ void CState::rdRobot()
     // rbt->rdTargetPose(rbp,rcp,ycp,gcp,tp,wgp,btp,ttp);
     rbt->rdWheels(lL, lR);
     rbt->rdRC(rc);
+    // 读取仿真时间 , 除以 100 单位 秒
+    sim_time = rbt->syncRobotTic() ;
+    std::cout << sim_time << std::endl;
 }
 
 void CState::wrRobot()

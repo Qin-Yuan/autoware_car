@@ -4,11 +4,11 @@ using namespace std;
 
 
 void Ros2Info::publishData(void){
+    publishClockData() ;
     publishLidarData();
     publishImuData();
     publishImageDate();
     publishOdomData();
-    publishClockData() ;
     publishPoint32Data(ex_state->pigt[0], ex_state->pigt[1], ex_state->pigt[2]);
     // publishTargetPose();
 }
@@ -25,12 +25,12 @@ void Ros2Info::publishLidarData(void) {
     } else if (ex_state->IsLidarAble == 1) {
         if (ex_state->lidar_mode == 1) {
             mScanPublisher = create_publisher<sensor_msgs::msg::LaserScan>("/sensing/lidar/top/scan_", 10);
-            ex_state->mScan.header.stamp = this->get_clock()->now() ;
+            ex_state->mScan.header.stamp = sim_time.clock ;
             mScanPublisher->publish(ex_state->mScan);
         }
         else if(ex_state->lidar_mode == 2) {
             mLidarPublisher = create_publisher<sensor_msgs::msg::PointCloud2>("/sensing/lidar/top/pointcloud_raw_", 10);
-            ex_state->mPC2.header.stamp = this->get_clock()->now() ;
+            ex_state->mPC2.header.stamp = sim_time.clock ;
             mLidarPublisher->publish(ex_state->mPC2) ;
         }
     }
@@ -41,22 +41,22 @@ void Ros2Info::publishImageDate(void) {
         ;
     } else if (ex_state->IsCameraAble == 1) {
         mImagePublisher = create_publisher<sensor_msgs::msg::Image>("/sensing/camera/traffic_light/image_raw_", rclcpp::SensorDataQoS().reliable());
-        ex_state->mImage.header.stamp = this->get_clock()->now() ;
+        ex_state->mImage.header.stamp = sim_time.clock ;
         mImagePublisher->publish(ex_state->mImage) ;
     }
 }
 
 void Ros2Info::publishClockData(void) {
-    auto msg = rosgraph_msgs::msg::Clock() ;
-    msg.clock = this->get_clock()->now();
-    mClockPublisher->publish(msg) ;
+    sim_time.clock.sec = ex_state->sim_time / 1000 ;
+    sim_time.clock.nanosec = ex_state->sim_time - sim_time.clock.sec * 1000 ;
+    mClockPublisher->publish(sim_time) ;
 }
 
 void Ros2Info::publishImuData(void) {
     auto msg = sensor_msgs::msg::Imu();
     double angularVelocity[] = {0.0, 0.0, 0.0};
     double linearAcceleration[] = {0.0, 0.0, 0.0};
-    msg.header.stamp = this->get_clock()->now();
+    msg.header.stamp = sim_time.clock ;
     msg.header.frame_id = "tamagawa/imu_link";
     msg.orientation.x =  ex_state->qigt.x();
     msg.orientation.y =  ex_state->qigt.y();
@@ -76,7 +76,7 @@ void Ros2Info::publishImuData(void) {
 
 void Ros2Info::publishOdomData(void) {
     auto msg = nav_msgs::msg::Odometry();
-    msg.header.stamp = this->get_clock()->now() ;
+    msg.header.stamp = sim_time.clock ;
     msg.header.frame_id = "base_link" ;
     // 机器人位置
     msg.pose.pose.position.x = ex_state->pigt[0] ;

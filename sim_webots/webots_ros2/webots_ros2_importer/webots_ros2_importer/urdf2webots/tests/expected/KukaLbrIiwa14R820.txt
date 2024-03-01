@@ -1,0 +1,243 @@
+Robot {
+  translation 0 0 2
+  rotation 1 0 0 -1.5708
+  children [
+    Solid {
+      children [
+        DEF base_link_visual CadShape {
+          url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/base_link.dae"
+        }
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0.000000 0.000000 1.000000
+          }
+          device [
+            RotationalMotor {
+              name "joint_a1"
+              maxVelocity 1.4834
+              minPosition -2.9668
+              maxPosition 2.9668
+              maxTorque 10000
+            }
+            PositionSensor {
+              name "joint_a1_sensor"
+            }
+          ]
+          endPoint Solid {
+            children [
+              DEF link_1_visual CadShape {
+                url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_1.dae"
+              }
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                  axis 0.000000 1.000000 0.000000
+                  anchor -0.000436 0.000000 0.360000
+                }
+                device [
+                  RotationalMotor {
+                    name "joint_a2"
+                    maxVelocity 1.4834
+                    minPosition -2.0942
+                    maxPosition 2.0942
+                    maxTorque 10000
+                  }
+                  PositionSensor {
+                    name "joint_a2_sensor"
+                  }
+                ]
+                endPoint Solid {
+                  translation -0.000436 0.000000 0.360000
+                  children [
+                    DEF link_2_visual CadShape {
+                      url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_2.dae"
+                    }
+                    HingeJoint {
+                      jointParameters HingeJointParameters {
+                        axis 0.000000 0.000000 1.000000
+                      }
+                      device [
+                        RotationalMotor {
+                          name "joint_a3"
+                          maxVelocity 1.7452
+                          minPosition -2.9668
+                          maxPosition 2.9668
+                          maxTorque 10000
+                        }
+                        PositionSensor {
+                          name "joint_a3_sensor"
+                        }
+                      ]
+                      endPoint Solid {
+                        children [
+                          DEF link_3_visual CadShape {
+                            url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_3.dae"
+                          }
+                          HingeJoint {
+                            jointParameters HingeJointParameters {
+                              axis 0.000000 -1.000000 0.000000
+                              anchor 0.000436 0.000000 0.420000
+                            }
+                            device [
+                              RotationalMotor {
+                                name "joint_a4"
+                                maxVelocity 1.3089
+                                minPosition -2.0942
+                                maxPosition 2.0942
+                                maxTorque 10000
+                              }
+                              PositionSensor {
+                                name "joint_a4_sensor"
+                              }
+                            ]
+                            endPoint Solid {
+                              translation 0.000436 0.000000 0.420000
+                              children [
+                                DEF link_4_visual CadShape {
+                                  url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_4.dae"
+                                }
+                                HingeJoint {
+                                  jointParameters HingeJointParameters {
+                                    axis 0.000000 0.000000 1.000000
+                                  }
+                                  device [
+                                    RotationalMotor {
+                                      name "joint_a5"
+                                      maxVelocity 2.2688
+                                      minPosition -2.9668
+                                      maxPosition 2.9668
+                                      maxTorque 10000
+                                    }
+                                    PositionSensor {
+                                      name "joint_a5_sensor"
+                                    }
+                                  ]
+                                  endPoint Solid {
+                                    children [
+                                      Transform {
+                                        scale -1.000000 -1.000000 -1.000000
+                                        children [
+                                          DEF link_5_visual_cw CadShape {
+                                            url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_5.dae"
+                                            ccw FALSE
+                                          }
+                                        ]
+                                      }
+                                      HingeJoint {
+                                        jointParameters HingeJointParameters {
+                                          axis 0.000000 1.000000 0.000000
+                                          anchor 0.000000 0.000000 0.400000
+                                        }
+                                        device [
+                                          RotationalMotor {
+                                            name "joint_a6"
+                                            maxVelocity 2.356
+                                            minPosition -2.0942
+                                            maxPosition 2.0942
+                                            maxTorque 10000
+                                          }
+                                          PositionSensor {
+                                            name "joint_a6_sensor"
+                                          }
+                                        ]
+                                        endPoint Solid {
+                                          translation 0.000000 0.000000 0.400000
+                                          children [
+                                            DEF link_6_visual CadShape {
+                                              url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_6.dae"
+                                            }
+                                            HingeJoint {
+                                              jointParameters HingeJointParameters {
+                                                axis 0.000000 0.000000 1.000000
+                                              }
+                                              device [
+                                                RotationalMotor {
+                                                  name "joint_a7"
+                                                  maxVelocity 2.356
+                                                  minPosition -3.0541
+                                                  maxPosition 3.0541
+                                                  maxTorque 10000
+                                                }
+                                                PositionSensor {
+                                                  name "joint_a7_sensor"
+                                                }
+                                              ]
+                                              endPoint Solid {
+                                                children [
+                                                  DEF link_7_visual CadShape {
+                                                    url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/visual/link_7.dae"
+                                                  }
+                                                ]
+                                                name "solid7"
+                                                boundingObject DEF link_7 Mesh {
+                                                  url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_7.stl"
+                                                }
+                                                physics Physics {
+                                                }
+                                              }
+                                            }
+                                          ]
+                                          name "solid6"
+                                          boundingObject DEF link_6 Mesh {
+                                            url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_6.stl"
+                                          }
+                                          physics Physics {
+                                          }
+                                        }
+                                      }
+                                    ]
+                                    name "solid5"
+                                    boundingObject DEF link_5 Mesh {
+                                      url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_5.stl"
+                                    }
+                                    physics Physics {
+                                    }
+                                  }
+                                }
+                              ]
+                              name "solid4"
+                              boundingObject DEF link_4 Mesh {
+                                url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_4.stl"
+                              }
+                              physics Physics {
+                              }
+                            }
+                          }
+                        ]
+                        name "solid3"
+                        boundingObject DEF link_3 Mesh {
+                          url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_3.stl"
+                        }
+                        physics Physics {
+                        }
+                      }
+                    }
+                  ]
+                  name "solid2"
+                  boundingObject DEF link_2 Mesh {
+                    url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_2.stl"
+                  }
+                  physics Physics {
+                  }
+                }
+              }
+            ]
+            name "solid1"
+            boundingObject DEF link_1 Mesh {
+              url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/link_1.stl"
+            }
+            physics Physics {
+            }
+          }
+        }
+      ]
+      name "solid0"
+      boundingObject DEF base_link Mesh {
+        url "root://tests/sources/kuka_lbr_iiwa_support/meshes/lbr_iiwa_14_r820/collision/base_link.stl"
+      }
+      physics Physics {
+      }
+    }
+  ]
+  name "kuka"
+  controller "<extern>"
+}
