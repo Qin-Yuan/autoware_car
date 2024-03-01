@@ -78,6 +78,10 @@ void RandomDownsampleFilterComponent::filter(
   pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_output(new pcl::PointCloud<pcl::PointXYZ>);
   // pcl_ros 库将 ros2 pointclouds 格式数据转化为 pcl 点云格式 ， input 赋值给 pcl_input
   pcl::fromROSMsg(*input, *pcl_input);
+  // qys : 剔除异常值 remove Nan
+  std::vector<int> indices ;
+  pcl::removeNaNFromPointCloud(*pcl_input, *pcl_input, indices);
+
   // 设置 pcl_output 点云大小，根据 pcl_input 计算得到
   pcl_output->points.reserve(pcl_input->points.size());
   // pcl降采样类实例化 filter

@@ -9,7 +9,7 @@ class odom_to_gnss(Node):
         self.get_logger().info("odom msg to gnss .")
         self.gnss_msg = PoseWithCovarianceStamped()        
         self.odom_msg = Odometry()
-        self.map_pose_gnss_init =[0.0,0.0,0.0]
+        self.map_pose_gnss_init =[12.93,47.82,0.27]
         self.odom_sub = self.create_subscription(Odometry,"odom",self.odom_sub_callback,10)
         self.gnss_sub = self.create_publisher(PoseWithCovarianceStamped,"/sensing/gnss/pose_with_covariance",10)
         # self.timer = self.create_timer(0.01, self.timer_callback)

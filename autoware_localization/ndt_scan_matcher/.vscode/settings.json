@@ -134,5 +134,12 @@
         "/home/robot/autoware_universe/autoware_sim_ws/install/autoware_gazebo_utils/lib/python3.10/site-packages",
         "/opt/ros/humble/lib/python3.10/site-packages",
         "/opt/ros/humble/local/lib/python3.10/dist-packages"
-    ]
+    ],
+    "files.associations": {
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "__split_buffer": "cpp",
+        "list": "cpp"
+    }
 }

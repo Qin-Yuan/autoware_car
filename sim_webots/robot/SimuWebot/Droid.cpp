@@ -292,15 +292,16 @@ void Droid::rdLidar(sensor_msgs::msg::PointCloud2 &pc2)
             float intensity = 89 ;
             // fields 属性写入 x y z i r t
             // 检查是否包含NaN值
-            if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
-                x = 0 ;
-                y = 0 ;
-                z = -1.8 ;
-                intensity = 0 ;
-            }
-            if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
-                std::cout << " 发现异常值 " << x << std::endl;
-            }
+            // if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+            //     // nanf("") 也会报错
+            //     x = 0 ;
+            //     y = 0 ;
+            //     z = -1.8 ;
+            //     intensity = 0 ;
+            // }
+            // if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+            //     std::cout << " 发现异常值 " << x << std::endl;
+            // }
             // x
             uint32_t offset = point_num * mPC2.point_step + mPC2.fields[0].offset;
             *reinterpret_cast<float*>(&mPC2.data[offset]) = x ;
