@@ -21,7 +21,9 @@ import pathlib
 import launch
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions.path_join_substitution import PathJoinSubstitution
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
+from launch.actions import IncludeLaunchDescription
 from launch import LaunchDescription
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
@@ -46,6 +48,7 @@ def get_ros2_nodes(*args):
         executable='driver',
         output='screen',
         additional_env={'WEBOTS_CONTROLLER_URL': controller_url_prefix() + 'vehicle'},
+        remappings=[("/sensing/lidar/top/pointcloud_raw/point_cloud", "/sensing/lidar/top/pointcloud_raw")],
         parameters=[
             {'robot_description': webots_urdf},
             {'use_sim_time': LaunchConfiguration('use_sim_time')},
@@ -101,6 +104,11 @@ def generate_launch_description():
             on_exit=get_ros2_nodes,
         )
     )
+
+    autoware_webots_utils_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(get_package_share_directory('autoware_webots_utils'), 'launch'), '/autoware_webots_utils_webtos_driver.launch.py'])
+        )
+    
     return LaunchDescription([
         use_sim_time_arg,
         DeclareLaunchArgument(
@@ -110,6 +118,7 @@ def generate_launch_description():
         ),
         webots,
         webots._supervisor,
+        autoware_webots_utils_launch,
         # This action will kill all nodes once the Webots simulation has exited
         launch.actions.RegisterEventHandler(
             event_handler=launch.event_handlers.OnProcessExit(

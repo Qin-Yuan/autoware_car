@@ -40,7 +40,7 @@ void CState::rdRobot()
     rbt->rdRC(rc);
     // 读取仿真时间 , 除以 100 单位 秒
     sim_time = rbt->syncRobotTic() ;
-    std::cout << sim_time << std::endl;
+    // std::cout << sim_time << std::endl;
 }
 
 void CState::wrRobot()

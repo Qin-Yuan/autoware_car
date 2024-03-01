@@ -286,19 +286,33 @@ void Droid::rdLidar(sensor_msgs::msg::PointCloud2 &pc2)
             // if (point_num == 2000) {
             //     std::cout << data[point_num].x << std::endl;
             // }
+            float x = data[point_num].x ;
+            float y = data[point_num].y ;
+            float z = data[point_num].z ;
+            float intensity = 89 ;
             // fields 属性写入 x y z i r t
+            // 检查是否包含NaN值
+            if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+                x = 0 ;
+                y = 0 ;
+                z = -1.8 ;
+                intensity = 0 ;
+            }
+            if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+                std::cout << " 发现异常值 " << x << std::endl;
+            }
             // x
             uint32_t offset = point_num * mPC2.point_step + mPC2.fields[0].offset;
-            *reinterpret_cast<float*>(&mPC2.data[offset]) = data[point_num].x ;
+            *reinterpret_cast<float*>(&mPC2.data[offset]) = x ;
             // y
             offset = point_num * mPC2.point_step + mPC2.fields[1].offset;
-            *reinterpret_cast<float*>(&mPC2.data[offset]) = data[point_num].y ;
+            *reinterpret_cast<float*>(&mPC2.data[offset]) = y ;
             // z
             offset = point_num * mPC2.point_step + mPC2.fields[2].offset;
-            *reinterpret_cast<float*>(&mPC2.data[offset]) = data[point_num].z ;
+            *reinterpret_cast<float*>(&mPC2.data[offset]) = z ;
             // i 点云强度给固定值
             offset = point_num * mPC2.point_step + mPC2.fields[3].offset;
-            *reinterpret_cast<float*>(&mPC2.data[offset]) = 89;
+            *reinterpret_cast<float*>(&mPC2.data[offset]) = intensity ;
             // r 从上到下： 0-layer_max
             offset = point_num * mPC2.point_step + mPC2.fields[4].offset;
             *reinterpret_cast<uint16_t*>(&mPC2.data[offset]) = data[point_num].layer_id ;

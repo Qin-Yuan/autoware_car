@@ -9,7 +9,7 @@ from ackermann_msgs.msg import AckermannDrive
 class pubOdom(Node):
     def __init__(self,node_name):
         super().__init__(node_name)
-        self.get_logger().info("pose msg to gnss .")
+        self.get_logger().info("pub odom .")
         self.gps_msg = PointStamped()        
         self.imu_msg = Imu()
         self.ackermann_msgs = AckermannDrive()
