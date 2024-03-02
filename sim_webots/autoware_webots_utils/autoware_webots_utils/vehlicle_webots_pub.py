@@ -68,7 +68,7 @@ class vehlicle_webots_pub(Node):
         self.hazard_lights_status_pub.publish(self.hazard_lights_status_msgs)
         self.steering_status_pub.publish(self.steering_status_msgs)
         self.turn_indicators_status_pub.publish(self.turn_indicators_status_msgs)
-        # self.velocity_status_pub.publish(self.velocity_status_msgs)
+        self.velocity_status_pub.publish(self.velocity_status_msgs)
     
     def angular2degree(self):
         wheelbase = 0.86*2  # 小车轮距

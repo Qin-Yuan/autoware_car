@@ -21,7 +21,8 @@ class PointCloudSubscriberPublisher(Node):
             10
         )
 
-        self.subscription_imu = self.create_subscription(
+        self.imu = Imu()
+        self.create_subscription(
             Imu,
             '/sensing/imu/tamagawa/imu_raw_',  
             self.imu_callback,
@@ -52,13 +53,15 @@ class PointCloudSubscriberPublisher(Node):
         # self.publisher_point.publish(self.point2)
 
     def imu_callback(self, msg):
-        self.publisher_imu.publish(msg)
+        self.imu = msg
+        # self.publisher_imu.publish(msg)
 
     def image_callback(self, msg):
         self.publisher_image.publish(msg)
 
     def timer_callback(self):
         self.publisher_point.publish(self.point2)
+        self.publisher_imu.publish(self.imu)
 
 def main(args=None):
     rclpy.init(args=args)

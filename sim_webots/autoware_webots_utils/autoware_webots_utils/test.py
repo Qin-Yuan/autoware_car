@@ -4,6 +4,7 @@ from std_msgs.msg import Header
 from sensor_msgs.msg import PointCloud2, PointField,Imu,Image
 from sensor_msgs_py import point_cloud2
 from geometry_msgs.msg import PoseWithCovarianceStamped
+from autoware_auto_vehicle_msgs.msg import VelocityReport
 import numpy as np
 
 class PointCloudSubscriberPublisher(Node):
@@ -22,18 +23,18 @@ class PointCloudSubscriberPublisher(Node):
         #     10
         # )
 
-        self.imu = Imu()
-        self.subscription_imu = self.create_subscription(
-            Imu,
-            '/sensing/imu/tamagawa/imu_raw_bag',  
-            self.imu_callback,
-            10
-        )
-        self.publisher_imu = self.create_publisher(
-            Imu,
-            '/sensing/imu/tamagawa/imu_raw',
-            10
-        )
+        # self.imu = Imu()
+        # self.subscription_imu = self.create_subscription(
+        #     Imu,
+        #     '/sensing/imu/tamagawa/imu_raw_bag',  
+        #     self.imu_callback,
+        #     10
+        # )
+        # self.publisher_imu = self.create_publisher(
+        #     Imu,
+        #     '/sensing/imu/tamagawa/imu_raw',
+        #     10
+        # )
 
         # self.gnss = PoseWithCovarianceStamped()
         # self.create_subscription(
@@ -48,6 +49,18 @@ class PointCloudSubscriberPublisher(Node):
         #     10
         # )
 
+        self.velocity_status = VelocityReport()
+        self.create_subscription(
+            VelocityReport,
+            '/vehicle/status/velocity_status_bag',  
+            self.velocity_status_callback,
+            10
+        )
+        self.publisher_velocity_status = self.create_publisher(
+            VelocityReport,
+            '/vehicle/status/velocity_status',
+            10
+        )
 
         self.timer = self.create_timer(0.01, self.timer_callback)
 
@@ -65,6 +78,9 @@ class PointCloudSubscriberPublisher(Node):
     def gnss_callback(self, msg):
         self.gnss = msg
         
+    def velocity_status_callback(self, msg):
+        self.velocity_status = msg
+        
 
     def timer_callback(self):
         pass
@@ -76,6 +92,9 @@ class PointCloudSubscriberPublisher(Node):
 
         # self.gnss.header.stamp = self.get_clock().now().to_msg()
         # self.publisher_gnss.publish(self.gnss)
+    
+        self.velocity_status.header.stamp = self.get_clock().now().to_msg()
+        self.publisher_velocity_status.publish(self.velocity_status)
 
 def main(args=None):
     rclpy.init(args=args)
