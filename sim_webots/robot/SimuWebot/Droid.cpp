@@ -148,7 +148,7 @@ void Droid::iniRobot()
             mPC2.point_step = 22;
             // 一行点云数据的字节数
             mPC2.row_step = mPC2.point_step * mPC2.width ;
-            mPC2.is_dense = false;
+            mPC2.is_dense = true;
             mPC2.fields.resize(6);
             mPC2.fields[0].name = "x";
             mPC2.fields[0].datatype = sensor_msgs::msg::PointField::FLOAT32;
@@ -280,6 +280,7 @@ void Droid::rdLidar(sensor_msgs::msg::PointCloud2 &pc2)
     if (data)
     {
         uint16_t point_count = mPC2.width * mPC2.height ;
+        uint16_t error_point_count = 0 ;
         // 编辑所有点云
         for (size_t point_num = 0 ; point_num < point_count ; ++point_num) {
             // if (data[point_num].layer_id < 12) continue;
@@ -292,36 +293,43 @@ void Droid::rdLidar(sensor_msgs::msg::PointCloud2 &pc2)
             float intensity = 89 ;
             // fields 属性写入 x y z i r t
             // 检查是否包含NaN值
-            // if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
-            //     // nanf("") 也会报错
-            //     x = 0 ;
-            //     y = 0 ;
-            //     z = -1.8 ;
-            //     intensity = 0 ;
-            // }
-            // if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+            if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+                // nanf("") 也会报错
+                // x = 0.0 ;
+                // y = 0.0 ;
+                // z = -1.8 ;
+                // intensity = 0.0 ;
+                // std::cout << " 发现异常值 " << x << std::endl;
+                error_point_count += 1 ;
+                continue;
+            }
+            // if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z) || !std::isfinite(data[point_num].layer_id) || !std::isfinite(data[point_num].time)) {
             //     std::cout << " 发现异常值 " << x << std::endl;
             // }
             // x
-            uint32_t offset = point_num * mPC2.point_step + mPC2.fields[0].offset;
+            uint32_t offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[0].offset;
             *reinterpret_cast<float*>(&mPC2.data[offset]) = x ;
             // y
-            offset = point_num * mPC2.point_step + mPC2.fields[1].offset;
+            offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[1].offset;
             *reinterpret_cast<float*>(&mPC2.data[offset]) = y ;
             // z
-            offset = point_num * mPC2.point_step + mPC2.fields[2].offset;
+            offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[2].offset;
             *reinterpret_cast<float*>(&mPC2.data[offset]) = z ;
             // i 点云强度给固定值
-            offset = point_num * mPC2.point_step + mPC2.fields[3].offset;
+            offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[3].offset;
             *reinterpret_cast<float*>(&mPC2.data[offset]) = intensity ;
             // r 从上到下： 0-layer_max
-            offset = point_num * mPC2.point_step + mPC2.fields[4].offset;
+            offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[4].offset;
             *reinterpret_cast<uint16_t*>(&mPC2.data[offset]) = data[point_num].layer_id ;
             // std::cout << data[point_num].layer_id << std::endl;
             // t
-            offset = point_num * mPC2.point_step + mPC2.fields[5].offset;
-            *reinterpret_cast<float*>(&mPC2.data[offset]) = data[point_num].time ;
+            offset = (point_num-error_point_count) * mPC2.point_step + mPC2.fields[5].offset;
+            // *reinterpret_cast<float*>(&mPC2.data[offset]) = data[point_num].time ;
+            *reinterpret_cast<float*>(&mPC2.data[offset]) = 0.0 ;
         }
+        // 一帧点云的二进制大小
+        // mPC2.data.resize(point_count-error_point_count);
+        std::cout << point_count << " - " << mPC2.data.size() / mPC2.point_step << std::endl;
         // std::cout << mPC2.width * mPC2.height << " " << mPC2.fields.size() << " " << data[28789].layer_id << std::endl;
         pc2 = mPC2;
     }

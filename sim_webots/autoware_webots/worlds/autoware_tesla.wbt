@@ -84,16 +84,16 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.358352835906221 0.09434406935645992 -0.9288069990989691 2.60430705780614
-  position 58.65124542395342 75.68686141191644 52.35221266006539
+  orientation 0.14184347200282746 0.9883653216105416 0.05490373837794453 1.193621754459253
+  position -86.84550847188281 -68.51909644340303 123.99771981082827
   near 1
   followSmoothness 0
 }
 TexturedBackground {
 }
 DEF vehicle Robot {
-  translation 12.9281 47.8189 0.400134
-  rotation 4.44264e-13 9.58979e-09 -1 -3.141495307179586
+  translation -45.2211 -53.0428 0.400134
+  rotation 0.0034093012803448545 -0.0034096112804612735 0.9999883755402841 4.07987e-06
   children [
     DEF camera Solid {
       translation 1.56 0 1.04
@@ -275,6 +275,7 @@ DEF vehicle Robot {
     DEF gyro Gyro {
     }
     DEF inertialunit InertialUnit {
+      rotation 0 0 1 -1.5707953071795862
       name "inertialunit"
     }
     DEF accelerometer Accelerometer {
@@ -653,7 +654,7 @@ CurvedRoadSegment {
   curvatureRadius 40.5
 }
 DEF vehicle_npc1 MercedesBenzSprinter {
-  translation -62.74 96.87 0.4445
+  translation -0.43691 -96.8965 0.4445
   name "vehicle_npc1"
 }
 DEF vehicle_npc TeslaModel3 {
@@ -1275,6 +1276,7 @@ UBuilding {
   rotation 0 0 1 1.5708
 }
 HollowBuilding {
+  translation -5.79806 -0.204261 0
   rotation 0 0 1 1.5708
 }
 HollowBuilding {
@@ -1315,7 +1317,7 @@ CyberboticsTower {
   rotation 0 0 1 1.5708
 }
 BigGlassTower {
-  translation 9.29537 68.6779 0
+  translation 7.14097 68.5967 4.26326e-14
   rotation 0 0 1 3.14159
 }
 Auditorium {
@@ -1348,6 +1350,16 @@ ResidentialBuilding {
 FastFoodRestaurant {
   translation -50.065561 51.749488 0.004
   rotation 0 0 1 -1.8325953071795864
+  height 4.3
+  length 11
+  width 11
+  brand "subway"
+  numberOfSides 2
+}
+FastFoodRestaurant {
+  translation 19.5715 21.6297 0.004
+  rotation 0 0 1 0.2618
+  name "fast food restaurant(2)"
   height 4.3
   length 11
   width 11
@@ -1470,9 +1482,29 @@ Sassafras {
   name "tree(49)"
 }
 Sassafras {
-  translation 5.89128 27.8362 -4.40537e-13
+  translation 9.83607 27.554 -4.40537e-13
   rotation 0 0 1 3.14159
   name "tree(46)"
+}
+Sassafras {
+  translation -2.61347 27.2547 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(71)"
+}
+Sassafras {
+  translation 2.94058 60.2109 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(68)"
+}
+Sassafras {
+  translation 14.2151 58.963 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(70)"
+}
+Sassafras {
+  translation 25.3374 60.1864 -4.40537e-13
+  rotation 0 0 1 3.14159
+  name "tree(69)"
 }
 Sassafras {
   translation -15.9617 -29.4457 -4.40537e-13
@@ -1670,7 +1702,7 @@ BigSassafras {
   name "tree(19)"
 }
 PedestrianCrossing {
-  translation 26 45 -0.06
+  translation 62.4834 44.857 -0.06
   rotation 0 0 1 -1.5707953071795862
 }
 PedestrianCrossing {
@@ -1849,14 +1881,14 @@ SpeedLimitSign {
   ]
 }
 TrafficCone {
-  translation -33.9068 -50.8173 0
+  translation -30.029 -45.7286 0
   physics Physics {
     density -1
     mass 1
   }
 }
 TrafficCone {
-  translation -33.9068 -53.3447 0
+  translation -28.2537 -45.7551 0
   name "traffic cone(1)"
   physics Physics {
     density -1
@@ -1864,7 +1896,7 @@ TrafficCone {
   }
 }
 TrafficCone {
-  translation -34.0095 -48.1681 0
+  translation -31.8109 -45.6387 0
   name "traffic cone(2)"
   physics Physics {
     density -1
@@ -1912,7 +1944,7 @@ TrafficCone {
   }
 }
 TrafficCone {
-  translation 53.7608 33.9741 0
+  translation 56.1979 33.1017 0
   name "traffic cone(8)"
   physics Physics {
     density -1
@@ -1920,7 +1952,7 @@ TrafficCone {
   }
 }
 TrafficCone {
-  translation 51.435 33.9697 0
+  translation 56.1736 30.8774 0
   name "traffic cone(9)"
   physics Physics {
     density -1
@@ -1928,7 +1960,7 @@ TrafficCone {
   }
 }
 TrafficCone {
-  translation 48.9544 33.9536 0
+  translation 56.1253 28.7567 0
   name "traffic cone(10)"
   physics Physics {
     density -1
@@ -1936,7 +1968,7 @@ TrafficCone {
   }
 }
 TrafficCone {
-  translation 45.7234 33.7172 0
+  translation 56.1047 25.797 0
   name "traffic cone(11)"
   physics Physics {
     density -1
@@ -2000,8 +2032,22 @@ TrafficCone {
   }
 }
 AdvertisingBoard {
-  translation 116.28367 48.100535 0
+  translation 111.258 47.4884 -2.84217e-14
   rotation 0 0 1 -2.094395307179586
+  backTexture []
+  displayBackLight TRUE
+  displayWidth 8
+  displayHeight 6
+  frameThickness 0.9
+  frameColor 0.52549 0.52549 0.52549
+  poleNumber 2
+  poleHeight 11
+  baseRatio 5.8
+}
+AdvertisingBoard {
+  translation 111.258 47.4884 -2.84217e-14
+  rotation 0 0 1 -2.094395307179586
+  name "advertising board(1)"
   backTexture []
   displayBackLight TRUE
   displayWidth 8

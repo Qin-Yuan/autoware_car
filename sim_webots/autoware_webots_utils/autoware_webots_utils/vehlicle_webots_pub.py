@@ -56,19 +56,19 @@ class vehlicle_webots_pub(Node):
         self.velocity_status_msgs.heading_rate = self.angular2degree()
         self.steering_status_msgs.steering_tire_angle = self.angular2degree()
 
-        self.control_mode_msgs.stamp = self.get_clock().now().to_msg()
-        self.gear_status_msgs.stamp = self.get_clock().now().to_msg()
-        self.hazard_lights_status_msgs.stamp = self.get_clock().now().to_msg()
-        self.steering_status_msgs.stamp = self.get_clock().now().to_msg()
-        self.turn_indicators_status_msgs.stamp = self.get_clock().now().to_msg()
-        self.velocity_status_msgs.header.stamp = self.get_clock().now().to_msg()
+        self.control_mode_msgs.stamp = self.odom_msg.header.stamp
+        self.gear_status_msgs.stamp = self.odom_msg.header.stamp
+        self.hazard_lights_status_msgs.stamp = self.odom_msg.header.stamp
+        self.steering_status_msgs.stamp = self.odom_msg.header.stamp
+        self.turn_indicators_status_msgs.stamp = self.odom_msg.header.stamp
+        self.velocity_status_msgs.header.stamp = self.odom_msg.header.stamp
 
         self.control_mode_pub.publish(self.control_mode_msgs)
         self.gear_status_pub.publish(self.gear_status_msgs)
         self.hazard_lights_status_pub.publish(self.hazard_lights_status_msgs)
         self.steering_status_pub.publish(self.steering_status_msgs)
         self.turn_indicators_status_pub.publish(self.turn_indicators_status_msgs)
-        self.velocity_status_pub.publish(self.velocity_status_msgs)
+        # self.velocity_status_pub.publish(self.velocity_status_msgs)
     
     def angular2degree(self):
         wheelbase = 0.86*2  # 小车轮距

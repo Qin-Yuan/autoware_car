@@ -30,7 +30,7 @@
     downsampleRate: 1                            # default: 1. Downsample your data if too many
     # points. i.e., 16 = 64 / 4, 16 = 16 / 1
     lidarMinRange: 2.1                           # default: 1.0, minimum lidar range to be used
-    lidarMaxRange: 50.0                        # default: 1000.0, maximum lidar range to be used
+    lidarMaxRange: 100.0                        # default: 1000.0, maximum lidar range to be used
 
     # IMU Settings
     imuAccNoise: 3.9939570888238808e-03

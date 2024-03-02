@@ -48,5 +48,5 @@ def generate_launch_description():
         AckermannControlCommand_to_cmd_vel ,
         odom_to_gnss ,
         # tf2_base_link_to_map ,
-        # vehlicle_gazebo_pub ,
+        vehlicle_gazebo_pub ,
     ])
