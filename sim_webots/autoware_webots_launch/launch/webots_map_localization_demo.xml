@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- 3D 定位跳跃、异常、报错受 webots 点云数据影响，通过使用实物3D激光雷达替换后定位正常，后续继续跟踪问题 -->
   <!-- map file and path -->
   <arg name="launch_map" default="true" description="launch map"/>
   <!-- 切换使用 gazebo_lio_sam_maps 或者 webots_lio_sam_maps 的点云地图-->
