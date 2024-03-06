@@ -84,8 +84,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.14184347200282746 0.9883653216105416 0.05490373837794453 1.193621754459253
-  position -86.84550847188281 -68.51909644340303 123.99771981082827
+  orientation 0.04561366543283399 0.9784292955970934 0.20148326740242556 1.189685424229386
+  position -114.89658435954422 -91.85973016970449 226.45775819673565
   near 1
   followSmoothness 0
 }
@@ -275,7 +275,7 @@ DEF vehicle Robot {
     DEF gyro Gyro {
     }
     DEF inertialunit InertialUnit {
-      rotation 0 0 1 -1.5707953071795862
+      rotation 0 0 1 1.01503e-06
       name "inertialunit"
     }
     DEF accelerometer Accelerometer {

@@ -10,7 +10,7 @@ class pubOdom(Node):
     def __init__(self,node_name):
         super().__init__(node_name)
         self.get_logger().info("pub odom .")
-        self.gps_msg = PointStamped()        
+        self.gps_msg = PointStamped() ; self.gps_init_flag = False ; self.gps_init_msg = [0,0,0]
         self.imu_msg = Imu()
         self.ackermann_msgs = AckermannDrive()
         self.odom_msg = Odometry()
@@ -22,8 +22,14 @@ class pubOdom(Node):
         self.timer = self.create_timer(0.01, self.timer_callback)
         
     def gps_sub_callback(self,date):
+        if self.gps_init_flag == False :
+            self.gps_init_flag = True
+            self.gps_init_msg = [date.point.x, date.point.y, date.point.z]
         self.gps_msg = date
-        
+        self.gps_msg.point.x -= self.gps_init_msg[0]
+        self.gps_msg.point.y -= self.gps_init_msg[1]
+        self.gps_msg.point.z -= self.gps_init_msg[2]
+
     def imu_sub_callback(self,date):
         self.imu_msg = date
         
