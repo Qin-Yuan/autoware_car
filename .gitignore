@@ -1,4 +1,6 @@
-# 屏蔽webots_ros2_driver的一些编译文件，否则二次下载后编译会出错
+# 屏蔽 .vscode
+.vscode/*
+# 屏蔽 webots_ros2_driver 的一些编译文件，否则二次下载后编译会出错
 sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libController.so
 sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libCppCar.so
 sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libCppController.so
