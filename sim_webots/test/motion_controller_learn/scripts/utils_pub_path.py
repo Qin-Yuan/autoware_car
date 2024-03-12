@@ -50,7 +50,7 @@ class PathPublisher(Node):
     def odom_callback(self, msg):
         x, y = msg.pose.pose.position.x, msg.pose.pose.position.y
         pose_goal_distance = math.sqrt((self.next_goal.pose.position.x-x)**2 + (self.next_goal.pose.position.y-y)**2)
-        if pose_goal_distance < self.min_distance and len(self.path_msg.poses) > 0 :
+        if pose_goal_distance < self.min_distance and len(self.path_msg.poses) > 1 :
             self.next_goal = self.path_msg.poses.pop(0)
             self.next_goal = self.path_msg.poses[0]
             self.get_logger().info("next goal ... ")

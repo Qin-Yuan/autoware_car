@@ -15,7 +15,7 @@ class PathSaveNode(Node):
         self.subscription = self.create_subscription(Odometry, 'odom', self.odom_callback, 10)
         self.data = None
         self.last_data = None
-        self.create_timer(1.0, self.timer_callback)
+        self.create_timer(0.5, self.timer_callback)
         self.get_logger().info("Save path to csv file ...")
 
     def odom_callback(self, msg):
