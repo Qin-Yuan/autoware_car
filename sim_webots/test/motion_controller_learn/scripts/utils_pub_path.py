@@ -53,8 +53,7 @@ class PathPublisher(Node):
         if pose_goal_distance < self.min_distance and len(self.path_msg.poses) > 1 :
             self.next_goal = self.path_msg.poses.pop(0)
             self.next_goal = self.path_msg.poses[0]
-            self.get_logger().info("next goal ... ")
-        
+            # self.get_logger().info(f"next goal x-{self.next_goal.pose.position.x}  y-{self.next_goal.pose.position.y})")
         # self.get_logger().info(f"{pose_goal_distance}")
 
 def main(args=None):

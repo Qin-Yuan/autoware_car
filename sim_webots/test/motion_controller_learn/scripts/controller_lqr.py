@@ -82,7 +82,7 @@ class VehicleLQRPathTrack(Node):
         lqr_N = 100             # 迭代范围
         lqr_EPS = 1e-4          # 迭代精度
         lqr_Q = np.eye(3)*3     # Q-半正定矩阵
-        lqr_R = np.eye(2)*2.    # R-正定矩阵
+        lqr_R = np.eye(2)*4.    # R-正定矩阵
         self.lqr_controller = LQRController(N=lqr_N, EPS=lqr_EPS, Q=lqr_Q, R=lqr_R, dt=self.dt)
         self.lqr_controller_thread = threading.Thread(target=self.vehicle_LQRPathTrack_thread)
         self.lqr_controller_thread_flag = False
@@ -90,8 +90,8 @@ class VehicleLQRPathTrack(Node):
     
     def _init_VehicleState(self) :
         self.max_steer_angle = 0.7  # [0,1]
-        self.dt = 0.1       # 控制时间间隔，单位: s 秒
-        self.L = 4.0        # 车流轴距，单位: m 米
+        self.dt = 0.1        # 控制时间间隔，单位: s 秒
+        self.L = 4.5         # 车辆轴距，单位: m 米
         self.x = None
         self.y = None
         self.steer_angle = 0.0
@@ -230,16 +230,19 @@ class VehicleLQRPathTrack(Node):
         # refer_tree = KDTree(refer_path)  # reference trajectory
         # print( self.path_goal_index, path_count , distance)
         while True:
-            # 更新机器人状态
+            start_time = time.time()
+            # 1-更新机器人状态
             robot_state = [self.x, self.y, self.yaw, self.v]
-            # 1-计算参考轨迹上距离机器人最近的点
+            # 2-计算参考轨迹上距离机器人最近的点
             e, k, ref_yaw, self.path_goal_index = self.calc_track_error(robot_state[0], robot_state[1])
+            # 3-索引最近目标点位姿
             refer_state = self.refer_path[self.path_goal_index, 0:3]
+            # 4-计算参考前轮转角
             ref_delta = math.atan2(self.L*k, 1)
+            # 5-计算A、B状态矩阵
             A, B = self.state_space(ref_delta, ref_yaw)
-            # lqr 
+            # 6-lqr控制器输出值
             delta = self.lqr_controller.lqr_control(robot_state, refer_state, A, B)
-            # print(delta , ref_delta)
             delta = delta + ref_delta
             delta = -delta
             # 限制前车轮最大转角
@@ -253,7 +256,13 @@ class VehicleLQRPathTrack(Node):
             # print(distance, self.path_goal_index)
             # 计算距离终点的距离
             distance = math.sqrt((refer_state[0] - robot_state[0])**2 + (refer_state[1] - robot_state[1])**2)
-            time.sleep(self.dt)
+            # 记录结束时间
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            if elapsed_time < self.dt :
+                time.sleep(self.dt-elapsed_time)
+            else:
+                self.get_logger().error(f"LQR controller dt is {self.dt}, but elapsed_time is {elapsed_time} .")
             # 到达终点停止
             if self.path_goal_index == path_count - 1 and distance < 0.5 :
                 break
