@@ -28,12 +28,12 @@ class LQRController :
     def lqr_control(self, robot_state, refer_state, A, B) :
         x = robot_state[0:3] - refer_state[0:3]
         P = self.cal_Ricatti(A, B, self.Q, self.R)
-        # 计算增益
-        K = -np.linalg.pinv(self.R + B.T @ P @ B) @ B.T @ P @ A
-        # 计算误差
+        # 计算增益, qys: 去掉负号
+        K = np.linalg.pinv(self.R + B.T @ P @ B) @ B.T @ P @ A
+        # 计算误差, qys: 这里本来应该有负号的
         u = K @ x
         u_star = u      # u_star = [[v-ref_v,delta-ref_delta]] 
-        # print(u_star,u_star[0,1])
+        print(u_star,u_star[0,1])
         return u_star[0,1]
     
     def cal_Ricatti(self, A, B, Q, R):
@@ -244,7 +244,6 @@ class VehicleLQRPathTrack(Node):
             # 6-lqr控制器输出值
             delta = self.lqr_controller.lqr_control(robot_state, refer_state, A, B)
             delta = delta + ref_delta
-            delta = -delta
             # 限制前车轮最大转角
             if delta < -self.max_steer_angle :
                 delta = -self.max_steer_angle

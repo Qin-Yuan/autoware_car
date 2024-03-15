@@ -76,11 +76,11 @@ class VehiclePIDPathTrack(Node):
 
     
     def _init_VehicleState(self) :
-        self.dt = 0.02
+        self.dt = 0.1
         self.x = None
         self.y = None
         self.steer_angle = 0.0
-        self.v = 5.0
+        self.v = 10.0
         self._past_x = []
         self._past_y = []
         self.yaw = None
