@@ -28,9 +28,8 @@ class LQRController :
     def lqr_control(self, robot_state, refer_state, A, B) :
         x = robot_state[0:3] - refer_state[0:3]
         P = self.cal_Ricatti(A, B, self.Q, self.R)
-        # 计算增益, qys: 去掉负号
+        # 计算增益, qys: 去掉负号, 因为webots中前轮转角顺时针为正，反着了
         K = np.linalg.pinv(self.R + B.T @ P @ B) @ B.T @ P @ A
-        # 计算误差, qys: 这里本来应该有负号的
         u = K @ x
         u_star = u      # u_star = [[v-ref_v,delta-ref_delta]] 
         print(u_star,u_star[0,1])
