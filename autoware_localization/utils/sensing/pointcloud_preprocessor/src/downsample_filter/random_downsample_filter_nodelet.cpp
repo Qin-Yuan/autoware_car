@@ -81,6 +81,7 @@ void RandomDownsampleFilterComponent::filter(
   // qys : 剔除异常值 remove Nan
   std::vector<int> indices ;
   pcl::removeNaNFromPointCloud(*pcl_input, *pcl_input, indices);
+  // RCLCPP_INFO_STREAM(get_logger(), " downsample filter num - " << pcl_input->points.size()) ;
 
   // 设置 pcl_output 点云大小，根据 pcl_input 计算得到
   pcl_output->points.reserve(pcl_input->points.size());

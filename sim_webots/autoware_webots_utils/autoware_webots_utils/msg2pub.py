@@ -4,6 +4,7 @@ from std_msgs.msg import Header
 from sensor_msgs.msg import PointCloud2, PointField,Imu,Image
 from sensor_msgs_py import point_cloud2
 import numpy as np
+import tf_transformations
 
 class PointCloudSubscriberPublisher(Node):
     def __init__(self):
@@ -22,6 +23,7 @@ class PointCloudSubscriberPublisher(Node):
         )
 
         self.imu = Imu()
+        self.init_yaw = None
         self.create_subscription(
             Imu,
             '/sensing/imu/tamagawa/imu_raw_',  
@@ -54,6 +56,23 @@ class PointCloudSubscriberPublisher(Node):
 
     def imu_callback(self, msg):
         self.imu = msg
+        # 矫正初始值
+        # if self.init_yaw == None :
+        #     self.init_yaw = tf_transformations.euler_from_quaternion([  msg.orientation.x, msg.orientation.y, 
+        #                                                                 msg.orientation.z, msg.orientation.w])[2]
+        #     return
+        # euler_raw = tf_transformations.euler_from_quaternion([msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w])
+        # euler = [euler_raw[0], euler_raw[1], euler_raw[2]]
+        # euler[2] -= self.init_yaw
+        # # print(euler)
+        # orientation = tf_transformations.quaternion_from_euler(euler[0], euler[1], euler[2])
+        # self.imu.header = msg.header
+        # # print(orientation)
+        # self.imu.orientation.x = orientation[0]
+        # self.imu.orientation.y = orientation[1]
+        # self.imu.orientation.z = orientation[2]
+        # self.imu.orientation.w = orientation[3]
+        # self.imu.linear_acceleration.z = 9.8
         # self.publisher_imu.publish(msg)
 
     def image_callback(self, msg):

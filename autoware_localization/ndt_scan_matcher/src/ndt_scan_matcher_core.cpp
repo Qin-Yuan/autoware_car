@@ -524,7 +524,7 @@ void NDTScanMatcher::publish_pose(
   result_pose_with_cov_msg.header.frame_id = map_frame_;
   result_pose_with_cov_msg.pose.pose = result_pose_msg;
   result_pose_with_cov_msg.pose.covariance = output_pose_covariance_;
-
+  
   if (is_converged) {
     ndt_pose_pub_->publish(result_pose_stamped_msg);
     ndt_pose_with_covariance_pub_->publish(result_pose_with_cov_msg);

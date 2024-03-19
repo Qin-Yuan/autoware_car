@@ -204,7 +204,7 @@ void EKFLocalizer::timerCallback()
     DEBUG_INFO(get_logger(), "[EKF] measurementUpdateTwist calc time = %f [ms]", stop_watch_.toc());
     DEBUG_INFO(get_logger(), "------------------------- end Twist -------------------------\n");
   }
-
+  
   const double x = ekf_.getXelement(IDX::X);
   const double y = ekf_.getXelement(IDX::Y);
   const double z = z_filter_.get_x();
@@ -221,9 +221,11 @@ void EKFLocalizer::timerCallback()
   current_ekf_pose_.header.frame_id = params_.pose_frame_id;
   current_ekf_pose_.header.stamp = this->now();
   current_ekf_pose_.pose.position = tier4_autoware_utils::createPoint(x, y, z);
+  // qys : y 异常，设置为 0
+  // current_ekf_pose_.pose.position.y = 0.0 ;
   current_ekf_pose_.pose.orientation =
     tier4_autoware_utils::createQuaternionFromRPY(roll, pitch, yaw);
-
+  // qys : 
   current_biased_ekf_pose_ = current_ekf_pose_;
   current_biased_ekf_pose_.pose.orientation =
     tier4_autoware_utils::createQuaternionFromRPY(roll, pitch, biased_yaw);
@@ -310,6 +312,7 @@ void EKFLocalizer::callbackInitialPose(
 
   X(IDX::X) = initialpose->pose.pose.position.x + transform.transform.translation.x;
   X(IDX::Y) = initialpose->pose.pose.position.y + transform.transform.translation.y;
+
   current_ekf_pose_.pose.position.z =
     initialpose->pose.pose.position.z + transform.transform.translation.z;
   X(IDX::YAW) =
@@ -343,7 +346,8 @@ void EKFLocalizer::callbackPoseWithCovariance(
   if (!is_activated_) {
     return;
   }
-
+  // qys :
+  // RCLCPP_INFO_STREAM(get_logger(), msg->pose.pose.position.x << " " << msg->pose.pose.position.x << " " << msg->pose.pose.position.y);
   pose_queue_.push(msg);
 
   updateSimple1DFilters(*msg);
@@ -355,6 +359,8 @@ void EKFLocalizer::callbackPoseWithCovariance(
 void EKFLocalizer::callbackTwistWithCovariance(
   geometry_msgs::msg::TwistWithCovarianceStamped::SharedPtr msg)
 {
+  // qys :
+  // RCLCPP_INFO_STREAM(get_logger(), msg->twist.twist.linear.x << " " << msg->twist.twist.angular.z << std::endl);
   twist_queue_.push(msg);
 }
 
@@ -550,6 +556,12 @@ void EKFLocalizer::publishEstimateResult()
 
   geometry_msgs::msg::PoseWithCovarianceStamped biased_pose_cov = pose_cov;
   biased_pose_cov.pose.pose = current_biased_ekf_pose_.pose;
+  // qys : y 值异常
+  // RCLCPP_INFO_STREAM(get_logger(), biased_pose_cov.pose.pose.position.x 
+  //                                 << " " 
+  //                                 << biased_pose_cov.pose.pose.position.y 
+  //                                 << " " 
+  //                                 << biased_pose_cov.pose.pose.position.z);
   pub_biased_pose_cov_->publish(biased_pose_cov);
 
   /* publish latest twist */
