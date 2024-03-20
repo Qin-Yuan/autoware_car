@@ -45,7 +45,8 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py'),
-        )
+        ),
+        launch_arguments={'use_sim_time': use_sim_time}.items(),
     )
     # RViz
     rviz = Node(
@@ -65,6 +66,11 @@ def generate_launch_description():
             # arguments=[urdf]
         )
     
+    autoware_gazebo_utils_launch = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([pkg_autoware_gazebo_utils_dir, '/autoware_gazebo_utils.launch.py']),
+                launch_arguments={'use_sim_time': use_sim_time}.items(),
+            )
+    
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -77,12 +83,8 @@ def generate_launch_description():
             description='SDF world file'),
         DeclareLaunchArgument('rviz', default_value='true',
                             description='Open RViz.'),
-
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([pkg_autoware_gazebo_utils_dir, '/autoware_gazebo_utils.launch.py'])
-        ),
-
         gazebo,
         robot_state_publisher,
+        autoware_gazebo_utils_launch,
         # rviz
     ])
