@@ -28,8 +28,8 @@ class LQRController :
     def lqr_control(self, robot_state, refer_state, A, B) :
         x = robot_state[0:3] - refer_state[0:3]
         P = self.cal_Ricatti(A, B, self.Q, self.R)
-        # 计算增益, qys: 去掉负号, 因为webots中前轮转角顺时针为正，反着了
-        K = np.linalg.pinv(self.R + B.T @ P @ B) @ B.T @ P @ A
+        # 计算增益
+        K = -np.linalg.pinv(self.R + B.T @ P @ B) @ B.T @ P @ A
         u = K @ x
         u_star = u      # u_star = [[v-ref_v,delta-ref_delta]] 
         print(u_star,u_star[0,1])
@@ -248,8 +248,8 @@ class VehicleLQRPathTrack(Node):
                 delta = -self.max_steer_angle
             elif delta > self.max_steer_angle :
                 delta = self.max_steer_angle
-            # 7-发布控制指令
-            self.twist_publisher(0, delta)
+            # 7-发布控制指令,qys: 添加负号, 因为webots中前轮转角顺时针为正，反着了
+            self.twist_publisher(0, -delta)
             # print("positions: ", self.x, self.y, self.yaw)
             # print(distance, self.path_goal_index)
             # 计算距离终点的距离
