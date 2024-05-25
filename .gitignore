@@ -1,15 +1,12 @@
 # 屏蔽 .vscode
 .vscode/*
 # 屏蔽 webots_ros2_driver 的一些编译文件，否则二次下载后编译会出错
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libController.so
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libCppCar.so
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libCppController.so
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libCppDriver.so
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libcar.so
-sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/libdriver.so
+sim_webots/webots_ros2/webots_ros2_driver/webots/lib/controller/*.so
+sim_webots/webots_ros2/webots_ros2_driver/webots/resources/projects/libraries/generic_robot_window/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/projects/default/libraries/vehicle/c/car/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/projects/default/libraries/vehicle/c/driver/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/projects/default/libraries/vehicle/cpp/car/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/projects/default/libraries/vehicle/cpp/driver/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/src/controller/c/build/
 sim_webots/webots_ros2/webots_ros2_driver/webots/src/controller/cpp/build/
+sim_webots/webots_ros2/webots_ros2_driver/webots/webots-controller
