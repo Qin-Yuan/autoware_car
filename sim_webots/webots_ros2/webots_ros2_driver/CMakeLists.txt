@@ -28,7 +28,15 @@ find_package(vision_msgs REQUIRED)
 find_package(webots_ros2_msgs REQUIRED)
 find_package(tinyxml2_vendor REQUIRED)
 find_package(TinyXML2 REQUIRED)
-find_package(PythonLibs 3.10 EXACT REQUIRED)
+find_package(yaml-cpp REQUIRED)
+
+if($ENV{ROS_DISTRO} MATCHES "humble")
+  find_package(Python 3.10 EXACT REQUIRED COMPONENTS Development)
+elseif($ENV{ROS_DISTRO} MATCHES "iron")
+  find_package(Python 3.10 EXACT REQUIRED COMPONENTS Development)
+elseif($ENV{ROS_DISTRO} MATCHES "rolling")
+  find_package(Python 3.12 EXACT REQUIRED COMPONENTS Development)
+endif()
 
 add_custom_target(compile-lib-controller ALL
   COMMAND ${CMAKE_COMMAND} -E env "WEBOTS_HOME=${CMAKE_CURRENT_SOURCE_DIR}/webots" make release -f Makefile > /dev/null 2>&1
@@ -41,13 +49,19 @@ add_custom_target(compile-lib-vehicle ALL
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/webots/projects/default/libraries/vehicle
 )
 
+add_custom_target(compile-generic-window ALL
+  COMMAND ${CMAKE_COMMAND} -E env "WEBOTS_HOME=${CMAKE_CURRENT_SOURCE_DIR}/webots" make release -f Makefile > /dev/null 2>&1
+  DEPENDS compile-lib-controller
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/webots/resources/projects/libraries/generic_robot_window
+)
+
 set(WEBOTS_LIB_BASE webots/lib/controller)
 
 include_directories(
   include
   webots/include/controller/c
   webots/include/controller/cpp
-  ${PYTHON_INCLUDE_DIRS}
+  ${Python_INCLUDE_DIRS}
 )
 
 link_directories(${WEBOTS_LIB_BASE})
@@ -71,7 +85,7 @@ ament_python_install_package(${PROJECT_NAME}
   PACKAGE_DIR ${PROJECT_NAME})
 
 # Driver
-set(CMAKE_INSTALL_RPATH "$ORIGIN/../controller")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/../controller") # Deprecated with new WebotsController node, remove with 2024.0.0
 add_executable(driver
   src/Driver.cpp
   src/WebotsNode.cpp
@@ -79,6 +93,7 @@ add_executable(driver
   src/plugins/Ros2SensorPlugin.cpp
   src/plugins/static/Ros2Lidar.cpp
   src/plugins/static/Ros2LED.cpp
+  src/plugins/static/Ros2Pen.cpp
   src/plugins/static/Ros2Camera.cpp
   src/plugins/static/Ros2GPS.cpp
   src/plugins/static/Ros2RangeFinder.cpp
@@ -87,6 +102,7 @@ add_executable(driver
   src/plugins/static/Ros2Emitter.cpp
   src/plugins/static/Ros2Receiver.cpp
   src/plugins/static/Ros2Compass.cpp
+  src/plugins/static/Ros2VacuumGripper.cpp
   src/utils/Math.cpp
   src/utils/Utils.cpp
 )
@@ -108,7 +124,8 @@ add_dependencies(driver
 )
 target_link_libraries(driver
   ${WEBOTS_LIB}
-  ${PYTHON_LIBRARIES}
+  ${Python_LIBRARIES}
+  yaml-cpp
 )
 install(
   DIRECTORY include/
@@ -119,7 +136,7 @@ install(TARGETS driver
 )
 
 # Dynamic IMU
-set(CMAKE_INSTALL_RPATH "$ORIGIN/controller")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/controller") # Deprecated with new WebotsController node, remove with 2024.0.0
 add_library(
   ${PROJECT_NAME}_imu
   SHARED
@@ -147,7 +164,7 @@ install(TARGETS ${PROJECT_NAME}_imu
 )
 
 # Dynamic RGBD
-set(CMAKE_INSTALL_RPATH "$ORIGIN/controller")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/controller") # Deprecated with new WebotsController node, remove with 2024.0.0
 add_library(
   ${PROJECT_NAME}_rgbd
   SHARED
@@ -193,6 +210,7 @@ install(
   PATTERN "*CppCar*"
   PATTERN "*driver*"
   PATTERN "*CppDriver*"
+  PATTERN "*generic_robot_window*"
 )
 
 # Prevent pluginlib from using boost
@@ -213,6 +231,12 @@ install(
   DESTINATION share/${PROJECT_NAME}/scripts
 )
 
+# Install webots-controller script
+install(
+  PROGRAMS webots/webots-controller
+  DESTINATION share/${PROJECT_NAME}/scripts
+)
+
 # Ament export
 set(WEBOTS_LIB_PATH
   controller/${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -221,6 +245,7 @@ set(WEBOTS_LIB_PATH
   controller/${CMAKE_SHARED_LIBRARY_PREFIX}CppDriver${CMAKE_SHARED_LIBRARY_SUFFIX}
   controller/${CMAKE_SHARED_LIBRARY_PREFIX}car${CMAKE_SHARED_LIBRARY_SUFFIX}
   controller/${CMAKE_SHARED_LIBRARY_PREFIX}CppCar${CMAKE_SHARED_LIBRARY_SUFFIX}
+  controller/${CMAKE_SHARED_LIBRARY_PREFIX}generic_robot_window${CMAKE_SHARED_LIBRARY_SUFFIX}
 )
 
 ament_export_include_directories(

@@ -1,1 +1,0 @@
--nostdlib -r -WI,-X -WI~FileList~ -o "~OutputPath~"

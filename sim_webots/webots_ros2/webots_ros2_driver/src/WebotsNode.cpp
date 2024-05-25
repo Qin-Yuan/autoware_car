@@ -14,6 +14,8 @@
 
 #include "webots_ros2_driver/WebotsNode.hpp"
 
+#include <yaml-cpp/yaml.h>
+#include <fstream>
 #include <rcl_interfaces/srv/set_parameters.hpp>
 #include <rclcpp/parameter_value.hpp>
 #include <rclcpp/timer.hpp>
@@ -29,10 +31,10 @@
 #include <webots_ros2_driver/plugins/static/Ros2LED.hpp>
 #include <webots_ros2_driver/plugins/static/Ros2Lidar.hpp>
 #include <webots_ros2_driver/plugins/static/Ros2LightSensor.hpp>
+#include <webots_ros2_driver/plugins/static/Ros2Pen.hpp>
 #include <webots_ros2_driver/plugins/static/Ros2RangeFinder.hpp>
 #include <webots_ros2_driver/plugins/static/Ros2Receiver.hpp>
-#include "webots_ros2_driver/PluginInterface.hpp"
-
+#include <webots_ros2_driver/plugins/static/Ros2VacuumGripper.hpp>
 #include "webots_ros2_driver/PluginInterface.hpp"
 #include "webots_ros2_driver/PythonPlugin.hpp"
 
@@ -49,13 +51,45 @@ namespace webots_ros2_driver {
   }
 
   WebotsNode::WebotsNode(std::string name) : Node(name), mPluginLoader(gPluginInterfaceName, gPluginInterface) {
-    mRobotDescription = this->declare_parameter<std::string>("robot_description", "");
+    mRobotDescriptionParam = this->declare_parameter<std::string>("robot_description", "");
     mSetRobotStatePublisher = this->declare_parameter<bool>("set_robot_state_publisher", false);
-    if (mRobotDescription != "") {
+    if (mRobotDescriptionParam != "") {
       mRobotDescriptionDocument = std::make_shared<tinyxml2::XMLDocument>();
-      mRobotDescriptionDocument->Parse(mRobotDescription.c_str());
+      // Path to URDF file
+      if (mRobotDescriptionParam.rfind(".urdf") == mRobotDescriptionParam.size() - 5)
+        mRobotDescriptionDocument->LoadFile(mRobotDescriptionParam.c_str());
+      // Path to Xacro file
+      else if (mRobotDescriptionParam.rfind(".xacro") == mRobotDescriptionParam.size() - 6) {
+        std::vector<std::string> xacroMappings =
+          this->declare_parameter<std::vector<std::string>>("xacro_mappings", std::vector<std::string>());
+        std::string command = "ros2 run xacro xacro " + mRobotDescriptionParam;
+        for (const std::string &xacroMapping : xacroMappings) {
+          command += " ";
+          command += xacroMapping;
+        }
+
+        FILE *stream = popen(command.c_str(), "r");
+        if (!stream)
+          throw std::runtime_error("Failed to execute xacro command");
+
+        char buffer[4096];
+        std::string xacroOutput;
+        while (fgets(buffer, sizeof(buffer), stream) != NULL)
+          xacroOutput += buffer;
+        pclose(stream);
+
+        mRobotDescriptionDocument->Parse(xacroOutput.c_str());
+      }
+      // Full string (deprecated)
+      else {
+        mRobotDescriptionDocument->Parse(mRobotDescriptionParam.c_str());
+        RCLCPP_WARN(
+          get_logger(),
+          "\033[33mPassing robot description as a string is deprecated. Provide the URDF or Xacro file path instead.\033[0m");
+      }
       if (!mRobotDescriptionDocument)
-        throw std::runtime_error("Invalid URDF, it cannot be parsed");
+        throw std::runtime_error("Invalid robot description, it cannot be parsed");
+      // Access the robot and webots elements as needed
       tinyxml2::XMLElement *robotXMLElement = mRobotDescriptionDocument->FirstChildElement("robot");
       if (!robotXMLElement)
         throw std::runtime_error("Invalid URDF, it doesn't contain a <robot> tag");
@@ -64,9 +98,28 @@ namespace webots_ros2_driver {
       mWebotsXMLElement = NULL;
       RCLCPP_INFO(get_logger(), "Robot description is not passed, using default parameters.");
     }
+    // Store robot description string in mRobotDescription
+    tinyxml2::XMLPrinter printer;
+    mRobotDescriptionDocument->Accept(&printer);
+    mRobotDescription = printer.CStr();
 
     mRemoveUrdfRobotPublisher = create_publisher<std_msgs::msg::String>("/remove_urdf_robot", rclcpp::ServicesQoS());
     mRemoveUrdfRobotMessage.data = name;
+
+    // Path to component remapping YAML
+    mComponentsRemappingFilePath = this->declare_parameter<std::string>("components_remappings", "");
+    if (mComponentsRemappingFilePath != "") {
+      std::ifstream file(mComponentsRemappingFilePath);
+      if (!file)
+        throw std::runtime_error("YAML file for components remappings doesn't exist.");
+
+      YAML::Node root = YAML::Load(file);
+      for (const auto &node : root) {
+        const std::string key = node.first.as<std::string>();
+        const std::string value = node.second.as<std::string>();
+        mComponentsRemapping[key] = value;
+      }
+    }
   }
 
   std::unordered_map<std::string, std::string> WebotsNode::getPluginProperties(tinyxml2::XMLElement *pluginElement) const {
@@ -111,10 +164,26 @@ namespace webots_ros2_driver {
     return properties;
   }
 
+  void WebotsNode::replaceUrdfNames(std::string &urdf) {
+    for (const auto &map : mComponentsRemapping) {
+      const std::string searchStr1 = "name=\"" + map.first + "\"";
+      const std::string searchStr2 = "link=\"" + map.first + "\"";
+      size_t pos = std::min(urdf.find(searchStr1), urdf.find(searchStr2));
+      while (pos != std::string::npos) {
+        const size_t quoteStartPos = pos + 6;
+        const size_t quoteEndPos = quoteStartPos + map.first.length();
+        urdf.replace(quoteStartPos, quoteEndPos - quoteStartPos, map.second);
+        pos = std::min(urdf.find(searchStr1, quoteEndPos), urdf.find(searchStr2, quoteEndPos));
+      }
+    }
+  }
+
   void WebotsNode::init() {
     if (mSetRobotStatePublisher) {
       std::string prefix = "";
-      setAnotherNodeParameter("robot_state_publisher", "robot_description", wb_robot_get_urdf(prefix.c_str()));
+      std::string webotsUrdf = wb_robot_get_urdf(prefix.c_str());
+      replaceUrdfNames(webotsUrdf);
+      setAnotherNodeParameter("robot_state_publisher", "robot_description", webotsUrdf);
     }
 
     mStep = wb_robot_get_basic_time_step();
@@ -156,6 +225,9 @@ namespace webots_ros2_driver {
         case WB_NODE_LED:
           plugin = std::make_shared<webots_ros2_driver::Ros2LED>();
           break;
+        case WB_NODE_PEN:
+          plugin = std::make_shared<webots_ros2_driver::Ros2Pen>();
+          break;
         case WB_NODE_EMITTER:
           plugin = std::make_shared<webots_ros2_driver::Ros2Emitter>();
           break;
@@ -164,6 +236,9 @@ namespace webots_ros2_driver {
           break;
         case WB_NODE_COMPASS:
           plugin = std::make_shared<webots_ros2_driver::Ros2Compass>();
+          break;
+        case WB_NODE_VACUUM_GRIPPER:
+          plugin = std::make_shared<webots_ros2_driver::Ros2VacuumGripper>();
           break;
       }
       if (plugin) {
@@ -218,6 +293,7 @@ namespace webots_ros2_driver {
     if (gShutdownSignalReceived && !mWaitingForUrdfRobotToBeRemoved) {
       mRemoveUrdfRobotPublisher->publish(mRemoveUrdfRobotMessage);
       mWaitingForUrdfRobotToBeRemoved = true;
+      return -1;
     }
 
     const int result = wb_robot_step(mStep);
@@ -230,7 +306,7 @@ namespace webots_ros2_driver {
   }
 
   void WebotsNode::setAnotherNodeParameter(std::string anotherNodeName, std::string parameterName, std::string parameterValue) {
-    mClient = create_client<rcl_interfaces::srv::SetParameters>(get_namespace() + anotherNodeName + "/set_parameters");
+    mClient = create_client<rcl_interfaces::srv::SetParameters>(anotherNodeName + "/set_parameters");
     mClient->wait_for_service(std::chrono::seconds(1));
     rcl_interfaces::srv::SetParameters::Request::SharedPtr request =
       std::make_shared<rcl_interfaces::srv::SetParameters::Request>();

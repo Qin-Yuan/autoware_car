@@ -37,7 +37,7 @@ from std_msgs.msg import String
 from webots_ros2_driver.utils import is_wsl, has_shared_folder, container_shared_folder, host_shared_folder
 sys.path.insert(1, os.path.join(os.path.dirname(webots_ros2_importer.__file__), 'urdf2webots'))
 from urdf2webots.importer import convertUrdfFile, convertUrdfContent  # noqa
-from webots_ros2_msgs.srv import SpawnUrdfRobot, SpawnNodeFromString  # noqa
+from webots_ros2_msgs.srv import GetBool, SetString, SpawnUrdfRobot, SpawnNodeFromString  # noqa
 
 # As Ros2Supervisor needs the controller library, we extend the path here
 # to avoid to load another library named "controller" or "vehicle".
@@ -65,10 +65,18 @@ class Ros2Supervisor(Node):
         # Services
         self.create_service(SpawnUrdfRobot, 'spawn_urdf_robot', self.__spawn_urdf_robot_callback)
         self.create_service(SpawnNodeFromString, 'spawn_node_from_string', self.__spawn_node_from_string_callback)
+        self.create_service(SetString, 'animation_start_recording', self.__animation_start_recording_callback)
+        self.create_service(GetBool, 'animation_stop_recording', self.__animation_stop_recording_callback)
+
         # Subscriptions
         self.create_subscription(String, 'remove_node', self.__remove_imported_node_callback, qos_profile_services_default)
 
     def __spawn_urdf_robot_callback(self, request, response):
+        # Deprecated, remove in 2024.0.0
+        self.get_logger().warn(
+            '\033[33mThe URDF Spawner is deprecated. It will be replaced by a new PROTOSpawner in the future. '
+            'See https://github.com/cyberbotics/webots_ros2/issues/818 for more information.\033[0m'
+        )
         robot = request.robot
 
         robot_name = robot.name if robot.name else ''
@@ -183,7 +191,7 @@ class Ros2Supervisor(Node):
             response.success = False
             return response
         # Extract Webots node name from string.
-        name_match = re.search('name "[a-z0-9_]*"', object_string)
+        name_match = re.search('name "[a-zA-Z0-9_]*"', object_string)
         object_name = name_match.group().replace('name ', '')
         object_name = object_name.replace('"', '')
         # Check that the name is not an empty string.
@@ -220,6 +228,19 @@ class Ros2Supervisor(Node):
         response.success = True
         return response
 
+    def __animation_start_recording_callback(self, request: SetString.Request, response: SetString.Response):
+        filename = request.value
+        self.get_logger().info(f"Start recording animation to {filename}")
+        self.__robot.animationStartRecording(filename)
+        response.success = True
+        return response
+
+    def __animation_stop_recording_callback(self, request: GetBool.Request, response: GetBool.Response):
+        self.get_logger().info("Stop recording animation")
+        self.__robot.animationStopRecording()
+        response.value = True
+        return response
+
     # Allows to remove any imported node (urdf robots / VRML Nodes) by name.
     def __remove_imported_node_callback(self, message):
         name = message.data
@@ -228,10 +249,10 @@ class Ros2Supervisor(Node):
             node = None
 
             for id_node in range(self.__insertion_node_place.getCount()):
-                node = self.__insertion_node_place.getMFNode(id_node)
-                node_name_field = node.getField('name')
+                simulation_node = self.__insertion_node_place.getMFNode(id_node)
+                node_name_field = simulation_node.getField('name')
                 if node_name_field and node_name_field.getSFString() == name:
-                    node = node
+                    node = simulation_node
                     break
 
             if node:
@@ -239,8 +260,11 @@ class Ros2Supervisor(Node):
                 self.__node_list.remove(name)
                 self.get_logger().info('Ros2Supervisor has removed the node named "' + str(name) + '".')
             else:
-                self.get_logger().info('Ros2Supervisor wanted to remove the node named "' + str(name) +
+                self.get_logger().warn('Ros2Supervisor wanted to remove the node named "' + str(name) +
                                        '" but this node has not been found in the simulation world.')
+        else:
+            self.get_logger().warn('The node named "' + str(name) +
+                                   '" cannot be removed because it was not imported into the world.')
 
     def __supervisor_step_callback(self):
         if self.__robot.step(self.__timestep) < 0:

@@ -40,15 +40,20 @@ namespace webots_ros2_driver {
     int step();
     std::string urdf() const { return mRobotDescription; };
     static void handleSignals();
+    std::vector<std::shared_ptr<PluginInterface>> mPlugins;
 
   private:
     std::unordered_map<std::string, std::string> getDeviceRosProperties(const std::string &name) const;
     std::unordered_map<std::string, std::string> getPluginProperties(tinyxml2::XMLElement *pluginElement) const;
     void setAnotherNodeParameter(std::string anotherNodeName, std::string parameterName, std::string parameterValue);
+    void replaceUrdfNames(std::string &urdf);
     rclcpp::Client<rcl_interfaces::srv::SetParameters>::SharedPtr mClient;
 
+    std::string mRobotDescriptionParam;
     std::string mRobotDescription;
     bool mSetRobotStatePublisher;
+    std::string mComponentsRemappingFilePath;
+    std::unordered_map<std::string, std::string> mComponentsRemapping;
 
     bool mWaitingForUrdfRobotToBeRemoved = false;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mRemoveUrdfRobotPublisher;
@@ -56,7 +61,6 @@ namespace webots_ros2_driver {
 
     rclcpp::TimerBase::SharedPtr mTimer;
     int mStep;
-    std::vector<std::shared_ptr<PluginInterface>> mPlugins;
     pluginlib::ClassLoader<PluginInterface> mPluginLoader;
     tinyxml2::XMLElement *mWebotsXMLElement;
     std::shared_ptr<tinyxml2::XMLDocument> mRobotDescriptionDocument;

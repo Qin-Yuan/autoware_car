@@ -29,7 +29,7 @@ from platform import uname
 
 
 # The minimal version should be the last stable release of Webots (both on master and develop branches)
-MINIMUM_VERSION_STR = 'R2023a'
+MINIMUM_VERSION_STR = 'R2023b'
 
 
 @functools.total_ordering
@@ -123,7 +123,15 @@ def container_shared_folder():
     return shared_folder_list[1]
 
 
+def is_docker():
+    mountinfo = Path("/proc/self/mountinfo")
+    return mountinfo.is_file() and "docker" in mountinfo.read_text()
+
+
 def get_host_ip():
+    if is_docker():
+        return "host.docker.internal"
+
     try:
         output = subprocess.run(['ip', 'route'], check=True, stdout=subprocess.PIPE, universal_newlines=True)
         for line in output.stdout.split('\n'):
@@ -133,6 +141,16 @@ def get_host_ip():
         sys.exit('Unable to get host IP address.')
     except subprocess.CalledProcessError:
         sys.exit('Unable to get host IP address. \'ip route\' could not be executed.')
+
+
+def controller_protocol():
+    protocol = 'tcp' if (has_shared_folder() or is_wsl()) else 'ipc'
+    return protocol
+
+
+def controller_ip_address():
+    ip_address = get_host_ip() if has_shared_folder() else get_wsl_ip_address()
+    return ip_address
 
 
 def controller_url_prefix(port='1234'):

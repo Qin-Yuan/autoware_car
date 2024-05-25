@@ -174,6 +174,16 @@ class WebotsLauncher(ExecuteProcess):
             sumonet_copy_path = Path(self.__world_copy.name).with_name(Path(self.__world_copy.name).stem + '_net')
             shutil.copytree(sumonet_path, sumonet_copy_path)
 
+        # Copy forests
+        forests_path = Path(world_path).with_name('forest')
+        if forests_path.exists():
+            forests_copy = Path(self.__world_copy.name).with_name('forest')
+
+            if forests_copy.exists():
+                shutil.rmtree(forests_copy)
+
+            shutil.copytree(forests_path, forests_copy)
+
         # Update relative paths in the world
         with open(self.__world_copy.name, 'r') as file:
             content = file.read()
@@ -256,6 +266,8 @@ class Ros2SupervisorLauncher(Node):
         super().__init__(
             package='webots_ros2_driver',
             executable='ros2_supervisor.py',
+            namespace='Ros2Supervisor',
+            remappings=[('/Ros2Supervisor/clock', '/clock')],
             output=output,
             # Set WEBOTS_HOME to the webots_ros2_driver installation folder
             # to load the correct libController libraries from the Python API

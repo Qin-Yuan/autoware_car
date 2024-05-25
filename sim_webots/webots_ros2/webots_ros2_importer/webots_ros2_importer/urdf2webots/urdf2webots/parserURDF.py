@@ -17,7 +17,7 @@ from urdf2webots.math_utils import convertRPYtoEulerAxis, rotateVector, combineR
 
 # to pass from external
 robotName = ''
-targetVersion = 'R2023a'
+targetVersion = 'R2023b'
 
 
 class Inertia():
@@ -515,7 +515,7 @@ def getInertia(node):
     return inertia
 
 
-def getVisual(link, node, path):
+def getVisual(link, node, path, outputDirectory):
     """Parse visual data of a link."""
     for index in range(0, len(node.getElementsByTagName('visual'))):
         visual = Visual()
@@ -595,7 +595,8 @@ def getVisual(link, node, path):
         elif hasElement(geometryElement, 'mesh'):
             meshfile = geometryElement.getElementsByTagName('mesh')[0].getAttribute('filename')
             if not os.path.isabs(meshfile):
-                meshfile = os.path.normpath(os.path.join(path, meshfile))
+                # Use the path relative to the output file
+                meshfile = os.path.normpath(os.path.relpath(os.path.join(path, meshfile), outputDirectory))
             # hack for gazebo mesh database
             if meshfile.count('package'):
                 idx0 = meshfile.find('package://')
@@ -634,7 +635,7 @@ def getVisual(link, node, path):
                 print('Unsupported format: \"' + extension + '\"')
 
 
-def getCollision(link, node, path):
+def getCollision(link, node, path, outputDirectory):
     """Parse collision of a link."""
     for index in range(0, len(node.getElementsByTagName('collision'))):
         collision = Collision()
@@ -663,14 +664,20 @@ def getCollision(link, node, path):
             collision.geometry.sphere.radius = float(geometryElement.getElementsByTagName('sphere')[0].getAttribute('radius'))
             link.collision.append(collision)
         elif hasElement(geometryElement, 'mesh'):
-            meshfile = os.path.normpath(os.path.join(path,
-                                                     geometryElement.getElementsByTagName('mesh')[0].getAttribute('filename')))
+            meshfile = geometryElement.getElementsByTagName('mesh')[0].getAttribute('filename')
+            if not os.path.isabs(meshfile):
+                # Use the path relative to the output file
+                meshfile = os.path.normpath(os.path.relpath(os.path.join(path, meshfile), outputDirectory))
             extension = os.path.splitext(meshfile)[1].lower()
             if geometryElement.getElementsByTagName('mesh')[0].getAttribute('scale'):
                 meshScale = geometryElement.getElementsByTagName('mesh')[0].getAttribute('scale').split()
                 collision.scale[0] = float(meshScale[0])
                 collision.scale[1] = float(meshScale[1])
                 collision.scale[2] = float(meshScale[2])
+                if (targetVersion >= 'R2023b' and collision.scale[0] != 1.0 and collision.scale[1] != 1.0
+                        and collision.scale[2] != 1.0):
+                    print('\033[1;33mWarning: BoundingObjects (collisions tags) cannot be scaled in version R2023b!'
+                          ' Please create a separate model.\033[0m')
                 if collision.scale[0] * collision.scale[1] * collision.scale[2] < 0.0:
                     if extension in ['.dae', '.obj', '.stl']:
                         collision.geometry.mesh.ccw = False
@@ -756,16 +763,16 @@ def getSafety(node):
     return safety
 
 
-def getLink(node, path):
+def getLink(node, path, outputDirectory):
     """Parse a link."""
     link = Link()
     link.name = node.getAttribute('name')
     if hasElement(node, 'inertial'):
         link.inertia = getInertia(node)
     if hasElement(node, 'visual'):
-        getVisual(link, node, path)
+        getVisual(link, node, path, outputDirectory)
     if hasElement(node, 'collision'):
-        getCollision(link, node, path)
+        getCollision(link, node, path, outputDirectory)
     if not any([hasElement(node, 'inertial'), hasElement(node, 'visual'), hasElement(node, 'collision')]):
         link.inertia.mass = None
     return link
