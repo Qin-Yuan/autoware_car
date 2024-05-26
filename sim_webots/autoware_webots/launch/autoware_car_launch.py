@@ -54,7 +54,6 @@ def generate_launch_description():
         ),
         webots,
         autoware_webots_run,
-        # autoware_tf2,
         # autoware_utils_launch,
         autoware_webots_utils_launch,
         robot_state_publisher,

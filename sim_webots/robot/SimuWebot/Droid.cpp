@@ -329,7 +329,7 @@ void Droid::rdLidar(sensor_msgs::msg::PointCloud2 &pc2)
         }
         // 一帧点云的二进制大小
         // mPC2.data.resize(point_count-error_point_count);
-        std::cout << point_count << " - " << mPC2.data.size() / mPC2.point_step << std::endl;
+        // std::cout << point_count << " - " << mPC2.data.size() / mPC2.point_step << std::endl;
         // std::cout << mPC2.width * mPC2.height << " " << mPC2.fields.size() << " " << data[28789].layer_id << std::endl;
         pc2 = mPC2;
     }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import time
 import math
-import cvxpy
+import cvxpy        # pip install cvxpy==1.3
 import threading
 import numpy as np
 from scipy.spatial import KDTree
@@ -145,12 +145,12 @@ class VehicleMPCPathTrack(Node):
     def _init_VehicleState(self) :
         self.max_steer_angle = 0.7      # [0,1]
         self.max_vel = 10.0
-        self.dt = 0.3                   # 控制时间间隔，单位: s 秒
+        self.dt = 0.1                   # 控制时间间隔，单位: s 秒
         self.L = 4.5                    # 车辆轴距，单位: m 米
         self.x = None
         self.y = None
         self.steer_angle = 0.0
-        self.v = 2.0
+        self.v = 10.0
         self._past_x = []
         self._past_y = []
         self.yaw = None
