@@ -62,7 +62,7 @@ class MPCController :
             delta_ref: 参考输入(velocity,steer_angle)
             returns: 最优的控制量和最优状态
         '''
-        x = cvxpy.Variable((self.NX, self.T+1))     # 状态，+1是初始初始状态
+        x = cvxpy.Variable((self.NX, self.T+1))     # 状态，+1是初始状态
         u = cvxpy.Variable((self.NU, self.T))       # 输入
         cost = 0.0                                  # 代价函数
         constraints = []                            # 约束条件
